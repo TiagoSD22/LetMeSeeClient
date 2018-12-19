@@ -6,33 +6,37 @@
      fxLayoutGap.xs="0">
 
     <div class = "filtros-sidenav" fxLayout="column" fxFlex = 20%>
-        <h5 style="align-items: left;text-align: left;font-synthesis: weight; font-size: 30px; font-size: 16px; color: lightgray;margin-left: 15px;">EDITAR</h5>
+        <h5 style="align-items: left;text-align: left;font-synthesis: weight; font-size: 30px; font-size: 16px; color: lightgray;margin-left: 15px;margin-bottom: 18px;margin-top: 20px;">EDITAR</h5>
         <mat-list role = "list" *ngIf = "menu" class="filtros-bar">
                 <mat-list-item  (click) = "toogle('negativo')" role="listitem">
                     <h5 class="filter-label">
+                        <img src="../../../assets/icons/negativo.svg" class="filter-icon">
                         Negativo
                     </h5>
                 </mat-list-item>
                 <mat-list-item  (click) = "toogle('limiar')" role="listitem">
                     <h5 class="filter-label">
+                        <img src="../../../assets/icons/limiar.png" class="filter-icon">
                         Limiar
                     </h5>
                 </mat-list-item>
-                <mat-list-item  (click) = "toogle('ajusteRGB')" role="listitem">
-                        <h5 class="filter-label">
-                            Ajuste RGB
-                        </h5>
+                <mat-list-item (click)="toogle('ajusteRGB')" role="listitem">
+                    <h5 class="filter-label">
+                        <img src="../../../assets/icons/colors.svg" class="filter-icon">
+                        Ajuste RGB
+                    </h5>
                 </mat-list-item>
         </mat-list>
 
         <mat-sidenav *ngIf = "negativoSidenavAberta" #negativoSidenav mode="side" class="filtro-param-sidenav">
             <h5 class="filter-label-title">Negativo</h5>
             <div class = 'negativo-sidenav'>
-                <button mat-mini-fab color="primary" 
+                <!--button mat-mini-fab color="primary" 
                         style="left: 2px;top: 2px;margin: auto;position:absolute;z-index: 10;cursor: pointer;" 
                         (click) = "voltarMenu('negativo')" matTooltip="voltar">
                     <i class="material-icons">arrow_back</i>
-                </button>
+                </button-->
+                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('negativo')" matTooltip="voltar">
                 <button mat-raised-button color="primary" style="margin-top: 30px;" (click) = "negativo()">Aplicar</button>
             </div>
         </mat-sidenav>
@@ -40,11 +44,12 @@
         <mat-sidenav *ngIf = "limiarSidenavAberta" #limiarSidenav mode="side" class="filtro-param-sidenav">
                 <h5 class="filter-label-title">Limiar</h5>
                 <div class = 'limiar-sidenav'>
-                    <button mat-mini-fab color="primary" 
+                    <!--button mat-mini-fab color="primary" 
                             style="left: 2px;top: 2px;margin: auto;position:absolute;z-index: 10;cursor: pointer;" 
                             (click) = "voltarMenu('limiar')" matTooltip="voltar">
                         <i class="material-icons">arrow_back</i>
-                    </button>
+                    </button-->
+                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('limiar')" matTooltip="voltar">
                     <div class="row" style="vertical-align:top;">
                     <mat-slider
                         class="limiar-input"
@@ -65,12 +70,12 @@
         <mat-sidenav *ngIf = "ajusteRGBSidenavAberta" #ajusteRGBSidenav mode="side" class="filtro-param-sidenav">
                 <h5 class="filter-label-title">Ajuste RGB</h5>
                 <div class = 'ajusteRGB-sidenav'>
-                    <button mat-mini-fab color="primary" 
+                    <!--button mat-mini-fab color="primary" 
                             style="left: 2px;top: 2px;margin: auto;position:absolute;z-index: 10;cursor: pointer;" 
                             (click) = "voltarMenu('ajusteRGB')" matTooltip="voltar">
                         <i class="material-icons">arrow_back</i>
-                    </button>
-                    
+                    </button-->
+                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('ajusteRGB')" matTooltip="voltar">
                     <mat-slider
                         class="limiar-input"
                         [disabled]="false"
@@ -83,7 +88,7 @@
                         [vertical]="false">
                     </mat-slider>
                     <br>
-                    <label>Canal vermelho</label>
+                    <label class="label-info">Canal vermelho</label>
                     
                     <mat-slider
                         class="limiar-input"
@@ -97,7 +102,7 @@
                         [vertical]="false">
                     </mat-slider>
                     <br>
-                    <label>Canal verde</label>
+                    <label class="label-info">Canal verde</label>
                     
                     <mat-slider
                         class="limiar-input"
@@ -111,9 +116,11 @@
                         [vertical]="false">
                     </mat-slider>
                     <br>
-                    <label>Canal azul</label>
+                    <label class="label-info">Canal azul</label>
                     <br><br>
-                    <button mat-raised-button color="primary" style="margin-top: 2px;" (click) = "ajusteRGB()">Aplicar</button>
+                    <label class="btn mat-mini-fab" style="margin-top: 2px;" (click) = "ajusteRGB()" matTooltip="Aplicar">
+                        <i class="zmdi zmdi-check"></i>
+                    </label>
                 </div>
         </mat-sidenav>
 

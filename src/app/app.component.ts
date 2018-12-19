@@ -8,7 +8,7 @@ import {ThemesService} from "./shared/services/themes/themes.service";
 import {SpinnerService} from "./shared/services/spinner/spinner.service";
 import {PreloaderService} from "./shared/services/preloader/preloader.service";
 
-declare var $: any;
+import * as $ from "../../node_modules/jquery";
 
 @Component({
     selector: "app-root",

@@ -14,6 +14,37 @@
     background-color: #232936;
 }
 
+.filtros-bar{
+    overflow-y: auto;
+    background-color: rgba(30, 25, 11, 0.3);
+    height: 100%;
+    width: 96%;
+    margin-left: 6px;
+    margin-right: 2px;
+    margin-top: 0px;
+    border-radius: 10px;
+    border-color: #3c7fca;
+}
+
+.filter-icon{
+    width : 16px;
+    height : 16px;
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+
+.voltar-icon{
+    left: 2px;
+    top: 2px;
+    margin: auto;
+    position:absolute;
+    z-index: 10;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
 .acoes-container{
     background-color: #28303F;
     margin-bottom: 0;
@@ -66,17 +97,16 @@
     -webkit-text-shadow: none;
     -webkit-font-smoothing: antialiased;
     letter-spacing: 1px;
-    font-size: 12px;
-    border-radius: 2px 2px 2px 2px;
-    //padding: 8px 25px;
+    font-size: 8px;
+    //border-radius: 50%;
+    cursor: pointer;
     display: inline-block;
-    border: 2px solid #3c7fca;
+    border: 1px solid #3c7fca;
     background: #3c7fca;
     margin-right: 10px;
     -webkit-transition: background .3s ease,color .3s ease,border-color .3s ease;
     transition: background .3s ease,color .3s ease,border-color .3s ease;
     outline: 0;
-    text-transform: uppercase;
 }
 
 .btn:hover {
@@ -104,6 +134,22 @@
     cursor: pointer;
 }
 
+.label-info{
+    align-items: left;
+    align-self: left;
+    text-align: left;
+    font-synthesis: weight;
+    font-size: 30px;
+    font-size: 16px;
+    color: white;
+    margin-left: 2px;
+    left: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
 .filter-label-title{
     align-items: center;
     text-align: left;
@@ -122,18 +168,6 @@
     font-weight: bold;
     background-color: rgba(100, 90, 95, 0.3);;
   }
-
-.filtros-bar{
-    overflow-y: auto;
-    background-color: rgba(30, 25, 11, 0.3);
-    height: 88%;
-    width: 96%;
-    margin-left: 6px;
-    margin-right: 2px;
-    border-radius: 10px;
-    border-color: #3c7fca;
-    
-}
 
 .negativo-sidenav{
     background-color: rgba(30, 25, 11, 0.3);

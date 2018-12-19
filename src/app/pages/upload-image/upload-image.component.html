@@ -1,17 +1,68 @@
-<div class = "main-container">
-  <br/>
-  <h5 style="font-synthesis: weight; font-size: 30px; color: lightgray;height: 0px;margin-top: 0;">Simples e leve editor para suas fotos</h5>
-  <h6 *ngIf = "config.getImgAtual() == undefined" style="font-synthesis: weight; color: lightgray;font-size: 20px;height: 0px;">Carregue uma imagem para começar</h6>
-  <label *ngIf = "config.getImgAtual() == undefined" class="btn btn-primary" style="cursor: pointer;">
+<div class="main-container">
+  <br />
+  <h5 style="font-synthesis: weight; font-size: 30px; color: lightgray;height: 0px;margin-top: 0;">Simples e leve
+    editor para suas fotos</h5>
+  <h6 *ngIf="config.getImgAtual() == undefined" style="font-synthesis: weight; color: lightgray;font-size: 20px;height: 0px;">Carregue
+    uma imagem para começar</h6>
+  <label *ngIf="config.getImgAtual() == undefined" class="btn btn-primary" style="cursor: pointer;">
     <input type="file" accept="image/*" (change)="onSelectFile($event)" style="display:none;cursor: pointer;">
-      <i class="zmdi zmdi-upload"></i> 
-      Carregar imagem
+    <i class="zmdi zmdi-upload"></i>
+    Carregar imagem
   </label>
-  <h6 *ngIf = "config.getImgAtual() != undefined" style="font-synthesis: weight; color: lightgray;font-size: 20px;height: 0px;">Edite suas imagens na aba de Filtros</h6>
-  <label *ngIf = "config.getImgAtual() != undefined" class="btn btn-primary" style="cursor: pointer;">
+  <h6 *ngIf="config.getImgAtual() != undefined" style="font-synthesis: weight; color: lightgray;font-size: 20px;height: 0px;">Edite
+    suas imagens na aba de Filtros</h6>
+  <label *ngIf="config.getImgAtual() != undefined" class="btn btn-primary" style="cursor: pointer;">
     <input type="file" accept="image/*" (change)="onSelectFile($event)" style="display:none;cursor: pointer; ">
-      <i class="zmdi zmdi-upload"></i> 
-      Carregar outra imagem
+    <i class="zmdi zmdi-upload"></i>
+    Carregar outra imagem
   </label>
 </div>
 
+
+<!--div class="load-screen" id="load_screen_root">
+  <div class="load-screen__iris" style="position: relative; pointer-events: none; width: 48px; height: 48px; display: none;">
+    <div style="position: absolute; left: 24px; top: 24px;" class="">
+      <div id="blade_holder_0" style="position: absolute; left: 24px; top: -16px;" class="">
+        <div id="blade_0" style="position: absolute; transform: rotate(0deg);">
+          <div id="blade_graphic_0" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(225, 74, 67) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+      <div id="blade_holder_2" style="position: absolute; left: 16px; top: 24px;" class="">
+        <div id="blade_2" style="position: absolute; transform: rotate(90deg);">
+          <div id="blade_graphic_2" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(245, 233, 73) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+      <div id="blade_holder_4" style="position: absolute; left: -24px; top: 16px;" class="">
+        <div id="blade_4" style="position: absolute; transform: rotate(180deg);">
+          <div id="blade_graphic_4" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(103, 195, 105) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+      <div id="blade_holder_6" style="position: absolute; left: -16px; top: -24px;" class="">
+        <div id="blade_6" style="position: absolute; transform: rotate(270deg);">
+          <div id="blade_graphic_6" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(150, 109, 184) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+      <div id="blade_holder_1" style="position: absolute; left: 28.2843px; top: 5.65685px;" class="">
+        <div id="blade_1" style="position: absolute; transform: rotate(45deg);">
+          <div id="blade_graphic_1" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(251, 159, 57) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+      <div id="blade_holder_3" style="position: absolute; left: -5.65685px; top: 28.2843px;" class="">
+        <div id="blade_3" style="position: absolute; transform: rotate(135deg);">
+          <div id="blade_graphic_3" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(183, 217, 63) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+      <div id="blade_holder_5" style="position: absolute; left: -28.2843px; top: -5.65685px;" class="">
+        <div id="blade_5" style="position: absolute; transform: rotate(225deg);">
+          <div id="blade_graphic_5" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(106, 145, 205) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+      <div id="blade_holder_7" style="position: absolute; left: 5.65685px; top: -28.2843px;" class="">
+        <div id="blade_7" style="position: absolute; transform: rotate(315deg);">
+          <div id="blade_graphic_7" style="position: absolute; background-color: rgba(0, 0, 0, 0); transform: rotate(-45deg); left: -16.9706px; bottom: -40.9706px; border-width: 17.9706px; border-style: solid; border-color: rgb(207, 99, 153) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-image: initial; opacity: 0.8;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="load-screen__message"></div>
+</div-->
