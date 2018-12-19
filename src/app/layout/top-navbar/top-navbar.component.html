@@ -1,0 +1,45 @@
+<nav class="navbar" role="navigation">
+    <ul class="navbar-nav nav-left">
+        <li class="nav-item hidden-sm">
+            <a (click)="toggleAppMobileLeftMenuSidebar()" class="nav-link mobile-menu-trigger" href="javascript:void(0)" mat-ripple>
+                <i class="mdi mdi-backburger"></i>
+            </a>
+        </li>
+    </ul>
+    <ul class="navbar-nav nav-right">
+        <li class="nav-item dropdown avatar-menu hidden-sm-down" dropdown>
+            <a class="nav-link" dropdownToggle href="javascript:void(0)" mat-ripple>
+				<span class="meta">
+					<span class="avatar">
+						<img alt="" class="img-circle max-w-35" src="assets/img/profiles/02.jpg">
+						<i class="badge mini success status"></i>
+					</span>
+					<span class="name">{{nomeUsuarioLogado}}</span>
+					<span class="caret"></span>
+				</span>
+            </a>
+            <ul *dropdownMenu class="dropdown-menu btn-accent dropdown-menu-right">
+                <li>
+                    <a href="/profile"><i class="zmdi zmdi-account"></i> Perfil</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/configuracoes']" href="javascript:void(0)"><i class="zmdi zmdi-settings"></i> Configurações</a>
+                </li>
+                <li>
+                    <a (click)="sair()" href="javascript:void(0)"><i class="zmdi zmdi-sign-in"></i> Sair</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a (click)="search.searchStatus = true" class="nav-link" href="javascript:void(0)" mat-ripple>
+                <i class="zmdi zmdi-search"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a (click)="toggleAppRightSidebar()" class="nav-link" href="javascript:void(0)" mat-ripple>
+                <i [ngClass]="{'mdi-playlist-minus': false, 'mdi-playlist-plus': true}" class="mdi"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<topbar-search #search></topbar-search>

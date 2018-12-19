@@ -1,0 +1,7 @@
+<div [class.open]="searchStatus" class="navbar-form" id="navbar_form">
+    <div class="form-group">
+        <input [(ngModel)]="searchValue" class="form-control" id="navbar_search" placeholder="Search and press enter..." type="text">
+        <i (click)="closeSearch()" class="zmdi zmdi-close close-search"></i>
+    </div>
+    <button class="hidden btn btn-default" type="submit">Submit</button>
+</div>

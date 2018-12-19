@@ -1,0 +1,12 @@
+<div class="card image-over-card">
+    <div class="card-image" style="height: 220px; width: 350px;margin-left:25px;">
+        <a href="javascript:void(0)">
+            <img [src]="imgPath" alt=""/>
+        </a>
+    </div>
+    <div class="card-block">
+        <h4 class="card-title card-title {{align}} m-b-0 m-t-10">{{title}}</h4>
+        <h6 class="category text-gray {{align}}">{{subtitle}}</h6>
+        <ng-content select="footer"></ng-content>
+    </div>
+</div>

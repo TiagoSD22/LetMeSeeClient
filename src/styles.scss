@@ -1,0 +1,27 @@
+/*------------------------------------------------------------------------------
+  GERA3- Angular 5
+------------------------------------------------------------------------------*/
+//== mixins
+@import '../node_modules/compass-mixins/lib/animate';
+//== Vendor
+@import '../node_modules/mdi/css/materialdesignicons.css';
+@import '../node_modules/multi-brand-colors/dist/scss/index.scss';
+@import '../node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.css';
+//== App
+@import "./app/shared/styles/app";
+
+.mat-tab-group-dynamic-height .mat-tab-body-content{
+  overflow:auto !important;
+}
+
+.status-success{
+  background-color:rgba(0,255,0,0.1) !important;
+}
+
+.status-danger{
+  background-color:rgba(255,0,0,0.1) !important;
+}
+
+.status-warning{
+  background-color:rgba(255, 166, 0, 0.1) !important;
+}

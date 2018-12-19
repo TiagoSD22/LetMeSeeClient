@@ -1,0 +1,50 @@
+<div class="main-container">
+    <div *ngIf = "imagens.length > 0" class="cardList">
+      <!--div class="cardList"-->
+        <mat-card *ngFor="let img of imagens" class="imagens">  
+          <mat-card-header style="margin-bottom: 5px;">
+            <div mat-card-avatar 
+              [ngClass]="{'formato-jpg': img.tipo == 'jpg' || img.tipo == 'jpeg', 'formato-png' : img.tipo == 'png', 'formato-bmp' : img.tipo == 'bmp', 'formato-gif' : img.tipo == 'gif'}">
+            </div>
+            <mat-card-title [ngClass]="{'normal-title': img.nome.length <= 20, 'reduced-title' : img.nome.length > 20 && img.nome.length <= 50, 'too-reduced-title' : img.nome.length > 50}">{{img.nome}}</mat-card-title>
+            <!--mat-card-subtitle>{{img.tipo}}</mat-card-subtitle-->
+          </mat-card-header>
+          <img class="image" mat-card-image src="data:image/{{img.tipo}};base64,{{img.conteudoBase64}}">
+          <mat-card-content>
+              <h5 style="font-size: 18px;" >Dimensões: {{img.largura}}x{{img.altura}}</h5>
+          </mat-card-content>
+          <mat-card-actions class="card-actions">
+            <button style="margin-bottom: 8px; margin-left: 10px;" 
+                    mat-mini-fab color="primary" 
+                    (click) = "salvarImagem(img)"
+                    matTooltip="Salvar esta foto">
+                <i class="zmdi zmdi-download zmdi-hc-lg"></i>
+            </button>
+            <button style="margin-bottom: 8px; margin-left: 5px;" 
+                    mat-mini-fab color="primary" 
+                    (click) = "editarImagem(img)"
+                    matTooltip="Editar esta foto">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button style="margin-bottom: 8px;margin-left: 5px;" 
+                    mat-mini-fab color="primary" 
+                    (click) = "excluirImagem(img)"
+                    matTooltip="Deletar esta foto">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      <!--/div-->
+    </div>
+  
+    <!--div *ngIf = "imagens.length == 0" style="text-align: center;align-items: center;align-content: center;padding-top: 50px;">
+      <h2 style="color: white;">Sem imagens no histórico.<br> Carregue uma imagem na aba "Carregar imagem" para adicionar arquivos.</h2>
+    </div-->
+  
+    <div id="limparHistoricoBT">
+        <button *ngIf = "imagens.length > 0"  mat-fab color = "primary" class="fixed" matTooltip="Limpar histórico" (click) = "limparHistorico()">
+            <mat-icon matBadge={{imagens.length}} matBadgePosition="above before" matBadgeColor="primary" >clear</mat-icon>
+        </button>
+    </div>
+  </div>
+  

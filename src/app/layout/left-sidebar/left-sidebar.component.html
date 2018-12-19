@@ -1,0 +1,31 @@
+<nav id="app_main-menu-wrapper">
+    <ul class="navbar-nav nav-logo">
+        <li class="nav-item logo-wrapper">
+            <a href="/upload-image">
+                <div class="logo">
+                    <img alt="Logo" src="assets/img/logo/logo.jpg">
+                </div>
+                <h1 class="brand-text">Let me See</h1>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a (click)="toggleMenuSideabar()" class="nav-link menu-trigger" href="javascript:void(0)" mat-ripple role="button">
+                <i class="mdi mdi-backburger"></i>
+            </a>
+        </li>
+    </ul>
+    <div [scrollbarOptions]="scrollbarOptions" class="fonte sidebar-inner sidebar-push" malihu-scrollbar>
+        <ul class="nav nav-pills flex-column">
+            <li class="sidebar-header">NAVEGAÇÃO</li>
+            <li>
+                <a [routerLink]="['/upload-image']"><i class="zmdi zmdi-upload"></i>Carregar imagem</a>
+            </li>
+            <li>
+                <a [routerLink]="['/filtros']"><i class="zmdi zmdi-palette"></i>Filtros</a>
+            </li>
+            <li>
+                <a [routerLink]="['/historico']"><i class="zmdi zmdi-collection-image"></i>Histórico</a>
+            </li>
+        </ul>
+    </div>
+</nav>
