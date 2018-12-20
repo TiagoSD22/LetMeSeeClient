@@ -26,6 +26,12 @@
                         Ajuste RGB
                     </h5>
                 </mat-list-item>
+                <mat-list-item (click)="toogle('roberts')" role="listitem">
+                    <h5 class="filter-label">
+                        <img src="../../../assets/icons/colors.svg" class="filter-icon">
+                        Roberts Cross
+                    </h5>
+                </mat-list-item>
         </mat-list>
 
         <mat-sidenav *ngIf = "negativoSidenavAberta" #negativoSidenav mode="side" class="filtro-param-sidenav">
@@ -122,6 +128,19 @@
                         <i class="zmdi zmdi-check"></i>
                     </label>
                 </div>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf = "robertsSidenavAberta" #robertsSidenav mode="side" class="filtro-param-sidenav">
+            <h5 class="filter-label-title">Roberts Cross</h5>
+            <div class = 'negativo-sidenav'>
+                <!--button mat-mini-fab color="primary" 
+                        style="left: 2px;top: 2px;margin: auto;position:absolute;z-index: 10;cursor: pointer;" 
+                        (click) = "voltarMenu('negativo')" matTooltip="voltar">
+                    <i class="material-icons">arrow_back</i>
+                </button-->
+                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('roberts')" matTooltip="voltar">
+                <button mat-raised-button color="primary" style="margin-top: 30px;" (click) = "roberts()">Aplicar</button>
+            </div>
         </mat-sidenav>
 
     </div>

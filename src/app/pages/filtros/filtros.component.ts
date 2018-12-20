@@ -45,6 +45,9 @@ export class FiltrosComponent implements OnInit {
   valorG : number = 0;
   valorB : number = 0;
 
+  @ViewChild('robertsSidenav') public robertsSidenav : MatSidenav;
+  robertsSidenavAberta : boolean = false;
+
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
     private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar) { }
@@ -119,6 +122,12 @@ export class FiltrosComponent implements OnInit {
         this.ajusteRGBSidenavAberta = false;
         setTimeout( () => {
           this.ajusteRGBSidenav.toggle();
+        }); 
+      break;
+      case 'roberts':
+        this.robertsSidenavAberta = false;
+        setTimeout( () => {
+          this.robertsSidenav.toggle();
         }) 
       break;
       default:
@@ -149,6 +158,13 @@ export class FiltrosComponent implements OnInit {
         this.menu = false;
         setTimeout( () => {
           this.ajusteRGBSidenav.toggle();
+        })
+      break;
+      case 'roberts':
+        this.robertsSidenavAberta = !this.robertsSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.robertsSidenav.toggle();
         })
       break;
       default:
@@ -200,6 +216,21 @@ export class FiltrosComponent implements OnInit {
     }).subscribe(response => {
       this.voltarMenu('ajusteRGB');
       this.openSnackBar("Sucesso!","Ajuste de cores aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  roberts() {
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/roberts/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.voltarMenu('roberts');
+      this.openSnackBar("Sucesso!","Filtro de Roberts Cross aplicado");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
