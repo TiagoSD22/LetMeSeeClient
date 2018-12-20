@@ -55,13 +55,15 @@
 }
 
 .image{
-    display: block;
+    display: flex;
+    object-fit: contain;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    box-sizing: content-box;
+    box-sizing: border-box;
     overflow-y: auto;
+    overflow-x: auto;
 }
 
 .example-margin {
@@ -175,6 +177,7 @@
     height: 100px;
     border-radius: 10px;
     position: relative;
+    z-index: 10;
 }
 
 .limiar-sidenav{
@@ -196,6 +199,8 @@
 .filtro-param-sidenav{
     background-color: #232936;
     align-self: center;
+    position: relative;
     width: 80%;
     border: 0;
+    z-index: 10;
 }

@@ -17,11 +17,26 @@ import { MatTableDataSource, MatDrawer, MatSidenav } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import {Imagem} from "../imagem";
 import { MatSnackBar } from '@angular/material';
+import {
+  animate, state, style, transition, trigger
+} from '@angular/animations';
 
 @Component({
   selector: 'app-filtros',
   templateUrl: './filtros.component.html',
-  styleUrls: ['./filtros.component.scss']
+  styleUrls: ['./filtros.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+        transition(':enter', [
+            style({ transform: 'translateY(100%)' }),
+            animate('200ms ease-in', style({ transform: 'translateY(0%)' }))
+        ]),
+        transition(':leave', [
+            style({ transform: 'translateY(0%)' }),
+            animate('200ms ease-in', style({ transform: 'translateY(100%)' }))
+        ])
+    ])
+]
 })
 export class FiltrosComponent implements OnInit {
 
