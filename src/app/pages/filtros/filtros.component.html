@@ -7,7 +7,7 @@
 
     <div class = "filtros-sidenav" fxLayout="column" fxFlex = 20%>
         <h5 style="align-items: left;text-align: left;font-synthesis: weight; font-size: 30px; font-size: 16px; color: lightgray;margin-left: 15px;margin-bottom: 18px;margin-top: 20px;">EDITAR</h5>
-        <mat-list role = "list" *ngIf = "menu" class="filtros-bar">
+        <mat-list role = "list" *ngIf = "menu" class="filtros-bar" [@slideInOut]>
                 <mat-list-item  (click) = "toogle('negativo')" role="listitem">
                     <h5 class="filter-label">
                         <img src="../../../assets/icons/negativo.svg" class="filter-icon">
@@ -34,15 +34,17 @@
                 </mat-list-item>
         </mat-list>
 
-        <mat-sidenav *ngIf = "negativoSidenavAberta" [@slideInOut]  #negativoSidenav mode="side" class="filtro-param-sidenav">
+        <mat-sidenav *ngIf = "negativoSidenavAberta" [@slideInOut] #negativoSidenav mode="side" class="filtro-param-sidenav">
             <h5 class="filter-label-title">Negativo</h5>
             <div class = 'negativo-sidenav'>
                 <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('negativo')" matTooltip="voltar">
-                <button mat-raised-button color="primary" style="margin-top: 30px;" (click) = "negativo()">Aplicar</button>
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "negativo()">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
             </div>
         </mat-sidenav>
 
-        <mat-sidenav *ngIf = "limiarSidenavAberta" #limiarSidenav mode="side" class="filtro-param-sidenav">
+        <mat-sidenav *ngIf = "limiarSidenavAberta" [@slideInOut] #limiarSidenav mode="side" class="filtro-param-sidenav">
                 <h5 class="filter-label-title">Limiar</h5>
                 <div class = 'limiar-sidenav'>
                     <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('limiar')" matTooltip="voltar">
@@ -59,11 +61,13 @@
                         [vertical]="false">
                     </mat-slider>
                     </div>
-                    <button mat-raised-button color="primary" style="margin-top: 2px;" (click) = "limiar()">Aplicar</button>
+                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "limiar()">
+                        <i class="zmdi zmdi-check"></i>
+                    </button>
                 </div>
         </mat-sidenav>
 
-        <mat-sidenav *ngIf = "ajusteRGBSidenavAberta" #ajusteRGBSidenav mode="side" class="filtro-param-sidenav">
+        <mat-sidenav *ngIf = "ajusteRGBSidenavAberta" [@slideInOut] #ajusteRGBSidenav mode="side" class="filtro-param-sidenav">
                 <h5 class="filter-label-title">Ajuste RGB</h5>
                 <div class = 'ajusteRGB-sidenav'>
                     <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('ajusteRGB')" matTooltip="voltar">
@@ -76,7 +80,8 @@
                         [step]="1"
                         [thumbLabel]="true"
                         [(ngModel)]="valorR"
-                        [vertical]="false">
+                        [vertical]="false"
+                        [color] = "red">
                     </mat-slider>
                     <br>
                     <label class="label-info">Canal vermelho</label>
@@ -109,24 +114,26 @@
                     <br>
                     <label class="label-info">Canal azul</label>
                     <br><br>
-                    <label class="btn mat-mini-fab" style="margin-top: 2px;" (click) = "ajusteRGB()" matTooltip="Aplicar">
+                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "ajusteRGB()" matTooltip="aplicar">
                         <i class="zmdi zmdi-check"></i>
-                    </label>
+                    </button>
                 </div>
         </mat-sidenav>
 
-        <mat-sidenav *ngIf = "robertsSidenavAberta" #robertsSidenav mode="side" class="filtro-param-sidenav">
+        <mat-sidenav *ngIf = "robertsSidenavAberta" [@slideInOut] #robertsSidenav mode="side" class="filtro-param-sidenav">
             <h5 class="filter-label-title">Roberts Cross</h5>
             <div class = 'negativo-sidenav'>
                 <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('roberts')" matTooltip="voltar">
-                <button mat-raised-button color="primary" style="margin-top: 30px;" (click) = "roberts()">Aplicar</button>
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "roberts()">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
             </div>
         </mat-sidenav>
 
     </div>
 
     <div class = "image-container" fxFlex fxLayout="column">
-        <div fxLayout="row" fxFlex = 94%  fxLayoutAlign="center center">
+        <div fxFlex = 96% fxLayout="row" fxLayoutAlign="center center">
             <img class="image" fxLayout="row" fxFlexFill
                  *ngIf = "imagem != undefined" 
                  src="data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
@@ -134,7 +141,7 @@
                  [style.height.px] = "imagem.altura * escala">
                  
         </div>
-        <div class="acoes-container" fxFlex = 6% >
+        <div class="acoes-container" fxFlex >
             <label style="margin-right: 80px;margin-top: 10px;" style="cursor: pointer;" matTooltip="Salvar" (click) = "salvarImagem()">
                 <i class="zmdi zmdi-download zmdi-hc-lg"></i>
             </label>
@@ -142,13 +149,12 @@
                 <i class="zmdi zmdi-minus-circle zmdi-hc-lg"></i>
             </label>
             <mat-slider
-                class="example-margin"
                 [disabled]="false"
                 [invert]="false"
                 [max]="4"
                 [min]="0.21"
                 [step]="0.01"
-                [thumbLabel]="true"
+                [thumbLabel]="false"
                 [(ngModel)]="escala"
                 [vertical]="false">
             </mat-slider>
@@ -165,14 +171,3 @@
         </div>
     </div>
 </div>
-
-<!--mat-card  style="background-color: #28303F">
-                    <mat-drawer #drawer class="example-sidenav" mode="side">
-                    <label mat-mini-fab color = "primary" (click) = "voltarMenu()">
-                        <i class="zmdi zmdi-caret-left-circle zmdi-hc-lg"></i>
-                    </label>
-                    <button (click)="negativo()" mat-raised-button>
-                    Aplicar
-                </button>
-        </mat-drawer>
-    </mat-card-->

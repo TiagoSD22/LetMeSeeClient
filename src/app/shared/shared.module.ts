@@ -15,6 +15,7 @@ import {MalihuScrollbarModule} from "ngx-malihu-scrollbar";
 import {AppBackdropComponent} from "./components/app_backdrop/app_backdrop.component";
 import {SmdFabSpeedDialActionsComponent, SmdFabSpeedDialComponent, SmdFabSpeedDialTriggerComponent} from "./components/fab";
 import {MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule} from "@angular/material";
+import { SlidePanelComponent } from './components/slide-panel/slide-panel.component';
 
 @NgModule({
     imports: [
@@ -64,7 +65,8 @@ import {MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardMo
         AppBackdropComponent,
         SmdFabSpeedDialComponent,
         SmdFabSpeedDialActionsComponent,
-        SmdFabSpeedDialTriggerComponent
+        SmdFabSpeedDialTriggerComponent,
+        SlidePanelComponent
     ],
     exports: [
         TabsModule,

@@ -27,16 +27,16 @@ import {
   styleUrls: ['./filtros.component.scss'],
   animations: [
     trigger('slideInOut', [
-        transition(':enter', [
-            style({ transform: 'translateY(100%)' }),
-            animate('200ms ease-in', style({ transform: 'translateY(0%)' }))
-        ]),
-        transition(':leave', [
-            style({ transform: 'translateY(0%)' }),
-            animate('200ms ease-in', style({ transform: 'translateY(100%)' }))
-        ])
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('200ms ease-in', style({ transform: 'translateX(0%)' }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0%)' }),
+        animate('200ms ease-in', style({ transform: 'translateX(-100%)' }))
+      ])
     ])
-]
+  ]
 })
 export class FiltrosComponent implements OnInit {
 
