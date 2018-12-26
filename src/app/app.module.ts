@@ -3,7 +3,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule, Title} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-
 import {AppState} from "./app.service";
 import {GlobalState} from "./app.state";
 import {ToastrModule} from 'ngx-toastr';
@@ -13,6 +12,8 @@ import {ResponsiveModule} from "ng2-responsive";
 import {SharedModule} from "./shared/shared.module";
 import {ServicesModule} from "./shared/services/services.module";
 import {RightSidebarService} from './layout/right-sidebar/right-sidebar.service';
+
+import 'hammerjs';
 
 const APP_PROVIDERS = [AppState, GlobalState, Title, RightSidebarService];
 

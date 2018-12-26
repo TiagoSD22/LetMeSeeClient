@@ -1,3 +1,4 @@
+import { MatSnackBarConfig } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 import { Component, OnInit,AfterViewInit, ChangeDetectorRef  } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
@@ -29,6 +30,7 @@ export class HistoricoComponent implements OnInit {
   imagens : Imagem[] = [];
   normalSnackBarAberta : boolean = false;
   EmptySnackBarAberta : boolean = false;
+  mostrarIrTopo : boolean = false;
 
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
@@ -37,6 +39,7 @@ export class HistoricoComponent implements OnInit {
   ngOnInit() {
     this.carregarHistorico();
   }
+
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -54,7 +57,8 @@ export class HistoricoComponent implements OnInit {
         this.ShowEmptySnackBar();
       }
     }, err => {
-      this.toastr.error("Erro!", "Não foi possível obter o histórico de imagens, falha ao se comunicar com o servidor", {progressBar : true});
+      //this.toastr.error("Erro!", "Não foi possível obter o histórico de imagens, falha ao se comunicar com o servidor", {progressBar : true});
+      this.openErrorSnackBar();
     })
   }
 
@@ -77,6 +81,13 @@ export class HistoricoComponent implements OnInit {
       duration: 3000
     });
     this.normalSnackBarAberta = true;
+  }
+
+  openErrorSnackBar(){
+    let config = new MatSnackBarConfig(); 
+    config.panelClass = 'errorSnackBar';
+    config.duration = -1;
+    this.snackBar.open("Falha ao obter o histórico","erro",config);
   }
 
   ShowEmptySnackBar(){
@@ -151,4 +162,25 @@ export class HistoricoComponent implements OnInit {
     //if(this.EmptySnackBarAberta || this.normalSnackBarAberta)
       //this.snackBar._openedSnackBarRef.dismiss();
   }
+
+  @HostListener('window:scroll', ['$event']) 
+    doSomething(event) {
+      // console.debug("Scroll Event", document.body.scrollTop);
+      // see András Szepesházi's comment below
+      console.debug("Scroll Event", window.pageYOffset );
+    }
+  // When the user scrolls down 20px from the top of the document, show the button
+  scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        this.mostrarIrTopo = true;
+    } else {
+        this.mostrarIrTopo = false;
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+} 
 }

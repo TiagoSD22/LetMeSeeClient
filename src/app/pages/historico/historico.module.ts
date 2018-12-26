@@ -7,7 +7,8 @@ import { MatTableModule, MatButtonModule, MatSelectModule, MatInputModule, MatTa
   MatSlideToggleModule,MatMenuModule,MatTooltipModule} from "@angular/material";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {GoTopButtonModule} from 'ng2-go-top-button';
+ 
 const ROTAS_Historico = [
   { path: "", component: HistoricoComponent }
 ];
@@ -30,6 +31,7 @@ const ROTAS_Historico = [
     MatTooltipModule,
     MatMenuModule,
     MatSliderModule,
+    GoTopButtonModule,
     RouterModule.forChild(ROTAS_Historico)
   ],
   declarations: [HistoricoComponent]

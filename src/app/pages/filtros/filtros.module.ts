@@ -9,6 +9,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 const ROTAS_Filtros = [
   { path: "", component: FiltrosComponent }
@@ -36,6 +37,7 @@ const ROTAS_Filtros = [
     MatMenuModule,
     MatSliderModule,
     FlexLayoutModule,
+    DragDropModule,
     RouterModule.forChild(ROTAS_Filtros)
   ],
   declarations: [FiltrosComponent]

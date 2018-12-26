@@ -1,4 +1,4 @@
-import { Component, OnInit,AfterViewInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -7,11 +7,11 @@ import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../shared/services/config/config.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ViewChild } from '@angular/core';
+import { ViewChild,ElementRef} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
 import { DatePipe } from "@angular/common";
-import { HostListener } from "@angular/core";
+import { HostListener,HostBinding } from "@angular/core";
 import 'rxjs/add/observable/interval';
 import { MatTableDataSource, MatDrawer, MatSidenav } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -20,6 +20,7 @@ import { MatSnackBar } from '@angular/material';
 import {
   animate, state, style, transition, trigger
 } from '@angular/animations';
+import { ImgSrcDirective } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-filtros',
@@ -36,7 +37,8 @@ import {
         animate('200ms ease-in', style({ transform: 'translateX(-100%)' }))
       ])
     ])
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class FiltrosComponent implements OnInit {
 
@@ -46,6 +48,10 @@ export class FiltrosComponent implements OnInit {
   pilha : Imagem[] = [];
   pilhaIndice : number = 0;
   menu : boolean = true;
+
+  @ViewChild('imgContainer') imgContainer : ElementRef;
+  lar : number;
+  alt : number;
 
   @ViewChild('negativoSidenav') public negativoSidenav : MatSidenav;
   negativoSidenavAberta : boolean = false;
@@ -63,6 +69,11 @@ export class FiltrosComponent implements OnInit {
   @ViewChild('robertsSidenav') public robertsSidenav : MatSidenav;
   robertsSidenavAberta : boolean = false;
 
+  @HostBinding("attr.style")
+  public get valueAsStyle(): any {
+    return this.DomSanitizer.bypassSecurityTrustStyle(`--cor-vermelha: ${this.valorR}`);
+  }
+
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
     private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar) { }
@@ -70,22 +81,45 @@ export class FiltrosComponent implements OnInit {
   ngOnInit() {
     this.imagem = this.config.getImgAtual();
     this.pilha[0] = this.imagem;
+    //this.alt = this.imgContainer.nativeElement.offsetHeight;
+    //this.lar = this.imgContainer.nativeElement.offsetWidth;
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (!this.config.appLayout.isApp_SidebarLeftCollapsed) {
         this.config.appLayout.isApp_SidebarLeftCollapsed = !this.config.appLayout.isApp_SidebarLeftCollapsed;
+        
       }
     });
+    this.alt = this.imgContainer.nativeElement.offsetHeight;
+    this.lar = this.imgContainer.nativeElement.offsetWidth;
+  }
+
+  ajustarTela(){
+    let largura = this.imgContainer.nativeElement.offsetHeight;
+    let altura = this.imgContainer.nativeElement.offsetWidth;
+    this.alt = altura;
+    this.lar = largura;
+    if(this.imagem.altura * this.escala > altura || this.imagem.largura * this.escala > largura){
+      this.escala = (((altura * 0.9) * (largura * 0.9)) * 100) / (this.imagem.altura * this.imagem.largura);
+      //this.imagem.altura = altura;
+      //this.imagem.largura = largura;
+    }
+  }
+
+  mostrarTamanhoOriginal(){
+    this.escala = 1;
   }
 
   aumentarEscala(){
-    this.escala += 0.05;
+    if(this.escala < 4)
+      this.escala += 0.05;
   }
 
   diminuirEscala(){
-    this.escala -= 0.05;
+    if(this.escala > 0.10)
+      this.escala -= 0.05;
   }
 
   adicionarPilha(){
@@ -252,5 +286,27 @@ export class FiltrosComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+  }
+
+  slideMudou(slide : String, event : any){
+    switch(slide){
+      case 'limiar':
+        this.valorLimiar = event.value;
+      break;
+      case 'escala':
+        this.escala = event.value;
+      break;
+      case 'canalR':
+        this.valorR = event.value;
+      break;
+      case 'canalG':
+        this.valorG = event.value;
+      break;
+      case 'canalB':
+        this.valorB = event.value;
+      break;
+      default :
+      break;
+    }
   }
 }
