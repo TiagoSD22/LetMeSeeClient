@@ -156,6 +156,12 @@
     right: 30px;
   }
 
+  .fixed:hover{
+    box-shadow: 5px 10px 18px rgb(40,48,63);
+    color: #3c7fca;
+    border: 1px solid #3c7fca;
+  }
+
   #voltarTopoBT{
     position: fixed;
     bottom: 5px;
