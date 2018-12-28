@@ -165,12 +165,16 @@ export class FiltrosComponent implements OnInit {
         this.limiarSidenavAberta = false;
         setTimeout( () => {
           this.limiarSidenav.toggle();
+          this.valorLimiar = 0;
         }) 
       break;
       case 'ajusteRGB':
         this.ajusteRGBSidenavAberta = false;
         setTimeout( () => {
           this.ajusteRGBSidenav.toggle();
+          this.valorR = 0;
+          this.valorG = 0;
+          this.valorB = 0;
         }); 
       break;
       case 'roberts':
