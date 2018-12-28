@@ -68,14 +68,21 @@
 }
 
 .action-bt{
-    opacity: 0.5;
+    //opacity: 0.5;
     margin-top: 15px;
+    border-radius: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    height: 17px;
+
 }
 
 .action-bt:hover{
     background: transparent;
     outline: 0;
-    opacity: 1; 
+    //opacity: 1; 
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 #3c7fca;
+    border-radius:10px;
 }
 
 .image-container{

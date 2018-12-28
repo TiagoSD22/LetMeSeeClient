@@ -165,17 +165,17 @@ export class FiltrosComponent implements OnInit {
         this.limiarSidenavAberta = false;
         setTimeout( () => {
           this.limiarSidenav.toggle();
-          this.valorLimiar = 0;
-        }) 
+        }); 
+        this.valorLimiar = 128;
       break;
       case 'ajusteRGB':
         this.ajusteRGBSidenavAberta = false;
         setTimeout( () => {
           this.ajusteRGBSidenav.toggle();
-          this.valorR = 0;
-          this.valorG = 0;
-          this.valorB = 0;
         }); 
+        this.valorR = 0;
+        this.valorG = 0;
+        this.valorB = 0;
       break;
       case 'roberts':
         this.robertsSidenavAberta = false;
@@ -228,7 +228,7 @@ export class FiltrosComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000
+      duration: 1500
     });
   }
 

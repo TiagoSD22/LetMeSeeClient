@@ -41,11 +41,6 @@
       <mat-icon>arrow_upward</mat-icon>
     </button>
   </div-->
-  <div id="voltarTopoBT">
-  <go-top-button>
-  </go-top-button>
-  </div>
-
   <div id="limparHistoricoBT">
     <button *ngIf="imagens.length > 0" mat-fab color="primary" class="fixed" matTooltip="Limpar histórico" (click)="limparHistorico()">
       <mat-icon matBadge={{imagens.length}} matBadgePosition="above before" matBadgeColor="primary">clear</mat-icon>
