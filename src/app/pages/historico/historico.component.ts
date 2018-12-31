@@ -1,3 +1,4 @@
+import { LeftSidebarComponent } from './../../layout/left-sidebar/left-sidebar.component';
 import { MatSnackBarConfig } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 import { Component, OnInit,AfterViewInit, ChangeDetectorRef  } from '@angular/core';
@@ -31,6 +32,13 @@ export class HistoricoComponent implements OnInit {
   normalSnackBarAberta : boolean = false;
   EmptySnackBarAberta : boolean = false;
   mostrarIrTopo : boolean = false;
+  imgVisualizar : Imagem;
+  visualizacao = false;
+  backgroundDarkColor = "#0e0e0e";
+  backgroundLightColor = "#FFFFFF";
+  backgroundColor = this.backgroundDarkColor;
+
+  @ViewChild('imageModal') public imageModal: ModalDirective;
 
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
@@ -39,7 +47,6 @@ export class HistoricoComponent implements OnInit {
   ngOnInit() {
     this.carregarHistorico();
   }
-
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -163,6 +170,63 @@ export class HistoricoComponent implements OnInit {
       //this.snackBar._openedSnackBarRef.dismiss();
   }
 
+  verImagem(img : Imagem){
+    //document.getElementById('app_sidebar-left').style.visibility = "hidden";
+    /*let d = document.getElementById('dialog');
+    let db = document.getElementById('dialog-body');
+    d.style.width = "100%";
+      d.style.height = "100%";
+      d.style.margin = "0px";
+      db.style.height = "100%"*/
+    this.visualizacao = true;
+    this.imgVisualizar = img;
+    this
+    this.imageModal.show();
+    var divObj = document.getElementById("full");
+       //Use the specification method before using prefixed versions
+      if (divObj.requestFullscreen) {
+        divObj.requestFullscreen();
+      }
+      
+    
+  }
+
+  fecharModal(){
+    //document.getElementById('app_sidebar-left').style.visibility = "visible";
+    let d = document.getElementById('dialog');
+    let db = document.getElementById('dialog-body');
+    //document.getElementById('dialog').removeAttribute('style');
+    //document.getElementById('dialog-body').removeAttribute('style');
+    this.imgVisualizar = undefined;
+    this.imageModal.hide();
+    this.visualizacao = false;
+    //document.getElementById('app_main-menu-wrapper').style.visibility = "visible";
+    //console.log("ver: " + this.visualizacao);
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    if (event.keyCode == 27) {
+      if (this.visualizacao) {
+        this.fecharModal();
+      }
+    }
+    else if(event.keyCode == 32){
+      if (this.visualizacao) {
+        this.mudarBackgroundColor();
+      }
+    }
+  }
+
+  mudarBackgroundColor(){
+    if(this.backgroundColor == this.backgroundDarkColor){
+      this.backgroundColor = this.backgroundLightColor;
+    }
+    else{
+      this.backgroundColor = this.backgroundDarkColor;
+    }
+  }
+
   @HostListener('window:scroll', ['$event']) 
     doSomething(event) {
       // console.debug("Scroll Event", document.body.scrollTop);
@@ -176,11 +240,11 @@ export class HistoricoComponent implements OnInit {
     } else {
         this.mostrarIrTopo = false;
     }
-}
+  }
 
 // When the user clicks on the button, scroll to the top of the document
-topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-} 
+  topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  } 
 }

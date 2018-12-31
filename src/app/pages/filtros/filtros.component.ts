@@ -48,6 +48,9 @@ export class FiltrosComponent implements OnInit {
   pilha : Imagem[] = [];
   pilhaIndice : number = 0;
   menu : boolean = true;
+  carregando : boolean = false;
+  larguraOriginal : number;
+  alturaOriginal: number;
 
   @ViewChild('imgContainer') imgContainer : ElementRef;
   lar : number;
@@ -69,10 +72,17 @@ export class FiltrosComponent implements OnInit {
   @ViewChild('robertsSidenav') public robertsSidenav : MatSidenav;
   robertsSidenavAberta : boolean = false;
 
-  @HostBinding("attr.style")
-  public get valueAsStyle(): any {
-    return this.DomSanitizer.bypassSecurityTrustStyle(`--cor-vermelha: ${this.valorR}`);
-  }
+  @ViewChild('espelhoHSidenav') public espelhoHSidenav : MatSidenav;
+  espelhoHSidenavAberta : boolean = false;
+
+  @ViewChild('espelhoVSidenav') public espelhoVSidenav : MatSidenav;
+  espelhoVSidenavAberta : boolean = false;
+
+  @ViewChild('girarHSidenav') public girarHSidenav : MatSidenav;
+  girarHSidenavAberta : boolean = false;
+
+  @ViewChild('girarAHSidenav') public girarAHSidenav : MatSidenav;
+  girarAHSidenavAberta : boolean = false;
 
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
@@ -81,30 +91,28 @@ export class FiltrosComponent implements OnInit {
   ngOnInit() {
     this.imagem = this.config.getImgAtual();
     this.pilha[0] = this.imagem;
-    //this.alt = this.imgContainer.nativeElement.offsetHeight;
-    //this.lar = this.imgContainer.nativeElement.offsetWidth;
+    this.larguraOriginal = this.imagem.largura;
+    this.alturaOriginal = this.imagem.altura;
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (!this.config.appLayout.isApp_SidebarLeftCollapsed) {
         this.config.appLayout.isApp_SidebarLeftCollapsed = !this.config.appLayout.isApp_SidebarLeftCollapsed;
-        
       }
     });
-    this.alt = this.imgContainer.nativeElement.offsetHeight;
-    this.lar = this.imgContainer.nativeElement.offsetWidth;
   }
 
   ajustarTela(){
-    let largura = this.imgContainer.nativeElement.offsetHeight;
-    let altura = this.imgContainer.nativeElement.offsetWidth;
-    this.alt = altura;
-    this.lar = largura;
-    if(this.imagem.altura * this.escala > altura || this.imagem.largura * this.escala > largura){
-      this.escala = (((altura * 0.9) * (largura * 0.9)) * 100) / (this.imagem.altura * this.imagem.largura);
-      //this.imagem.altura = altura;
-      //this.imagem.largura = largura;
+    let altura = document.getElementById('img-container').offsetHeight * 1.1;
+    let largura = document.getElementById('img-container').offsetWidth * 1.1;
+    if(this.alturaOriginal * this.escala > altura || this.larguraOriginal * this.escala > largura){
+      if(this.larguraOriginal < largura && this.alturaOriginal < altura){
+        this.escala = 1;
+      }
+      else{
+        this.escala = (0.9 * altura * largura) / (this.alturaOriginal* this.larguraOriginal);
+      }
     }
   }
 
@@ -154,40 +162,66 @@ export class FiltrosComponent implements OnInit {
   }
 
   voltarMenu(sidenav : String){
-    switch(sidenav){
-      case 'negativo':
-        this.negativoSidenavAberta = false;
-        setTimeout( () => {
-          this.negativoSidenav.toggle();
-        }) 
-      break;
-      case 'limiar':
-        this.limiarSidenavAberta = false;
-        setTimeout( () => {
-          this.limiarSidenav.toggle();
-        }); 
-        this.valorLimiar = 128;
-      break;
-      case 'ajusteRGB':
-        this.ajusteRGBSidenavAberta = false;
-        setTimeout( () => {
-          this.ajusteRGBSidenav.toggle();
-        }); 
-        this.valorR = 0;
-        this.valorG = 0;
-        this.valorB = 0;
-      break;
-      case 'roberts':
-        this.robertsSidenavAberta = false;
-        setTimeout( () => {
-          this.robertsSidenav.toggle();
-        }) 
-      break;
-      default:
-    
-      break;
+    if(!this.carregando){
+      switch(sidenav){
+        case 'negativo':
+          this.negativoSidenavAberta = false;
+          setTimeout( () => {
+            this.negativoSidenav.toggle();
+          }) 
+        break;
+        case 'limiar':
+          this.limiarSidenavAberta = false;
+          setTimeout( () => {
+            this.limiarSidenav.toggle();
+          }); 
+          this.valorLimiar = 128;
+        break;
+        case 'ajusteRGB':
+          this.ajusteRGBSidenavAberta = false;
+          setTimeout( () => {
+            this.ajusteRGBSidenav.toggle();
+          }); 
+          this.valorR = 0;
+          this.valorG = 0;
+          this.valorB = 0;
+        break;
+        case 'roberts':
+          this.robertsSidenavAberta = false;
+          setTimeout( () => {
+            this.robertsSidenav.toggle();
+          }) 
+        break;
+        case 'espelhoH':
+          this.espelhoHSidenavAberta = false;
+          setTimeout( () => {
+            this.espelhoHSidenav.toggle();
+          }) 
+        break;
+        case 'espelhoV':
+          this.espelhoVSidenavAberta = false;
+          setTimeout( () => {
+            this.espelhoVSidenav.toggle();
+          }) 
+        break;
+        case 'girarH':
+          this.girarHSidenavAberta = false;
+          setTimeout( () => {
+            this.girarHSidenav.toggle();
+          }) 
+        break;
+        case 'girarAH':
+          this.girarAHSidenavAberta = false;
+          setTimeout( () => {
+            this.girarAHSidenav.toggle();
+          }) 
+        break;
+        default:
+      
+        break;
+      }
+      this.menu = true;
     }
-    this.menu = true;
   }
 
   toogle(sidenav : String){
@@ -220,6 +254,34 @@ export class FiltrosComponent implements OnInit {
           this.robertsSidenav.toggle();
         })
       break;
+      case 'espelhoH':
+        this.espelhoHSidenavAberta = !this.espelhoHSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.espelhoHSidenav.toggle();
+        })
+      break;
+      case 'espelhoV':
+        this.espelhoVSidenavAberta = !this.espelhoVSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.espelhoVSidenav.toggle();
+        })
+      break;
+      case 'girarH':
+        this.girarHSidenavAberta = !this.girarHSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.girarHSidenav.toggle();
+        })
+      break;
+      case 'girarAH':
+        this.girarAHSidenavAberta = !this.girarAHSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.girarAHSidenav.toggle();
+        })
+      break;
       default:
     
       break;
@@ -233,61 +295,145 @@ export class FiltrosComponent implements OnInit {
   }
 
   negativo() {
+    this.carregando = true;
     this.http.post<Imagem>(this.urlFiltros.toString().concat("/negativo/").concat('nada'), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
+      this.carregando = false;
       this.voltarMenu('negativo');
       this.openSnackBar("Sucesso!","Filtro de negativo aplicado");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
     }, err => {
+      this.carregando = false;
       console.log(err);
     });
   }
 
   limiar() {
+    this.carregando = true;
     this.http.post<Imagem>(this.urlFiltros.toString().concat("/limiar/").concat(JSON.stringify({"valor" : this.valorLimiar})), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
+      this.carregando = false;
       this.voltarMenu('limiar');
       this.openSnackBar("Sucesso!","Filtro de limiar aplicado");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
     }, err => {
+      this.carregando = false;
       console.log(err);
     });
   }
 
   ajusteRGB() {
+    this.carregando = true;
     this.http.post<Imagem>(this.urlFiltros.toString().concat("/ajusteRGB/").concat(JSON.stringify({"valorR" : this.valorR,"valorG" : this.valorG, "valorB" : this.valorB})), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
+      this.carregando = false;
       this.voltarMenu('ajusteRGB');
       this.openSnackBar("Sucesso!","Ajuste de cores aplicado");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
     }, err => {
+      this.carregando = false;
       console.log(err);
     });
   }
 
   roberts() {
+    this.carregando = true;
     this.http.post<Imagem>(this.urlFiltros.toString().concat("/roberts/").concat('nada'), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
+      this.carregando = false;
       this.voltarMenu('roberts');
       this.openSnackBar("Sucesso!","Filtro de Roberts Cross aplicado");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
     }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  espelhoH() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/espelhoH/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('espelhoH');
+      this.openSnackBar("Sucesso!","Espelho horizontal aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  espelhoV() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/espelhoV/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('espelhoV');
+      this.openSnackBar("Sucesso!","Espelho vertical aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  girarH() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/girarH/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('girarH');
+      this.openSnackBar("Sucesso!","Rotação horária aplicada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  girarAH() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/girarAH/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('girarAH');
+      this.openSnackBar("Sucesso!","Rotação anti-horária aplicada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
       console.log(err);
     });
   }
@@ -311,6 +457,12 @@ export class FiltrosComponent implements OnInit {
       break;
       default :
       break;
+    }
+  }
+
+  ngOnDestroy(): void {
+    if(this.carregando){
+      this.carregando = false;
     }
   }
 }

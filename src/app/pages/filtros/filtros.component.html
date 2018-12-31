@@ -7,45 +7,97 @@
 
     <div class = "filtros-sidenav" fxLayout="column" fxFlex = 20%>
         <h5 style="align-items: left;text-align: left;font-synthesis: weight; font-size: 30px; font-size: 16px; color: lightgray;margin-left: 15px;margin-bottom: 18px;margin-top: 20px;">EDITAR</h5>
-        <mat-list role = "list" *ngIf = "menu" class="filtros-bar" [@slideInOut]>
-                <mat-list-item style="margin-top: 15px;"  (click) = "toogle('negativo')" role="listitem">
-                    <h5 class="filter-label">
-                        <img src="../../../assets/icons/negativo.svg" class="filter-icon">
-                        Negativo
-                    </h5>
-                </mat-list-item>
-                <mat-list-item  (click) = "toogle('limiar')" role="listitem">
-                    <h5 class="filter-label">
-                        <img src="../../../assets/icons/limiar.png" class="filter-icon">
-                        Limiar
-                    </h5>
-                </mat-list-item>
-                <mat-list-item (click)="toogle('ajusteRGB')" role="listitem">
-                    <h5 class="filter-label">
-                        <img src="../../../assets/icons/colors.svg" class="filter-icon">
-                        Ajuste RGB
-                    </h5>
-                </mat-list-item>
-                <mat-list-item (click)="toogle('roberts')" role="listitem">
-                    <h5 class="filter-label">
-                        <img src="../../../assets/icons/edges.svg" class="filter-icon">
-                        Roberts Cross
-                    </h5>
-                </mat-list-item>
-                <!--mat-list-item>
-                    
-                   largura: {{lar}}<br>
-                   altura : {{alt}}<br>
-                    img largura: {{imagem?.largura * escala}}<br>
-                    img altura: {{imagem?.altura * escala}}
-                </mat-list-item-->
-        </mat-list>
+        <mat-accordion *ngIf = "menu" class="filtros-bar" [@slideInOut]>
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header class = "panel-header">
+                    <mat-panel-title>
+                        <img src="../../../assets/icons/filtros.png" class="filter-icon" style="top: 30px;">
+                        <h5 class="filter-category-label">Filtros</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <mat-list role = "list" *ngIf = "menu" style="width: 100%;max-width: 100%;">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('negativo')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/negativo.svg" class="filter-icon">
+                                Negativo
+                            </h5>
+                        </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('limiar')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/limiar.png" class="filter-icon">
+                                Limiar
+                            </h5>
+                        </mat-list-item>
+                    </mat-list>
+                </ng-template>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header class="panel-header">
+                    <mat-panel-title>
+                        <img src="../../../assets/icons/ajuste.svg" class="filter-icon" style="top: 30px;">
+                        <h5 class="filter-category-label">Ajuste</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <mat-list role = "list" *ngIf = "menu" style="width: 100%;max-width: 100%;">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('ajusteRGB')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/colors.svg" class="filter-icon">
+                                Ajuste RGB
+                            </h5>
+                        </mat-list-item>
+                    </mat-list>
+                </ng-template>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header class="panel-header">
+                    <mat-panel-title>
+                        <img src="../../../assets/icons/editar.svg" class="filter-icon" style="top: 30px;">
+                        <h5 class="filter-category-label">Editar</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <mat-list role="list" *ngIf="menu" style="width: 100%;max-width: 100%;">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('espelhoH')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/espelho_horizontal.svg" class="filter-icon">
+                                Espelho horizontal
+                            </h5>
+                        </mat-list-item>
+                
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('espelhoV')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/espelho_vertical.svg" class="filter-icon">
+                                Espelho vertical
+                            </h5>
+                        </mat-list-item>
+
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('girarH')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/rotacionar_horario.svg" class="filter-icon">
+                                Girar horário
+                            </h5>
+                        </mat-list-item>
+
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('girarAH')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/rotacionar_antihorario.svg" class="filter-icon">
+                                Girar anti-horário
+                            </h5>
+                        </mat-list-item>
+                    </mat-list>
+                </ng-template>
+            </mat-expansion-panel>
+        </mat-accordion>
 
         <mat-sidenav *ngIf = "negativoSidenavAberta" [@slideInOut] #negativoSidenav mode="side" class="filtro-param-sidenav">
             <h5 class="filter-label-title">Negativo</h5>
             <div class = 'negativo-sidenav'>
                 <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('negativo')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "negativo()" matTooltip="Aplicar">
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "negativo()" matTooltip="Aplicar" [disabled] = "carregando">
                     <i class="zmdi zmdi-check"></i>
                 </button>
             </div>
@@ -79,7 +131,7 @@
                             +{{valorLimiar}}
                         </label>
                     </div>
-                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "limiar()" matTooltip="Aplicar">
+                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "limiar()" matTooltip="Aplicar" [disabled] = "carregando">
                         <i class="zmdi zmdi-check"></i>
                     </button>
                 </div>
@@ -158,7 +210,7 @@
                         </label>
                     </div>
                     
-                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "ajusteRGB()" matTooltip="Aplicar">
+                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "ajusteRGB()" matTooltip="Aplicar" [disabled] = "carregando">
                         <i class="zmdi zmdi-check"></i>
                     </button>
                 </div>
@@ -168,7 +220,47 @@
             <h5 class="filter-label-title">Roberts Cross</h5>
             <div class = 'negativo-sidenav'>
                 <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('roberts')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "roberts()" matTooltip="Aplicar">
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "roberts()" matTooltip="Aplicar" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf = "espelhoHSidenavAberta" [@slideInOut] #espelhoHSidenav mode="side" class="filtro-param-sidenav">
+                <h5 class="filter-label-title">Espelho horizontal</h5>
+                <div class = 'negativo-sidenav'>
+                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('espelhoH')" matTooltip="Voltar">
+                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "espelhoH()" matTooltip="Aplicar" [disabled] = "carregando">
+                        <i class="zmdi zmdi-check"></i>
+                    </button>
+                </div>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf = "espelhoVSidenavAberta" [@slideInOut] #espelhoVSidenav mode="side" class="filtro-param-sidenav">
+                <h5 class="filter-label-title">Espelho vertical</h5>
+                <div class = 'negativo-sidenav'>
+                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('espelhoV')" matTooltip="Voltar">
+                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "espelhoV()" matTooltip="Aplicar" [disabled] = "carregando">
+                        <i class="zmdi zmdi-check"></i>
+                    </button>
+                </div>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf = "girarHSidenavAberta" [@slideInOut] #girarHSidenav mode="side" class="filtro-param-sidenav">
+            <h5 class="filter-label-title">Girar horário</h5>
+            <div class = 'negativo-sidenav'>
+                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('girarH')" matTooltip="Voltar">
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "girarH()" matTooltip="Aplicar" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf = "girarAHSidenavAberta" [@slideInOut] #girarAHSidenav mode="side" class="filtro-param-sidenav">
+            <h5 class="filter-label-title">Girar anti-horário</h5>
+            <div class = 'negativo-sidenav'>
+                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('girarAH')" matTooltip="Voltar">
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "girarAH()" matTooltip="Aplicar" [disabled] = "carregando">
                     <i class="zmdi zmdi-check"></i>
                 </button>
             </div>
@@ -177,12 +269,13 @@
     </div>
 
     <div fxFlex fxLayout="column">
-        <div fxFlex = 96% fxLayout="row" fxLayoutAlign="center center" class="image-container" #imgContainer>
+        <div fxFlex = 96% fxLayout="row" fxLayoutAlign="center center" class="image-container" #imgContainer id = "img-container">
             <img cdkDragBoundary=".image-container" cdkDrag class="image" fxFlex
                  *ngIf = "imagem != undefined" 
                  src="data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
                  [style.width.px] = "imagem.largura * escala"
                  [style.height.px] = "imagem.altura * escala">  
+            <mat-spinner *ngIf = "carregando" ></mat-spinner>
             
         </div>
 

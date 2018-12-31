@@ -12,7 +12,7 @@ import {ResponsiveModule} from "ng2-responsive";
 import {SharedModule} from "./shared/shared.module";
 import {ServicesModule} from "./shared/services/services.module";
 import {RightSidebarService} from './layout/right-sidebar/right-sidebar.service';
-
+import { ModalModule } from "ngx-bootstrap";
 import 'hammerjs';
 
 const APP_PROVIDERS = [AppState, GlobalState, Title, RightSidebarService];
@@ -29,10 +29,14 @@ const APP_PROVIDERS = [AppState, GlobalState, Title, RightSidebarService];
         ReactiveFormsModule,
         SharedModule.forRoot(),
         ToastrModule.forRoot(),
+        ModalModule.forRoot(),
         BrowserAnimationsModule
     ],
     providers: [APP_PROVIDERS],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    exports: [
+        ModalModule
+    ]
 })
 export class AppModule {
     constructor(public appState: AppState) {
