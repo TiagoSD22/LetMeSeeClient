@@ -563,7 +563,17 @@
                     src="data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
                     [style.width.px] = "imagem.largura * escala"
                     [style.height.px] = "imagem.altura * escala">  
-                <mat-spinner *ngIf = "carregando" ></mat-spinner>
+            </div>
+            <div *ngIf = "carregando" class="lds-grid">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
 
