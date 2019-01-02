@@ -59,6 +59,9 @@ export class FiltrosComponent implements OnInit {
   @ViewChild('negativoSidenav') public negativoSidenav : MatSidenav;
   negativoSidenavAberta : boolean = false;
 
+  @ViewChild('escalaCinzaSidenav') public escalaCinzaSidenav : MatSidenav;
+  escalaCinzaSidenavAberta : boolean = false;
+
   @ViewChild('limiarSidenav') public limiarSidenav : MatSidenav;
   limiarSidenavAberta : boolean = false;
   valorLimiar : number = 128;
@@ -84,6 +87,24 @@ export class FiltrosComponent implements OnInit {
   @ViewChild('girarAHSidenav') public girarAHSidenav : MatSidenav;
   girarAHSidenavAberta : boolean = false;
 
+  @ViewChild('dilatarSidenav') public dilatarSidenav : MatSidenav;
+  dilatarSidenavAberta : boolean = false;
+
+  @ViewChild('erodirSidenav') public erodirSidenav : MatSidenav;
+  erodirSidenavAberta : boolean = false;
+  larguraK : number = 3;
+  alturaK : number = 3;
+  selecaoLivre : boolean = false;
+
+  @ViewChild('medianaSidenav') public medianaSidenav : MatSidenav;
+  medianaSidenavAberta : boolean = false;
+
+  @ViewChild('blurSidenav') public blurSidenav : MatSidenav;
+  blurSidenavAberta : boolean = false;
+  gaussiana : boolean = false;
+  sigmaX : number = 0.0;
+  sigmaY : number = 0.0;
+
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
     private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar) { }
@@ -104,8 +125,10 @@ export class FiltrosComponent implements OnInit {
   }
 
   ajustarTela(){
+    console.log("Distancia: " + document.getElementById('image').offsetTop);
     let altura = document.getElementById('img-container').offsetHeight * 1.1;
     let largura = document.getElementById('img-container').offsetWidth * 1.1;
+    document.getElementById('image').style.transform = "translate3d(0px, 0px, 0px)";
     if(this.alturaOriginal * this.escala > altura || this.larguraOriginal * this.escala > largura){
       if(this.larguraOriginal < largura && this.alturaOriginal < altura){
         this.escala = 1;
@@ -136,15 +159,19 @@ export class FiltrosComponent implements OnInit {
   }
 
   desfazer(){
-    this.pilhaIndice -= 1;
-    this.imagem = this.pilha[this.pilhaIndice];
-    this.config.seImgAtual(this.imagem);
+    if(this.pilhaIndice > 0){
+      this.pilhaIndice -= 1;
+      this.imagem = this.pilha[this.pilhaIndice];
+      this.config.seImgAtual(this.imagem);
+    }
   }
 
   refazer(){
-    this.pilhaIndice += 1;
-    this.imagem = this.pilha[this.pilhaIndice];
-    this.config.seImgAtual(this.imagem);
+    if(this.pilhaIndice < this.pilha.length - 1){
+      this.pilhaIndice += 1;
+      this.imagem = this.pilha[this.pilhaIndice];
+      this.config.seImgAtual(this.imagem);
+    }
   }
 
   salvarImagem(){
@@ -168,6 +195,12 @@ export class FiltrosComponent implements OnInit {
           this.negativoSidenavAberta = false;
           setTimeout( () => {
             this.negativoSidenav.toggle();
+          }) 
+        break;
+        case 'escalaCinza':
+          this.escalaCinzaSidenavAberta = false;
+          setTimeout( () => {
+            this.escalaCinzaSidenav.toggle();
           }) 
         break;
         case 'limiar':
@@ -216,6 +249,41 @@ export class FiltrosComponent implements OnInit {
             this.girarAHSidenav.toggle();
           }) 
         break;
+        case 'dilatar':
+          this.dilatarSidenavAberta = false;
+          setTimeout( () => {
+            this.dilatarSidenav.toggle();
+          });
+          this.larguraK = 3;
+          this.alturaK = 3; 
+          this.selecaoLivre = false;
+        break;
+        case 'erodir':
+          this.erodirSidenavAberta = false;
+          setTimeout( () => {
+            this.erodirSidenav.toggle();
+          });
+          this.larguraK = 3;
+          this.alturaK = 3; 
+          this.selecaoLivre = false;
+        break;
+        case 'mediana':
+          this.medianaSidenavAberta = false;
+          setTimeout( () => {
+            this.medianaSidenav.toggle();
+          });
+          this.larguraK = 3; 
+        break;
+        case 'blur':
+          this.blurSidenavAberta = false;
+          setTimeout( () => {
+            this.blurSidenav.toggle();
+          });
+          this.larguraK = 3;
+          this.gaussiana = false; 
+          this.sigmaX = 0;
+          this.sigmaY = 0;
+        break;
         default:
       
         break;
@@ -231,6 +299,13 @@ export class FiltrosComponent implements OnInit {
         this.menu = false;
         setTimeout( () => {
           this.negativoSidenav.toggle();
+        })
+      break;
+      case 'escalaCinza':
+        this.escalaCinzaSidenavAberta = !this.escalaCinzaSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.escalaCinzaSidenav.toggle();
         })
       break;
       case 'limiar':
@@ -282,6 +357,36 @@ export class FiltrosComponent implements OnInit {
           this.girarAHSidenav.toggle();
         })
       break;
+      case 'dilatar':
+        this.dilatarSidenavAberta = !this.dilatarSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.dilatarSidenav.toggle();
+        })
+      break;
+      case 'erodir':
+        this.erodirSidenavAberta = !this.erodirSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.erodirSidenav.toggle();
+        })
+      break;
+      case 'mediana':
+      this.larguraK = 5;
+        this.medianaSidenavAberta = !this.medianaSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.medianaSidenav.toggle();
+        })
+      break;
+      case 'blur':
+      this.larguraK = 5;
+        this.blurSidenavAberta = !this.blurSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.blurSidenav.toggle();
+        })
+      break;
       default:
     
       break;
@@ -303,6 +408,24 @@ export class FiltrosComponent implements OnInit {
       this.carregando = false;
       this.voltarMenu('negativo');
       this.openSnackBar("Sucesso!","Filtro de negativo aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  escalaCinza() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/escala_cinza/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('escalaCinza');
+      this.openSnackBar("Sucesso!","Filtro de escala de cinza aplicado!");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
@@ -339,6 +462,24 @@ export class FiltrosComponent implements OnInit {
       this.carregando = false;
       this.voltarMenu('ajusteRGB');
       this.openSnackBar("Sucesso!","Ajuste de cores aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  mock(){
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/sobel/").concat(JSON.stringify({"w" : 1640,"h" : 2240})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('negativo');
+      this.openSnackBar("Sucesso!","");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
@@ -438,6 +579,86 @@ export class FiltrosComponent implements OnInit {
     });
   }
 
+  dilatar() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/dilatar/").concat(JSON.stringify({"w" : this.larguraK,"h" : this.alturaK})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('dilatar');
+      this.openSnackBar("Sucesso!","Dilatação aplicada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  erodir() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/erodir/").concat(JSON.stringify({"w" : this.larguraK,"h" : this.alturaK})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('erodir');
+      this.openSnackBar("Sucesso!","Erosão aplicada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  mediana() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/mediana/").concat(JSON.stringify({"k" : this.larguraK})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('mediana');
+      this.openSnackBar("Sucesso!","Mediana aplicada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  blur(){
+    this.carregando = true;
+    let filtro : String = "blur";
+    let parametros = JSON.stringify({"w" : this.larguraK,"h" : this.larguraK});
+    let msg = "Blur aplicado!";
+    if(this.gaussiana){
+      filtro = "gaussian_blur";
+      parametros = JSON.stringify({"w" : this.larguraK,"h" : this.larguraK,"x" : this.sigmaX, "y" : this.sigmaY});
+      msg = "Gaussian Blur aplicado!";
+    }
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/" + filtro + "/").concat(parametros), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('blur');
+      this.openSnackBar("Sucesso!",msg);
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
   slideMudou(slide : String, event : any){
     switch(slide){
       case 'limiar':
@@ -455,7 +676,39 @@ export class FiltrosComponent implements OnInit {
       case 'canalB':
         this.valorB = event.value;
       break;
+      case 'larguraK':
+        if(!this.selecaoLivre){
+          this.alturaK = event.value;
+        }
+        this.larguraK = event.value;
+      break;
+      case 'alturaK':
+        if(!this.selecaoLivre){
+          this.larguraK = event.value;
+        }
+        this.alturaK = event.value;
+      break;
+      case 'mediana':
+        this.larguraK = event.value;
+      break;
       default :
+      break;
+    }
+  }
+
+  inputMudou(input : String){
+    switch(input){
+      case 'dilatarW':
+        if(this.larguraK < 2){
+          this.larguraK = 2;
+        }
+      break;
+      case 'dilatarH':
+        if(this.alturaK < 2){
+          this.alturaK = 2;
+        }
+      break;
+      default:
       break;
     }
   }

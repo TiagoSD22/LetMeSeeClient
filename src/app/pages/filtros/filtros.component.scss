@@ -25,7 +25,7 @@
     margin-top: 63px;
     border-radius: 10px;
     border-color: #3c7fca;
-    //background: url('../../../assets/img/filtros-bar2.jpg') no-repeat center;
+    //background: url('../../../assets/img/glass.jpg') no-repeat center;
     position: absolute;
 }
 .filtros-bar::-webkit-scrollbar {
@@ -121,25 +121,27 @@
     border-radius:10px;
 }
 
-.image-container{
+.image-container{ 
     display: flex;
     overflow: hidden;
+    //overflow: auto;
     position: relative;
     object-fit: contain;
     flex-wrap: wrap;
     height: auto;
     width: auto;
-    //margin: 1rem;
+    z-index: 5;
+}
+
+.img-wrapper{
+    display: flex;
+    z-index: -5;
+    position: absolute;
 }
 
 .image{
     display: flex;
-    object-fit: cover;
-    //margin: 0 auto;
-    //margin-right: auto;
-    //margin-left: auto;
-    //margin-top: 10px;
-    //margin-bottom: 10px;
+    //object-fit: cover;
     position: absolute;
     cursor: move;
 }
@@ -305,6 +307,14 @@
     position: relative;
 }
 
+.dilatacao-sidenav{
+    background-color: rgba(30, 25, 11, 0.3);
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    position: relative;
+}
+
 .filtro-param-sidenav{
     background-color: #232936;
     align-self: center;
@@ -319,4 +329,53 @@
     align-items: center;
     justify-content: flex-start;
     padding-top: 50px;
+}
+
+.desativado{
+    cursor: not-allowed;
+}
+
+.ativado{
+    cursor: pointer;
+}
+
+.two-col {
+    position: absolute;
+    //margin-top: 50px;
+    overflow: hidden;/* Makes this div contain its floats */
+}
+
+.two-col .col1,
+.two-col .col2 {
+    width: 49%;
+}
+
+.two-col .col1 {
+    float: left;
+}
+
+.two-col .col2 {
+    float: right;
+}
+
+.two-col label {
+    display: block;
+}
+
+.two-col .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #3c7fca;
+    text-align: center !important;
+}
+
+.two-col .mat-drawer, .mat-input-element {
+    text-align: center !important;
+    color: #3c7fca !important;
+}
+
+.two-col .mat-form-field-appearance-legacy .mat-form-field-underline {
+    color: #3c7fca !important;
+}
+
+.two-col .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: #3c7fca !important;
 }

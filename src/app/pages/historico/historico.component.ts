@@ -1,7 +1,6 @@
-import { LeftSidebarComponent } from './../../layout/left-sidebar/left-sidebar.component';
 import { MatSnackBarConfig } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
-import { Component, OnInit,AfterViewInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ChangeDetectorRef,Inject} from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -19,6 +18,8 @@ import 'rxjs/add/observable/interval';
 import { MatTableDataSource } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import {Imagem} from "../imagem";
+import { DOCUMENT } from '@angular/platform-browser';
+import { WINDOW } from "../../shared/services/window.service";
 
 @Component({
   selector: 'app-historico',
@@ -37,12 +38,16 @@ export class HistoricoComponent implements OnInit {
   backgroundDarkColor = "#0e0e0e";
   backgroundLightColor = "#FFFFFF";
   backgroundColor = this.backgroundDarkColor;
+  showScroll: boolean;
+  showScrollHeight = 150;
+  hideScrollHeight = 10;
 
   @ViewChild('imageModal') public imageModal: ModalDirective;
 
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
-    private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar) { }
+    private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar,@Inject(DOCUMENT) private document: Document,
+    @Inject(WINDOW) private window: Window) { }
 
   ngOnInit() {
     this.carregarHistorico();
@@ -168,40 +173,23 @@ export class HistoricoComponent implements OnInit {
   ngOnDestroy(): void {
     //if(this.EmptySnackBarAberta || this.normalSnackBarAberta)
       //this.snackBar._openedSnackBarRef.dismiss();
+    if(this.visualizacao){
+      this.config.mostrarBarra();
+    }
   }
 
   verImagem(img : Imagem){
-    //document.getElementById('app_sidebar-left').style.visibility = "hidden";
-    /*let d = document.getElementById('dialog');
-    let db = document.getElementById('dialog-body');
-    d.style.width = "100%";
-      d.style.height = "100%";
-      d.style.margin = "0px";
-      db.style.height = "100%"*/
+    this.config.esconderBarra();
     this.visualizacao = true;
     this.imgVisualizar = img;
-    this
     this.imageModal.show();
-    var divObj = document.getElementById("full");
-       //Use the specification method before using prefixed versions
-      if (divObj.requestFullscreen) {
-        divObj.requestFullscreen();
-      }
-      
-    
   }
 
   fecharModal(){
-    //document.getElementById('app_sidebar-left').style.visibility = "visible";
-    let d = document.getElementById('dialog');
-    let db = document.getElementById('dialog-body');
-    //document.getElementById('dialog').removeAttribute('style');
-    //document.getElementById('dialog-body').removeAttribute('style');
     this.imgVisualizar = undefined;
     this.imageModal.hide();
     this.visualizacao = false;
-    //document.getElementById('app_main-menu-wrapper').style.visibility = "visible";
-    //console.log("ver: " + this.visualizacao);
+    this.config.mostrarBarra();
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -227,24 +215,25 @@ export class HistoricoComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', ['$event']) 
-    doSomething(event) {
-      // console.debug("Scroll Event", document.body.scrollTop);
-      // see András Szepesházi's comment below
-      console.debug("Scroll Event", window.pageYOffset );
-    }
-  // When the user scrolls down 20px from the top of the document, show the button
-  scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        this.mostrarIrTopo = true;
-    } else {
-        this.mostrarIrTopo = false;
+  /*@HostListener('window:scroll', [])
+  onWindowScroll() {
+    console.log("Scroll");
+    if (( window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+      this.showScroll = true;
+    } 
+    else if ( this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight){ 
+      this.showScroll = false; 
     }
   }
-
-// When the user clicks on the button, scroll to the top of the document
-  topFunction() {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  } 
+  scrollToTop() 
+    { 
+      (function smoothscroll() 
+      { var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; 
+        if (currentScroll > 0) 
+        {
+          window.requestAnimationFrame(smoothscroll);
+          window.scrollTo(0, currentScroll - (currentScroll / 5));
+        }
+      })();
+    }*/
 }

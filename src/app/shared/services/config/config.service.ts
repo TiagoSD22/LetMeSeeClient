@@ -11,6 +11,7 @@ export class ConfigService {
     public breakpoint: any;
     private ip : String;
     public imgAtual : Imagem = undefined;
+    public mostrarBarraLateral : boolean = true;
 
     constructor() {
         this.ip = window.location.origin;
@@ -39,5 +40,17 @@ export class ConfigService {
 
     getImgAtual(){
         return this.imgAtual;
+    }
+
+    esconderBarra(){
+        document.getElementById('app_sidebar-left').style.visibility = "hidden";
+        //document.getElementById('app-wrapper').style.backgroundColor = "#0e0e0e";
+        document.getElementById('content_outer_wrapper').style.paddingLeft = "0px";
+    }
+
+    mostrarBarra(){
+        document.getElementById('app_sidebar-left').style.visibility = "visible";
+        document.getElementById('content_outer_wrapper').style.paddingLeft = "50px";
+        //document.getElementById('content_outer_wrapper').className = "_content.scss";
     }
 }

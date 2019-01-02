@@ -4,7 +4,7 @@ import { RouterModule } from "@angular/router";
 import {FiltrosComponent} from "./filtros.component";
 import { MatTableModule, MatButtonModule, MatSelectModule, MatInputModule, MatTabsModule, 
   MatExpansionModule, MatCardModule,MatSliderModule, MatRadioModule,MatIconModule,
-  MatSlideToggleModule,MatMenuModule, MatTooltipModule,MatSidenavModule,MatListModule, MatProgressSpinnerModule} from "@angular/material";
+  MatSlideToggleModule,MatMenuModule, MatTooltipModule,MatSidenavModule,MatListModule, MatProgressSpinnerModule,MatCheckboxModule} from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
 import {MatBadgeModule} from "@angular/material/badge";
@@ -27,6 +27,7 @@ const ROTAS_Filtros = [
     MatTooltipModule,
     MatSnackBarModule,
     MatBadgeModule,
+    MatCheckboxModule,
     MatTabsModule,
     MatIconModule,
     MatSidenavModule,
