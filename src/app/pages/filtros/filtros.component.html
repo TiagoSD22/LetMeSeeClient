@@ -47,6 +47,12 @@
                                 Erosão
                             </h5>
                         </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('extrairCanal')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/extrair_canal.png" class="filter-icon">
+                                Extrair canal
+                            </h5>
+                        </mat-list-item>
                     </mat-list>
                 </ng-template>
             </mat-expansion-panel>
@@ -121,14 +127,13 @@
                     </mat-list>
                 </ng-template>
             </mat-expansion-panel>
-            <mat-expansion-panel class="panel">
-                    <mat-expansion-panel-header class="panel-header">
-                            <mat-panel-title>
-                                <img src="../../../assets/icons/bug.svg" class="filter-icon" style="top: 30px;">
-                                <h5 (click) = "mock()" class="filter-category-label">MOCK</h5>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-            </mat-expansion-panel>
+            
+            <div style="padding-top: 10px;">
+                <button (click) = "mock()" mat-raised-button color = "primary">
+                    <img src="../../../assets/icons/bug.svg" class="filter-icon" style="top: 0px;">
+                    MOCK!!
+                </button>
+            </div>
         </mat-accordion>
 
         <mat-sidenav *ngIf = "negativoSidenavAberta" [@slideInOut] #negativoSidenav mode="side" class="filtro-param-sidenav">
@@ -502,6 +507,50 @@
                     <i class="zmdi zmdi-check"></i>
                 </button>
             </div>
+    </mat-sidenav>
+
+    <mat-sidenav *ngIf = "extrairCanalSidenavAberta" [@slideInOut] #extrairCanalSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Extrair canal</h5>
+        <div class = 'negativo-sidenav' style="height: 200px;">
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('extrairCanal')" matTooltip="Voltar">
+            <div style="padding-top: 40px;">
+            <div style="display: inline-block;">
+                <mat-checkbox class="red-check" 
+                              [labelPosition]="before" 
+                              [(ngModel)]="extrairR" 
+                              matTooltip="Extrair canal vermelho">
+                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
+                        R
+                    </h5>
+                </mat-checkbox>
+            </div>
+            <div style="display: inline-block;padding-left: 10px;">
+                <mat-checkbox class="green-check" 
+                              [labelPosition]="before" 
+                              [(ngModel)]="extrairG" 
+                              matTooltip="Extrair canal verde">
+                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
+                        G
+                    </h5>
+                </mat-checkbox>
+            </div>
+            <div style="display: inline-block;padding-left: 10px;">
+                <mat-checkbox class="blue-check" 
+                              [labelPosition]="before" 
+                              [(ngModel)]="extrairB" 
+                              matTooltip="Extrair canal azul">
+                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
+                        B
+                    </h5>
+                </mat-checkbox>
+            </div>
+            </div>
+            <div style="width: 20%;left: 40%;position: absolute;" [matTooltip]="!extrairR && !extrairG && !extrairB ? 'Selecione um canal!' : 'Aplicar'">
+                <button [disabled] = "!extrairR && !extrairG && !extrairB" class="btn" mat-mini-fab color="primary" style="margin-top: 20px;" (click) = "extrairCanal()" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </div>
     </mat-sidenav>
 
     </div>

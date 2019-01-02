@@ -379,3 +379,16 @@
 .two-col .mat-form-field-appearance-legacy .mat-form-field-underline {
     background-color: #3c7fca !important;
 }
+
+.red-check.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #FF0000 !important;
+}
+
+.green-check.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #00FF00 !important;
+}
+
+.blue-check.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #0000FF !important;
+}
+

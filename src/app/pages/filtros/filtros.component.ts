@@ -105,6 +105,12 @@ export class FiltrosComponent implements OnInit {
   sigmaX : number = 0.0;
   sigmaY : number = 0.0;
 
+  @ViewChild('extrairCanalSidenav') public extrairCanalSidenav : MatSidenav;
+  extrairCanalSidenavAberta : boolean = false;
+  extrairR : boolean = true;
+  extrairG : boolean = false;
+  extrairB : boolean = false;
+
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
     private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar) { }
@@ -284,6 +290,15 @@ export class FiltrosComponent implements OnInit {
           this.sigmaX = 0;
           this.sigmaY = 0;
         break;
+        case 'extrairCanal':
+          this.extrairCanalSidenavAberta = false;
+          setTimeout( () => {
+            this.extrairCanalSidenav.toggle();
+          }) 
+          this.extrairR = true;
+          this.extrairG = false;
+          this.extrairB = false;
+        break;
         default:
       
         break;
@@ -387,6 +402,13 @@ export class FiltrosComponent implements OnInit {
           this.blurSidenav.toggle();
         })
       break;
+      case 'extrairCanal':
+        this.extrairCanalSidenavAberta = !this.extrairCanalSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.extrairCanalSidenav.toggle();
+        })
+      break;
       default:
     
       break;
@@ -473,7 +495,7 @@ export class FiltrosComponent implements OnInit {
 
   mock(){
     this.carregando = true;
-    this.http.post<Imagem>(this.urlFiltros.toString().concat("/sobel/").concat(JSON.stringify({"w" : 1640,"h" : 2240})), this.imagem, {
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/extrair_canal/").concat(JSON.stringify({"R" : true,"B" : false, "G" : false})), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
@@ -650,6 +672,24 @@ export class FiltrosComponent implements OnInit {
       this.carregando = false;
       this.voltarMenu('blur');
       this.openSnackBar("Sucesso!",msg);
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  extrairCanal(){
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/extrair_canal/").concat(JSON.stringify({"R" : this.extrairR,"G" : this.extrairG, "B" : this.extrairB})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('extrairCanal');
+      this.openSnackBar("Sucesso!","Extração de canal aplicada!");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
