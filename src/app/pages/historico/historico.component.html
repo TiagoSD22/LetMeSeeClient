@@ -1,15 +1,13 @@
 <div [hidden] = "visualizacao" class="main-container">
   <div *ngIf="imagens.length > 0" class="cardList">
     <mat-card *ngFor="let img of imagens" class="imagens">
-      <mat-card-header class="card-header" style="margin-bottom: 5px;">
-        <!--div mat-card-avatar [ngClass]="{'formato-jpg': img.tipo == 'jpg' || img.tipo == 'jpeg', 'formato-png' : img.tipo == 'png', 'formato-bmp' : img.tipo == 'bmp', 'formato-gif' : img.tipo == 'gif'}">
-        </div-->
+      <mat-card-header class="card-header" style="margin-bottom: 5px;height: 60px; max-height: 60px;">
         <div>
           <button mat-mini-fab style="left: 5px;position: absolute;top: 2px;cursor: default; background-color : rgb(40,48,63);">
             .{{img.tipo | uppercase}}
           </button>
         </div>
-        <mat-card-title class= "normal-title" style="padding-left: 20px;top:1px;">{{img.nome}}</mat-card-title>
+        <mat-card-title class= "header-title" style="padding-left: 20px;top:1px;">{{img.nome}}</mat-card-title>
         <!--mat-card-subtitle>{{img.tipo}}</mat-card-subtitle-->
       </mat-card-header>
       <div class = "image-wrapper">
@@ -33,7 +31,7 @@
                 matTooltip="Salvar esta foto">
           <mat-icon>get_app</mat-icon>SALVAR
         </button>
-        <button class="btn fab"
+        <button class="shake-bt"
                 style="margin-bottom: 8px; margin-left: 5px;" 
                 mat-mini-fab color="primary" 
                 (click)="editarImagem(img)"
@@ -64,9 +62,9 @@
 
 <div *ngIf = "imgVisualizar != undefined" id = "modal-dialog"  class="modal fade" bsModal #imageModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
       aria-hidden="true" [style.background-color] = "backgroundColor">
-    <div class="modal-content" >
-      <div id = "dialog-body" class="modal-body">
-        <img id = "full" src="data:image/{{imgVisualizar?.tipo}};base64,{{imgVisualizar?.conteudoBase64}}" class="img-full">
-      </div>
+  <div class="modal-content" >
+    <div id = "dialog-body" class="modal-body">
+      <img id = "full" src="data:image/{{imgVisualizar?.tipo}};base64,{{imgVisualizar?.conteudoBase64}}" class="img-full">
+    </div>
   </div>
 </div>

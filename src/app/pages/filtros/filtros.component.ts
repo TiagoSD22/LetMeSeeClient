@@ -111,6 +111,24 @@ export class FiltrosComponent implements OnInit {
   extrairG : boolean = false;
   extrairB : boolean = false;
 
+  @ViewChild('resizeSidenav') public resizeSidenav : MatSidenav;
+  resizeSidenavAberta : boolean = false;
+  manterProporcao : boolean = false;
+  novaLargura : number;
+  novaAltura : number;
+
+  @ViewChild('brilhoSidenav') public brilhoSidenav : MatSidenav;
+  brilhoSidenavAberta : boolean = false;
+  valorBrilho : number = 0;
+
+  @ViewChild('contrasteSidenav') public contrasteSidenav : MatSidenav;
+  contrasteSidenavAberta : boolean = false;
+  valorContraste : number = 1;
+
+  @ViewChild('trocarCanaisSidenav') public trocarCanaisSidenav : MatSidenav;
+  trocarCanaisSidenavAberta : boolean = false;
+  canaisSwap : String = ""
+
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
     private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar) { }
@@ -120,6 +138,8 @@ export class FiltrosComponent implements OnInit {
     this.pilha[0] = this.imagem;
     this.larguraOriginal = this.imagem.largura;
     this.alturaOriginal = this.imagem.altura;
+    this.novaLargura = this.larguraOriginal;
+    this.novaAltura = this.alturaOriginal;
   }
 
   ngAfterViewInit(): void {
@@ -299,6 +319,36 @@ export class FiltrosComponent implements OnInit {
           this.extrairG = false;
           this.extrairB = false;
         break;
+        case 'resize':
+          this.resizeSidenavAberta = false;
+          setTimeout( () => {
+            this.resizeSidenav.toggle();
+          });
+          this.manterProporcao = false;
+          this.imagem.largura = this.larguraOriginal;
+          this.imagem.altura = this.alturaOriginal;
+        break;
+        case 'brilho':
+          this.brilhoSidenavAberta = false;
+          setTimeout( () => {
+            this.brilhoSidenav.toggle();
+          }); 
+          this.valorBrilho = 0;
+        break;
+        case 'contraste':
+          this.contrasteSidenavAberta = false;
+          setTimeout( () => {
+            this.contrasteSidenav.toggle();
+          }); 
+          this.valorContraste = 1.0;
+        break;
+        case 'trocarCanais':
+          this.trocarCanaisSidenavAberta = false;
+          setTimeout( () => {
+            this.trocarCanaisSidenav.toggle();
+          }); 
+          this.canaisSwap = ""
+        break;
         default:
       
         break;
@@ -409,6 +459,36 @@ export class FiltrosComponent implements OnInit {
           this.extrairCanalSidenav.toggle();
         })
       break;
+      case 'resize':
+      this.novaLargura = this.imagem.largura;
+      this.novaAltura = this.imagem.altura;
+        this.resizeSidenavAberta = !this.resizeSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.resizeSidenav.toggle();
+        })
+      break;
+      case 'brilho':
+        this.brilhoSidenavAberta = !this.brilhoSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.brilhoSidenav.toggle();
+        })
+      break;
+      case 'contraste':
+        this.contrasteSidenavAberta = !this.contrasteSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.contrasteSidenav.toggle();
+        })
+      break;
+      case 'trocarCanais':
+        this.trocarCanaisSidenavAberta = !this.trocarCanaisSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.trocarCanaisSidenav.toggle();
+        })
+      break;
       default:
     
       break;
@@ -493,16 +573,18 @@ export class FiltrosComponent implements OnInit {
     });
   }
 
-  mock(){
+  resize(){
     this.carregando = true;
-    this.http.post<Imagem>(this.urlFiltros.toString().concat("/extrair_canal/").concat(JSON.stringify({"R" : true,"B" : false, "G" : false})), this.imagem, {
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/redimensionar/").concat(JSON.stringify({"w" : this.novaLargura,"h" : this.novaAltura})), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
       this.carregando = false;
-      this.voltarMenu('negativo');
-      this.openSnackBar("Sucesso!","");
+      this.voltarMenu('resize');
+      this.openSnackBar("Sucesso!","Imagem redimensionada!");
       this.imagem = response.body;
+      this.alturaOriginal = this.imagem.altura;
+      this.larguraOriginal = this.imagem.largura;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
     }, err => {
@@ -699,6 +781,60 @@ export class FiltrosComponent implements OnInit {
     });
   }
 
+  brilho(){
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/brilho/").concat(JSON.stringify({"gain" : this.valorBrilho})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('brilho');
+      this.openSnackBar("Sucesso!","Brilho ajustado!");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  contraste(){
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/contraste/").concat(JSON.stringify({"gamma" : this.valorContraste})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('contraste');
+      this.openSnackBar("Sucesso!","Contraste ajustado!");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  trocarCanais(){
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/trocar_canais/").concat(JSON.stringify({"canais" : this.canaisSwap})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('trocarCanais');
+      this.openSnackBar("Sucesso!","Canais trocados!");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
   slideMudou(slide : String, event : any){
     switch(slide){
       case 'limiar':
@@ -731,6 +867,12 @@ export class FiltrosComponent implements OnInit {
       case 'mediana':
         this.larguraK = event.value;
       break;
+      case 'brilho':
+        this.valorBrilho = event.value;
+      break;
+      case 'contraste':
+        this.valorContraste = event.value;
+      break;
       default :
       break;
     }
@@ -738,15 +880,19 @@ export class FiltrosComponent implements OnInit {
 
   inputMudou(input : String){
     switch(input){
-      case 'dilatarW':
-        if(this.larguraK < 2){
-          this.larguraK = 2;
+      case 'novaLargura':
+        if(this.manterProporcao){
+          this.novaAltura =  Math.round((this.novaLargura/this.larguraOriginal) * this.alturaOriginal);
         }
+        this.imagem.largura = this.novaLargura;
+        this.imagem.altura = this.novaAltura;
       break;
-      case 'dilatarH':
-        if(this.alturaK < 2){
-          this.alturaK = 2;
+      case 'novaAltura':
+        if(this.manterProporcao){
+          this.novaLargura =  Math.round((this.novaAltura / this.alturaOriginal) * this.larguraOriginal);
         }
+        this.imagem.altura = this.novaAltura;
+        this.imagem.largura = this.novaLargura;;
       break;
       default:
       break;
@@ -757,5 +903,23 @@ export class FiltrosComponent implements OnInit {
     if(this.carregando){
       this.carregando = false;
     }
+  }
+
+  mock(){
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/trocar_canais/").concat(JSON.stringify({"canais" : "RB"})), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      //this.voltarMenu('negativo');
+      this.openSnackBar("Sucesso!","");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
   }
 }

@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: 32px;
+  //margin-left: 32px;
+  //margin-left: 50px;
   //width: fit-content;//remover ocupa toda a tela
   justify-content: flex-start;
 }
@@ -12,7 +13,7 @@
   box-sizing: border-box;
 }
 .cardList > * {
-  margin-right: 32px;
+  margin-right: 50px;
   margin-top: 32px;
 }
 
@@ -59,7 +60,49 @@
   text-align: center;
   position: relative;
   margin-bottom: 32px; /* same as fxLayoutGap for even distribution */
-  flex: 0 1 calc(33.3% - 32px);
+  //flex: 0 1 calc(33.3% - 32px);
+  //flex: 0 1 calc(25% - 50px);
+}
+
+@media only screen and (min-width: 37.50em) {
+  .card {
+    max-width: calc(50% - 20px);
+  }
+}
+@media (min-width: 68em) {
+  .imagens{
+    flex: 0 1 calc(33.3% - 50px);
+  }
+  .cardList{
+    margin-left: 50px;
+  }
+} 
+
+@media (min-width: 100em) { 
+  .imagens{
+    flex: 0 1 calc(25% - 50px);
+  }
+  .cardList{
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 68em) { 
+  .imagens{
+    flex: 0 1 calc(50% - 50px);
+  }
+  .cardList{
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 41em) { 
+  .imagens{
+    flex: 0 1 calc(100% - 50px);
+  }
+  .cardList{
+    margin-left: 50px;
+  }
 }
 
 .imagens:hover{
@@ -115,7 +158,7 @@
   text-align: left;
 }
 
-.normal-title{
+.header-title{
   font-weight: bold;
   margin-left: 5px;
   margin-top: 10px;
@@ -124,11 +167,39 @@
   white-space: pre-wrap !important;
   word-break: break-all;
   word-break: break-word;
- -webkit-hyphens: auto;
- -moz-hyphens: auto;
-     hyphens: auto;
-     overflow: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  overflow: auto;
+  max-height: 100%;
 }
+
+
+.header-title::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+.header-title::-webkit-scrollbar
+{
+	width: 0.35em;
+	background-color: #F5F5F5;
+}
+
+.header-title::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44, rgb(122,153,217)),
+									   color-stop(0.72, rgb(73,125,189)),
+									   color-stop(0.86, rgb(28,58,148)));
+}
+
+
 
 .reduced-title{
   font-weight: bold;
@@ -224,7 +295,7 @@
     padding: 0.25em 0.3em 0;
   }
   
-  .card .card-content p {
+  .card .card-content h5 {
     font-size: 1em;
     line-height: 1.2;
     margin-bottom: 0.5em;
@@ -321,4 +392,21 @@
 @keyframes zoom {
   from {transform:scale(0.2)} 
   to {transform:scale(1)}
+}
+
+.shake-bt{
+  position: absolute;
+  display: inline-block;
+  right: 10px;
+  bottom: 30px;
+}
+
+.shake-bt:hover{
+  animation: shake 0.5s;
+  animation-iteration-count: infinite; 
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
 }

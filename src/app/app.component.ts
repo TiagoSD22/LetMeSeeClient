@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
     @HostListener("window:resize")
     public onWindowResize(): void {
         if (this._shouldMenuReset()) {
-            this.config.appLayout.isApp_SidebarLeftCollapsed = false;
+            //this.config.appLayout.isApp_SidebarLeftCollapsed = false;
         }
     }
 

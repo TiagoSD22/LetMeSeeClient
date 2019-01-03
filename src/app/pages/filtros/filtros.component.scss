@@ -73,6 +73,15 @@
     opacity: 0.7;
 }
 
+.small-slider.mat-slider-horizontal {
+    height: 48px;
+    min-width: 20px !important;
+}
+
+.small-slider{
+    width: 20%;
+}
+
 .voltar-icon{
     left: 2px;
     top: 2px;
@@ -114,11 +123,12 @@
 }
 
 .action-bt:hover{
-    background: transparent;
+    /*background: transparent;
     outline: 0;
     //opacity: 1; 
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 #3c7fca;
-    border-radius:10px;
+    border-radius:10px;*/
+    transform: scale(1.25);
 }
 
 .image-container{ 
@@ -363,21 +373,29 @@
 }
 
 .two-col .mat-form-field-appearance-legacy .mat-form-field-label {
-    color: #3c7fca;
+    //color: #3c7fca;
+    color: lightgray;
     text-align: center !important;
+}
+
+.two-col .mat-form-field.mat-focused .mat-form-field-label{
+    color: #3c7fca !important;
 }
 
 .two-col .mat-drawer, .mat-input-element {
     text-align: center !important;
-    color: #3c7fca !important;
+    //color: #3c7fca !important;
+    color: lightgray !important;
 }
 
 .two-col .mat-form-field-appearance-legacy .mat-form-field-underline {
-    color: #3c7fca !important;
+    //color: #3c7fca !important;
+    color: lightgray !important;
 }
 
 .two-col .mat-form-field-appearance-legacy .mat-form-field-underline {
-    background-color: #3c7fca !important;
+    //background-color: #3c7fca !important;
+    background-color: lightgray !important;
 }
 
 .red-check.mat-checkbox-checked.mat-accent .mat-checkbox-background {

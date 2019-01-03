@@ -53,6 +53,12 @@
                                 Extrair canal
                             </h5>
                         </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('trocarCanais')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/swap.png" class="filter-icon">
+                                Trocar canais RGB
+                            </h5>
+                        </mat-list-item>
                     </mat-list>
                 </ng-template>
             </mat-expansion-panel>
@@ -66,6 +72,18 @@
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
                     <mat-list role = "list" *ngIf = "menu" style="width: 100%;max-width: 100%;">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('contraste')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/contraste.svg" class="filter-icon">
+                                Contraste
+                            </h5>
+                        </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('brilho')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/brilho.svg" class="filter-icon">
+                                Nível de brilho
+                            </h5>
+                        </mat-list-item>
                         <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('ajusteRGB')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/colors.svg" class="filter-icon">
@@ -97,6 +115,13 @@
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
                     <mat-list role="list" *ngIf="menu" style="width: 100%;max-width: 100%;">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('resize')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/resize.png" class="filter-icon">
+                                Redimensionar
+                            </h5>
+                        </mat-list-item>
+
                         <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('espelhoH')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/espelho_horizontal.svg" class="filter-icon">
@@ -509,6 +534,38 @@
             </div>
     </mat-sidenav>
 
+    <mat-sidenav *ngIf = "resizeSidenavAberta" [@slideInOut] #resizeSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Redimensionar</h5>
+        <div class = 'dilatacao-sidenav'>
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('resize')" matTooltip="Voltar">
+            <div class="flex flex-horizontal-center" style="right: 5px;top:5px;display: flex;align-items: center;right: 0;position: absolute;">
+                <mat-checkbox [labelPosition]="after" [(ngModel)]="manterProporcao" style="margin-top: 0px;">
+                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
+                        Manter proporção
+                    </h5>
+                </mat-checkbox>
+                <img src="../../../assets/icons/aspect_ratio.png" [style.width.px] = "16" [style.height.px] = "16" style="margin-left: 5px;margin-right: 5px;">
+            </div>
+            <div class="two-col" style="margin-top: 70px;">
+                <div class="col1" style="width: 40%">
+                    <mat-form-field class="example-full-width">
+                        <input (change) = "inputMudou('novaLargura')" [(ngModel)]="novaLargura" type="text" matInput placeholder="Largura">
+                        <span matSuffix style="color: #3c7fca;">px &nbsp;</span>
+                    </mat-form-field>
+                </div>
+                <div class="col2" style="width: 40%">
+                    <mat-form-field class="example-full-width">
+                        <input (change) = "inputMudou('novaAltura')" [(ngModel)]="novaAltura" type="text" matInput placeholder="Altura">
+                        <span matSuffix style="color: #3c7fca;">px &nbsp;</span>
+                    </mat-form-field>
+                </div>
+            </div>
+            <button class="btn" mat-mini-fab color="primary" style="margin-top: 140px;" (click) = "resize()" matTooltip="Aplicar" [disabled] = "carregando">
+                <i class="zmdi zmdi-check"></i>
+            </button>
+        </div>
+    </mat-sidenav>
+
     <mat-sidenav *ngIf = "extrairCanalSidenavAberta" [@slideInOut] #extrairCanalSidenav mode="side" class="filtro-param-sidenav">
         <h5 class="filter-label-title">Extrair canal</h5>
         <div class = 'negativo-sidenav' style="height: 200px;">
@@ -547,6 +604,113 @@
             </div>
             <div style="width: 20%;left: 40%;position: absolute;" [matTooltip]="!extrairR && !extrairG && !extrairB ? 'Selecione um canal!' : 'Aplicar'">
                 <button [disabled] = "!extrairR && !extrairG && !extrairB" class="btn" mat-mini-fab color="primary" style="margin-top: 20px;" (click) = "extrairCanal()" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav *ngIf = "brilhoSidenavAberta" [@slideInOut] #brilhoSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Nível de brilho</h5>
+        <div class = 'limiar-sidenav'>
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('briho')" matTooltip="Voltar">
+            <div class="div-align">
+                <label for = "brilho-value" class="label-slider">
+                    Brilho
+                </label>
+                <mat-slider
+                    [disabled]="false"
+                    [invert]="false"
+                    [max]="255"
+                    [min]="-255"
+                    [step]="1"
+                    [thumbLabel]="false"
+                    [(ngModel)]="valorBrilho"
+                    [vertical]="false"
+                    (input) = "slideMudou('brilho',$event)"
+                    id = "brilho-value">
+                </mat-slider>
+                <label *ngIf="valorBrilho <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+                    {{((valorBrilho / 255) * 100) | number:'1.0-0'}}%
+                </label>
+                <label *ngIf="valorBrilho > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+                    +{{((valorBrilho / 255) * 100) | number:'1.0-0'}}%
+                </label>
+            </div>
+            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "brilho()" matTooltip="Aplicar" [disabled] = "carregando">
+                <i class="zmdi zmdi-check"></i>
+            </button>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav *ngIf = "contrasteSidenavAberta" [@slideInOut] #contrasteSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Contraste</h5>
+        <div class = 'limiar-sidenav'>
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('contraste')" matTooltip="Voltar">
+            <div class="div-align">
+                <label for = "contraste-value" class="label-slider">
+                    Contraste
+                </label>
+                <mat-slider class="small-slider"
+                    [disabled]="false"
+                    [invert]="false"
+                    [max]="10"
+                    [min]="0"
+                    [step]="0.1"
+                    [thumbLabel]="false"
+                    [(ngModel)]="valorContraste"
+                    [vertical]="false"
+                    (input) = "slideMudou('contraste',$event)"
+                    id = "contraste-value">
+                </mat-slider>
+                <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+                    {{((valorContraste / 10.0) * 100) | number:'1.0-0'}}%
+                </label>
+            </div>
+            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "contraste()" matTooltip="Aplicar" [disabled] = "carregando">
+                <i class="zmdi zmdi-check"></i>
+            </button>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav *ngIf = "trocarCanaisSidenavAberta" [@slideInOut] #trocarCanaisSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Trocar canais RGB</h5>
+        <div class = 'negativo-sidenav' style="height: 230px;">
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('trocarCanais')" matTooltip="Voltar">
+            
+            <div style="padding-top: 55px;left: 5px;">
+                <mat-radio-group style="display: flex; flex-direction: column;position: absolute;left: 10px;" [(ngModel)]="canaisSwap">
+                    <mat-radio-button style="padding-bottom: 10px;flex: 1;"
+                                value = "RG"
+                                matTooltip="Trocar canal vermelho com verde">
+                        <h5 style="color: red; display: inline-block;margin-bottom: 0px;margin-top: 0px;">R</h5>  
+                        <h5 style="display: inline-block; font-size: 14px;opacity: 0.7;color: lightgray;margin-bottom: 0px;margin-top: 0px;">
+                            <->
+                        </h5>
+                        <h5 style="color: green;display: inline-block;margin-bottom: 0px;margin-top: 0px;">G</h5>
+                    </mat-radio-button>
+                    <mat-radio-button style="padding-bottom: 10px; margin-left: 0;flex: 1;text-align: left;"
+                                value = "RB"
+                                matTooltip="Trocar canal vermelho com azul">
+                            <h5 style="color: red; display: inline-block;margin-bottom: 0px;margin-top: 0px;">R</h5>  
+                            <h5 style="display: inline-block; font-size: 14px;opacity: 0.7;color: lightgray;margin-bottom: 0px;margin-top: 0px;">
+                                <->
+                            </h5>
+                            <h5 style="color: blue;display: inline-block;margin-bottom: 0px;margin-top: 0px;">B</h5>
+                    </mat-radio-button>
+                    <mat-radio-button style="padding-bottom: 10px;flex: 1;text-align: left;"
+                                value = "GB"
+                                matTooltip="Trocar canal verde com azul">
+                            <h5 style="color: green; display: inline-block; margin-bottom: 0px;margin-top: 0px;">G</h5>  
+                            <h5 style="display: inline-block; font-size: 14px;opacity: 0.7;color: lightgray;margin-bottom: 0px;margin-top: 0px;">
+                                <->
+                            </h5>
+                            <h5 style="color: blue;display: inline-block; margin-bottom: 0px;margin-top: 0px;">B</h5>
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div style="width: 20%;left: 40%;position: absolute;bottom: 20px;" matTooltip ="Aplica">
+                <button class="btn" mat-mini-fab color="primary" (click) = "trocarCanais()" [disabled] = "carregando">
                     <i class="zmdi zmdi-check"></i>
                 </button>
             </div>
