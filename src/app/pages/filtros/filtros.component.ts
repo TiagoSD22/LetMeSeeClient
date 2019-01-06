@@ -20,7 +20,7 @@ import { MatSnackBar } from '@angular/material';
 import {
   animate, state, style, transition, trigger
 } from '@angular/animations';
-import { ImgSrcDirective } from '@angular/flex-layout';
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: 'app-filtros',
@@ -65,6 +65,8 @@ export class FiltrosComponent implements OnInit {
   @ViewChild('limiarSidenav') public limiarSidenav : MatSidenav;
   limiarSidenavAberta : boolean = false;
   valorLimiar : number = 128;
+  usarMedia : boolean = false;
+  referencia : String = "RGB";
 
   @ViewChild('ajusteRGBSidenav') public ajusteRGBSidenav : MatSidenav;
   ajusteRGBSidenavAberta : boolean = false;
@@ -74,6 +76,12 @@ export class FiltrosComponent implements OnInit {
 
   @ViewChild('robertsSidenav') public robertsSidenav : MatSidenav;
   robertsSidenavAberta : boolean = false;
+
+  @ViewChild('prewittSidenav') public prewittSidenav : MatSidenav;
+  prewittSidenavAberta : boolean = false;
+
+  @ViewChild('sobelSidenav') public sobelSidenav : MatSidenav;
+  sobelSidenavAberta : boolean = false;
 
   @ViewChild('espelhoHSidenav') public espelhoHSidenav : MatSidenav;
   espelhoHSidenavAberta : boolean = false;
@@ -111,6 +119,19 @@ export class FiltrosComponent implements OnInit {
   extrairG : boolean = false;
   extrairB : boolean = false;
 
+  @ViewChild('eqCanalSidenav') public eqCanalSidenav : MatSidenav;
+  eqCanalSidenavAberta : boolean = false;
+  equalizarR : boolean = true;
+  equalizarG : boolean = true;
+  equalizarB : boolean = true;
+  eqPorFaixa : boolean = false;
+  minR : number = 0;
+  minG : number = 0;
+  minB : number = 0;
+  maxR : number = 255;
+  maxG : number = 255;
+  maxB : number = 255;
+
   @ViewChild('resizeSidenav') public resizeSidenav : MatSidenav;
   resizeSidenavAberta : boolean = false;
   manterProporcao : boolean = false;
@@ -127,7 +148,10 @@ export class FiltrosComponent implements OnInit {
 
   @ViewChild('trocarCanaisSidenav') public trocarCanaisSidenav : MatSidenav;
   trocarCanaisSidenavAberta : boolean = false;
-  canaisSwap : String = ""
+  canaisSwap : String = "RG"
+
+  @ViewChild('eqHistSidenav') public eqHistSidenav : MatSidenav;
+  eqHistSidenavAberta : boolean = false;
 
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
@@ -192,6 +216,12 @@ export class FiltrosComponent implements OnInit {
     }
   }
 
+  desfazerTudo(){
+    this.pilhaIndice = 0;
+    this.imagem = this.pilha[this.pilhaIndice]
+    this.config.seImgAtual(this.imagem);
+  }
+
   refazer(){
     if(this.pilhaIndice < this.pilha.length - 1){
       this.pilhaIndice += 1;
@@ -235,6 +265,8 @@ export class FiltrosComponent implements OnInit {
             this.limiarSidenav.toggle();
           }); 
           this.valorLimiar = 128;
+          this.usarMedia = false;
+          this.referencia = "RGB";
         break;
         case 'ajusteRGB':
           this.ajusteRGBSidenavAberta = false;
@@ -249,6 +281,18 @@ export class FiltrosComponent implements OnInit {
           this.robertsSidenavAberta = false;
           setTimeout( () => {
             this.robertsSidenav.toggle();
+          }) 
+        break;
+        case 'prewitt':
+          this.prewittSidenavAberta = false;
+          setTimeout( () => {
+            this.prewittSidenav.toggle();
+          }) 
+        break;
+        case 'sobel':
+          this.sobelSidenavAberta = false;
+          setTimeout( () => {
+            this.sobelSidenav.toggle();
           }) 
         break;
         case 'espelhoH':
@@ -347,7 +391,29 @@ export class FiltrosComponent implements OnInit {
           setTimeout( () => {
             this.trocarCanaisSidenav.toggle();
           }); 
-          this.canaisSwap = ""
+          this.canaisSwap = "RG";
+        break;
+        case 'eqHist':
+          this.eqHistSidenavAberta = false;
+          setTimeout( () => {
+            this.eqHistSidenav.toggle();
+          }) 
+        break;
+        case 'eqCanal':
+          this.eqCanalSidenavAberta = false;
+          setTimeout( () => {
+            this.eqCanalSidenav.toggle();
+          }) 
+          this.minR = 0;
+          this.minG = 0;
+          this.minB = 0;
+          this.maxR = 255;
+          this.maxG = 255;
+          this.maxB = 255;
+          this.eqPorFaixa = false;
+          this.equalizarR = true;
+          this.equalizarG = true;
+          this.equalizarB = true;
         break;
         default:
       
@@ -392,6 +458,20 @@ export class FiltrosComponent implements OnInit {
         this.menu = false;
         setTimeout( () => {
           this.robertsSidenav.toggle();
+        })
+      break;
+      case 'prewitt':
+        this.prewittSidenavAberta = !this.prewittSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.prewittSidenav.toggle();
+        })
+      break;
+      case 'sobel':
+        this.sobelSidenavAberta = !this.sobelSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.sobelSidenav.toggle();
         })
       break;
       case 'espelhoH':
@@ -489,6 +569,20 @@ export class FiltrosComponent implements OnInit {
           this.trocarCanaisSidenav.toggle();
         })
       break;
+      case 'eqHist':
+        this.eqHistSidenavAberta = !this.eqHistSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.eqHistSidenav.toggle();
+        })
+      break;
+      case 'eqCanal':
+        this.eqCanalSidenavAberta = !this.eqCanalSidenavAberta;
+          this.menu = false;
+          setTimeout( () => {
+            this.eqCanalSidenav.toggle();
+          })
+      break;
       default:
     
       break;
@@ -496,8 +590,10 @@ export class FiltrosComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 1500
+    this.snackBar.open(action, message, {
+      duration: 1500,
+      verticalPosition : 'top',
+      horizontalPosition: 'center'
     });
   }
 
@@ -539,7 +635,7 @@ export class FiltrosComponent implements OnInit {
 
   limiar() {
     this.carregando = true;
-    this.http.post<Imagem>(this.urlFiltros.toString().concat("/limiar/").concat(JSON.stringify({"valor" : this.valorLimiar})), this.imagem, {
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/limiar/").concat(JSON.stringify({"valor" : this.valorLimiar, "usarMedia" : this.usarMedia, "referencia" : this.referencia})), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
@@ -601,7 +697,43 @@ export class FiltrosComponent implements OnInit {
     }).subscribe(response => {
       this.carregando = false;
       this.voltarMenu('roberts');
-      this.openSnackBar("Sucesso!","Filtro de Roberts Cross aplicado");
+      this.openSnackBar("Sucesso!","Roberts Cross aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  sobel() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/sobel/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('sobel');
+      this.openSnackBar("Sucesso!","Sobel aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  prewitt() {
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/prewitt/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('prewitt');
+      this.openSnackBar("Sucesso!","Prewitt aplicado");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
@@ -835,6 +967,53 @@ export class FiltrosComponent implements OnInit {
     });
   }
 
+  eqHist(){
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/equalizar_histograma/").concat('nada'), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('eqHist');
+      this.openSnackBar("Sucesso!","Histograma equalizado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  eqCanal(){
+    this.carregando = true;
+    let parametrosURL = JSON.stringify({
+      "equalizarR" : this.equalizarR,
+      "equalizarG" : this.equalizarG, 
+      "equalizarB" : this.equalizarB, 
+      "minR" : this.minR, 
+      "maxR" : this.maxR, 
+      "minG" : this.minG, 
+      "maxG" : this.maxG, 
+      "minB" : this.minB, 
+      "maxB" : this.maxB
+    });
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/equalizar_canal/").concat(parametrosURL), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('eqCanal');
+      this.openSnackBar("Sucesso!","Equalização de canais aplicada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
   slideMudou(slide : String, event : any){
     switch(slide){
       case 'limiar':
@@ -899,6 +1078,29 @@ export class FiltrosComponent implements OnInit {
     }
   }
 
+  checkBoxMudou(origem : String){
+    switch(origem){
+      case 'eqPorFaixa':
+        this.minR = this.minG = this.minB = 0;
+        this.maxR = this.maxG = this.maxB = 255;
+      break;
+      case 'equalizarR':
+        this.minR = 0;
+        this.maxR = 255;
+      break;
+      case 'equalizarG':
+        this.minG = 0;
+        this.maxG = 255;
+      break;
+      case 'equalizarB':
+        this.minB = 0;
+        this.maxB = 255;
+      break;
+      default:
+      break;
+    }
+  }
+
   ngOnDestroy(): void {
     if(this.carregando){
       this.carregando = false;
@@ -907,7 +1109,18 @@ export class FiltrosComponent implements OnInit {
 
   mock(){
     this.carregando = true;
-    this.http.post<Imagem>(this.urlFiltros.toString().concat("/trocar_canais/").concat(JSON.stringify({"canais" : "RB"})), this.imagem, {
+    let parametrosURL = JSON.stringify({
+      "equalizarR" : true,
+      "equalizarG" : true, 
+      "equalizarB" : true, 
+      "minR" : 0, 
+      "maxR" : 255, 
+      "minG" : 0, 
+      "maxG" : 255, 
+      "minB" : 0, 
+      "maxB" : 255
+    });
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/equalizar_canal/").concat(parametrosURL), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {

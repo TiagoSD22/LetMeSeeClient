@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {Ng5SliderModule} from '../../../../node_modules/ng5-slider';
 
 const ROTAS_Filtros = [
   { path: "", component: FiltrosComponent }
@@ -40,6 +41,7 @@ const ROTAS_Filtros = [
     MatSliderModule,
     FlexLayoutModule,
     DragDropModule,
+    Ng5SliderModule,
     RouterModule.forChild(ROTAS_Filtros)
   ],
   declarations: [FiltrosComponent]

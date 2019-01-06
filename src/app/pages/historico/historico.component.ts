@@ -99,14 +99,20 @@ export class HistoricoComponent implements OnInit {
     let config = new MatSnackBarConfig(); 
     config.panelClass = 'errorSnackBar';
     config.duration = -1;
+    config.verticalPosition = 'top';
     this.snackBar.open("Falha ao obter o histórico","erro",config);
   }
 
   ShowEmptySnackBar(){
-    this.snackBar.open("Histórico vazio", "Não há imagens no histórico",{
-      duration: -1
+    let snackBarRef = this.snackBar.open("Histórico vazio","Carregar imagem",{
+      duration: -1,
+      verticalPosition : 'top',
+      
     });
     this.EmptySnackBarAberta = true;
+    snackBarRef.onAction().subscribe(() => {
+      this._router.navigate(['/upload-image']);
+    });
   }
 
   editarImagem(img : Imagem){

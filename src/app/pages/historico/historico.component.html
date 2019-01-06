@@ -1,10 +1,10 @@
 <div [hidden] = "visualizacao" class="main-container">
   <div *ngIf="imagens.length > 0" class="cardList">
     <mat-card *ngFor="let img of imagens" class="imagens">
-      <mat-card-header class="card-header" style="margin-bottom: 5px;height: 60px; max-height: 60px;">
+      <mat-card-header class="card-header" style="margin-bottom: 5px;height: 60px; max-height: 60px;padding-bottom: 10px;">
         <div>
           <button mat-mini-fab style="left: 5px;position: absolute;top: 2px;cursor: default; background-color : rgb(40,48,63);">
-            .{{img.tipo | uppercase}}
+            {{img.tipo | uppercase}}
           </button>
         </div>
         <mat-card-title class= "header-title" style="padding-left: 20px;top:1px;">{{img.nome}}</mat-card-title>
@@ -54,7 +54,7 @@
     </button>
   </div>
   <div id="limparHistoricoBT">
-    <button *ngIf="imagens.length > 0" mat-fab color="primary" class="fixed" matTooltip="Limpar histórico" (click)="limparHistorico()">
+    <button *ngIf="imagens.length > 0" mat-fab color="primary" class="clean-bt" matTooltip="Limpar histórico" (click)="limparHistorico()">
       <mat-icon matBadge={{imagens.length}} matBadgePosition="above before" matBadgeColor="primary">clear</mat-icon>
     </button>
   </div>

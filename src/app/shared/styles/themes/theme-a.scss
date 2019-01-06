@@ -642,8 +642,8 @@ code {
 
 .swal2-modal {
   .swal2-confirm {
-    background-color: $app_accent !important;
-    color: #fff !important;
+    background-color: #232936 !important;
+    color: #232936 !important;
     box-shadow: 0 2px 2px 0 rgba($app_accent, .14),
     0 3px 1px -2px rgba($app_accent, .2), 0 1px 5px 0 rgba($app_accent, .12) !important;
 
@@ -651,6 +651,23 @@ code {
       box-shadow: 0 14px 26px -12px rgba($app_accent, .42),
       0 4px 23px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba($app_accent, .2);
     }
+  }
+}
+
+.swal2-modal{
+  .swal2-popup {
+    display: none;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    width: 32em;
+    max-width: 100%;
+    padding: 1.25em;
+    border-radius: .3125em;
+    background: #232936 !important;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
   }
 }
 

@@ -102,6 +102,18 @@
                                 Blur
                             </h5>
                         </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('eqHist')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/eqHist2.png" class="filter-icon">
+                                Equalizar histograma
+                            </h5>
+                        </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('eqCanal')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/eqCanal.svg" class="filter-icon">
+                                Equalização de canais
+                            </h5>
+                        </mat-list-item>
                     </mat-list>
                 </ng-template>
             </mat-expansion-panel>
@@ -152,6 +164,37 @@
                     </mat-list>
                 </ng-template>
             </mat-expansion-panel>
+
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header class="panel-header">
+                    <mat-panel-title>
+                        <img src="../../../assets/icons/edges.svg" class="filter-icon" style="top: 30px;">
+                        <h5 class="filter-category-label">Bordas</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <mat-list role="list" *ngIf="menu" style="width: 100%;max-width: 100%;">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('prewitt')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/P.png" class="filter-icon edge">
+                                Prewitt
+                            </h5>
+                        </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('roberts')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/R.png" class="filter-icon edge">
+                                Roberts Cross
+                            </h5>
+                        </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('sobel')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/S.png" class="filter-icon edge">
+                                Sobel
+                            </h5>
+                        </mat-list-item>
+                    </mat-list>
+                </ng-template>
+            </mat-expansion-panel>
             
             <div style="padding-top: 10px;">
                 <button (click) = "mock()" mat-raised-button color = "primary">
@@ -181,11 +224,24 @@
             </div>
         </mat-sidenav>
 
+        <mat-sidenav *ngIf = "eqHistSidenavAberta" [@slideInOut] #eqHistSidenav mode="side" class="filtro-param-sidenav">
+            <h5 class="filter-label-title">Equalizar histograma</h5>
+            <div class = 'negativo-sidenav'>
+                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('eqHist')" matTooltip="Voltar">
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "eqHist()" matTooltip="Aplicar" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </mat-sidenav>
+
         <mat-sidenav *ngIf = "limiarSidenavAberta" [@slideInOut] #limiarSidenav mode="side" class="filtro-param-sidenav">
                 <h5 class="filter-label-title">Limiar</h5>
-                <div class = 'limiar-sidenav'>
+                <div class = 'limiar-sidenav' style="height: 180px;">
                     <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('limiar')" matTooltip="Voltar">
-                    <div class="div-align">
+                    <div style="right: 5px;top:5px;position: absolute;">
+                        <mat-checkbox [labelPosition]="after" [(ngModel)]="usarMedia"><h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">Usar intensidade média</h5></mat-checkbox>
+                    </div>
+                    <div *ngIf = "!usarMedia" class="div-align" style="padding-top: 70px;">
                         <label for = "limiar-value" class="label-slider">
                             Valor
                         </label>
@@ -209,9 +265,24 @@
                             +{{valorLimiar}}
                         </label>
                     </div>
-                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "limiar()" matTooltip="Aplicar" [disabled] = "carregando">
-                        <i class="zmdi zmdi-check"></i>
-                    </button>
+                    <div *ngIf = "usarMedia" style="padding-top: 60px;">
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="referencia" class="referencia-select">
+                                <mat-option class="option-text" value="RGB">Média dos 3 canais</mat-option>
+                                <mat-option class="option-text" value="RG">Média dos canais vermelho e verde apenas</mat-option>
+                                <mat-option class="option-text" value="RB">Média dos canais vermelho e azul apenas</mat-option>
+                                <mat-option class="option-text" value="GB">Média dos canais verde e azul apenas</mat-option>
+                                <mat-option class="option-text" value="R">Média do canal vermelho apenas</mat-option>
+                                <mat-option class="option-text" value="G">Média do canal verde apenas</mat-option>
+                                <mat-option class="option-text" value="B">Média do canal azul apenas</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div style="display: flex;position: absolute;width: 100%;bottom: 0px;">
+                        <button class="btn" mat-mini-fab color="primary" style="bottom: 10px;position: relative;margin: auto;" (click) = "limiar()" matTooltip="Aplicar" [disabled] = "carregando">
+                            <i class="zmdi zmdi-check"></i>
+                        </button>
+                    </div>
                 </div>
         </mat-sidenav>
 
@@ -299,6 +370,26 @@
             <div class = 'negativo-sidenav'>
                 <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('roberts')" matTooltip="Voltar">
                 <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "roberts()" matTooltip="Aplicar" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf = "sobelSidenavAberta" [@slideInOut] #sobelSidenav mode="side" class="filtro-param-sidenav">
+            <h5 class="filter-label-title">Sobel</h5>
+            <div class = 'negativo-sidenav'>
+                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('sobel')" matTooltip="Voltar">
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "sobel()" matTooltip="Aplicar" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf = "prewittSidenavAberta" [@slideInOut] #prewittSidenav mode="side" class="filtro-param-sidenav">
+            <h5 class="filter-label-title">Prewitt</h5>
+            <div class = 'negativo-sidenav'>
+                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('prewitt')" matTooltip="Voltar">
+                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "prewitt()" matTooltip="Aplicar" [disabled] = "carregando">
                     <i class="zmdi zmdi-check"></i>
                 </button>
             </div>
@@ -613,7 +704,7 @@
     <mat-sidenav *ngIf = "brilhoSidenavAberta" [@slideInOut] #brilhoSidenav mode="side" class="filtro-param-sidenav">
         <h5 class="filter-label-title">Nível de brilho</h5>
         <div class = 'limiar-sidenav'>
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('briho')" matTooltip="Voltar">
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('brilho')" matTooltip="Voltar">
             <div class="div-align">
                 <label for = "brilho-value" class="label-slider">
                     Brilho
@@ -679,38 +770,80 @@
             <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('trocarCanais')" matTooltip="Voltar">
             
             <div style="padding-top: 55px;left: 5px;">
-                <mat-radio-group style="display: flex; flex-direction: column;position: absolute;left: 10px;" [(ngModel)]="canaisSwap">
-                    <mat-radio-button style="padding-bottom: 10px;flex: 1;"
-                                value = "RG"
-                                matTooltip="Trocar canal vermelho com verde">
-                        <h5 style="color: red; display: inline-block;margin-bottom: 0px;margin-top: 0px;">R</h5>  
-                        <h5 style="display: inline-block; font-size: 14px;opacity: 0.7;color: lightgray;margin-bottom: 0px;margin-top: 0px;">
-                            <->
-                        </h5>
-                        <h5 style="color: green;display: inline-block;margin-bottom: 0px;margin-top: 0px;">G</h5>
-                    </mat-radio-button>
-                    <mat-radio-button style="padding-bottom: 10px; margin-left: 0;flex: 1;text-align: left;"
-                                value = "RB"
-                                matTooltip="Trocar canal vermelho com azul">
-                            <h5 style="color: red; display: inline-block;margin-bottom: 0px;margin-top: 0px;">R</h5>  
-                            <h5 style="display: inline-block; font-size: 14px;opacity: 0.7;color: lightgray;margin-bottom: 0px;margin-top: 0px;">
-                                <->
-                            </h5>
-                            <h5 style="color: blue;display: inline-block;margin-bottom: 0px;margin-top: 0px;">B</h5>
-                    </mat-radio-button>
-                    <mat-radio-button style="padding-bottom: 10px;flex: 1;text-align: left;"
-                                value = "GB"
-                                matTooltip="Trocar canal verde com azul">
-                            <h5 style="color: green; display: inline-block; margin-bottom: 0px;margin-top: 0px;">G</h5>  
-                            <h5 style="display: inline-block; font-size: 14px;opacity: 0.7;color: lightgray;margin-bottom: 0px;margin-top: 0px;">
-                                <->
-                            </h5>
-                            <h5 style="color: blue;display: inline-block; margin-bottom: 0px;margin-top: 0px;">B</h5>
-                    </mat-radio-button>
-                </mat-radio-group>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="canaisSwap" class="referencia-select">
+                        <mat-option class="option-text" value="RG">Trocar vermelho com verde</mat-option>
+                        <mat-option class="option-text" value="RB">Trocar vermelho com azul</mat-option>
+                        <mat-option class="option-text" value="GB">Trocar verde com azul</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div style="width: 20%;left: 40%;position: absolute;bottom: 20px;" matTooltip ="Aplica">
                 <button class="btn" mat-mini-fab color="primary" (click) = "trocarCanais()" [disabled] = "carregando">
+                    <i class="zmdi zmdi-check"></i>
+                </button>
+            </div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav *ngIf = "eqCanalSidenavAberta" [@slideInOut] #eqCanalSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Equalização de canais</h5>
+        <div class = 'negativo-sidenav' [ngClass]="{'normal': !eqPorFaixa || (!equalizarR && !equalizarG && !equalizarB), 
+                                        'classe1' : eqPorFaixa && ((equalizarR && !equalizarG && !equalizarB) ||
+                                                                   (equalizarG && !equalizarR && !equalizarB) ||
+                                                                   (equalizarB && !equalizarG && !equalizarR)),
+                                        'classe2' : eqPorFaixa && ((equalizarR && equalizarG && !equalizarB) ||
+                                                                   (equalizarR && equalizarB && !equalizarG) ||
+                                                                   (equalizarG && equalizarB && !equalizarR)),
+                                        'classe3' : eqPorFaixa && equalizarR && equalizarG && equalizarB}">
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('eqCanal')" matTooltip="Voltar">
+            <div class="flex flex-horizontal-center" style="padding-bottom: 20px;right: 5px;top:5px;display: flex;align-items: center;right: 5px;position: absolute;">
+                <mat-checkbox [labelPosition]="after" [(ngModel)]="eqPorFaixa" style="margin-top: 0px;" (change) = "checkBoxMudou('eqPorFaixa')">
+                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
+                        Equalizar por faixa
+                    </h5>
+                </mat-checkbox>
+            </div>
+            <div style="padding-top: 60px;display: flex; flex-direction: column;left: 0px;align-items: flex-start;">
+                <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
+                    <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="red-check" 
+                                [labelPosition]="before" 
+                                [(ngModel)]="equalizarR" 
+                                (change) = "checkBoxMudou('equalizarR')"
+                                matTooltip="Equalizar canal vermelho">
+                        <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
+                            Equalizar canal vermelho
+                        </h5>
+                    </mat-checkbox>
+                    <ng5-slider class="ng-slider red" *ngIf = "eqPorFaixa && equalizarR" [(value)]="minR" [(highValue)]="maxR" floor = 0 ceil = 255 step = 1></ng5-slider>
+                </div>
+                <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
+                    <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="green-check" 
+                                [labelPosition]="before" 
+                                [(ngModel)]="equalizarG" 
+                                (change) = "checkBoxMudou('equalizarG')"
+                                matTooltip="Equalizar canal verde">
+                        <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
+                            Equalizar canal verde
+                        </h5>
+                    </mat-checkbox>
+                    <ng5-slider class="ng-slider green" *ngIf = "eqPorFaixa && equalizarG" [(value)]="minG" [(highValue)]="maxG" floor = 0 ceil = 255 step = 1></ng5-slider>
+                </div>
+                <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
+                    <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="blue-check" 
+                                [labelPosition]="before" 
+                                [(ngModel)]="equalizarB" 
+                                (change) = "checkBoxMudou('equalizarB')"
+                                matTooltip="Equalizar canal azul">
+                        <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
+                            Equalizar canal azul
+                        </h5>
+                    </mat-checkbox>
+                    <ng5-slider class="ng-slider blue" *ngIf = "eqPorFaixa && equalizarB" [(value)]="minB" [(highValue)]="maxB" floor = 0 ceil = 255 step = 1></ng5-slider>
+                </div>
+            </div>
+            <div style="width: 20%;left: 40%;position: absolute;bottom: 10px;" [matTooltip] = "!equalizarR && !equalizarG && !equalizarB ? 'Selecione um canal para equalizar' : 'Aplicar'">
+                <button [disabled] = "!equalizarR && !equalizarG && !equalizarB" class="btn" mat-mini-fab color="primary" (click) = "eqCanal()" [disabled] = "carregando">
                     <i class="zmdi zmdi-check"></i>
                 </button>
             </div>
@@ -775,6 +908,7 @@
             </label>
         
             <mat-slider
+                class = "escala-slider"
                 [disabled]="false"
                 [invert]="false"
                 [max]="4"
@@ -797,6 +931,14 @@
             <label style="padding-left: 10px;padding-right: 50px;max-width: 100px;margin-top: 13px;">
                    {{escala * 100 | number:'1.0-0'}}%
             </label>
+
+            <label [ngClass] = "{'desativado' : pilhaIndice === 0, 'ativado' : pilhaIndice !== 0}"
+                   style="right: 0px; margin-left: 20px;margin-right: 10px;"
+                   matTooltip="Desfazer tudo" 
+                   (click) = "desfazerTudo()"
+                   class="action-bt">
+                <i class="zmdi zmdi-mail-reply-all"></i>
+            </label>
         
             <label [ngClass] = "{'desativado' : pilhaIndice === 0, 'ativado' : pilhaIndice !== 0}"
                    style="right: 0px; margin-left: 20px;margin-right: 30px;"
@@ -811,6 +953,14 @@
                    (click) = "refazer()"
                    class="action-bt">
                 <i class="zmdi zmdi-redo zmdi-hc-lg"></i>
+            </label>
+
+            <label [ngClass] = "{'desativado' : pilha.length === 1, 'ativado' : pilha.length !== 1}"
+                   style="right: 0px; margin-left: 60px;margin-right: 5px;margin-top: 5px;"
+                   matTooltip="Histórico local"
+                   (click) = "mostrarHistoricoLocal()"
+                   class="action-bt">
+                <i class="zmdi zmdi-time-restore zmdi-hc-2x"></i>
             </label>
         </div>
     </div>

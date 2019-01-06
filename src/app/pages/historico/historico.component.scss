@@ -34,7 +34,7 @@
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -59,9 +59,8 @@
   width: 250px;
   text-align: center;
   position: relative;
-  margin-bottom: 32px; /* same as fxLayoutGap for even distribution */
-  //flex: 0 1 calc(33.3% - 32px);
-  //flex: 0 1 calc(25% - 50px);
+  margin-bottom: 32px; 
+  border-radius: 5px;
 }
 
 @media only screen and (min-width: 37.50em) {
@@ -156,6 +155,7 @@
   margin: auto;
   bottom: 0;
   text-align: left;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .header-title{
@@ -173,7 +173,6 @@
   overflow: auto;
   max-height: 100%;
 }
-
 
 .header-title::-webkit-scrollbar-track
 {
@@ -199,36 +198,6 @@
 									   color-stop(0.86, rgb(28,58,148)));
 }
 
-
-
-.reduced-title{
-  font-weight: bold;
-  margin-left: 5px;
-  margin-top: 10px;
-  font-size: 12px;
-  word-wrap: break-word !important; 
-  white-space: pre-wrap !important;
-  word-break: break-all;
-  word-break: break-word;
- -webkit-hyphens: auto;
- -moz-hyphens: auto;
-     hyphens: auto;
-}
-
-.too-reduced-title{
-  font-weight: bold;
-  margin-left: 5px;
-  margin-top: 10px;
-  font-size: 10px;
-  word-wrap: break-word !important; 
-  white-space: pre-wrap !important;
-  word-break: break-all;
-  word-break: break-word;
- -webkit-hyphens: auto;
- -moz-hyphens: auto;
-     hyphens: auto;
-}
-
 .main-container{
     width: 100%;
     height: 100%;
@@ -238,26 +207,6 @@
     min-height:100vh;
     text-align: center;
     overflow: auto;
-}
-
-.formato-jpg {
-    background-image: url('../../../assets/img/formatos/jpg.gif');
-    background-size: cover;
-}
-
-.formato-png {
-    background-image: url('../../../assets/img/formatos/png.gif');
-    background-size: cover;
-}
-
-.formato-bmp {
-    background-image: url('../../../assets/img/formatos/bmp.gif');
-    background-size: cover;
-}
-
-.formato-gif {
-    background-image: url('../../../assets/img/formatos/gif.gif');
-    background-size: cover;
 }
 
 .fixed {
@@ -270,6 +219,12 @@
     position: fixed;
     bottom: 5px;
     right: 30px;
+  }
+
+  .clean-bt{
+    background-color : rgb(40,48,63);
+    color: white;
+    border-color: #46b8da;
   }
 
   .fixed:hover{

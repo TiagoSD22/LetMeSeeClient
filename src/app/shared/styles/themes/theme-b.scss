@@ -605,14 +605,14 @@ code {
 
 .swal2-modal {
   .swal2-confirm {
-    background-color: $app_accent !important;
+    background-color: #3c7fca !important;
     color: #fff !important;
-    box-shadow: 0 2px 2px 0 rgba($app_accent, .14),
-    0 3px 1px -2px rgba($app_accent, .2), 0 1px 5px 0 rgba($app_accent, .12) !important;
+    box-shadow: 0 2px 2px 0 rgba(lightgray, .14),
+    0 3px 1px -2px rgba(lightgray, .2), 0 1px 5px 0 rgba(lightgray, .12) !important;
 
     &:hover {
-      box-shadow: 0 14px 26px -12px rgba($app_accent, .42),
-      0 4px 23px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba($app_accent, .2);
+      box-shadow: 0 14px 26px -12px rgba(lightgray, .42),
+      0 4px 23px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(lightgray, .2);
     }
   }
 }

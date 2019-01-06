@@ -48,6 +48,16 @@ border-radius: 10px;
 cursor: move !important;
 }
 
+.mat-tooltip{
+  //background: #1A090D !important;
+  //background: #4A314D !important;
+  //background: #ABEDC6 !important;
+  //background: #0A2239 !important;
+  //background : #132E32 !important;
+  //background: #0D1321 !important;
+  background: rgba(13,19,33,0.6) !important;
+}
+
 #container {
   position: absolute;
   width: 200px;
@@ -121,4 +131,45 @@ cursor: move !important;
   25% {transform: translate(100px, 0)} 
   50% {transform: translate(100px, -100px)} 
   75% {transform: translate(0, -100px)} 
+}
+
+
+  .swal2-popup {
+    display: none;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    width: 32em;
+    max-width: 100%;
+    padding: 1.25em;
+    border-radius: .3125em;
+    background: #232936 !important;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.swal2-confirm {
+  background-color: #f3c789 !important; 
+  color: #fff !important;
+  box-shadow: 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12) !important;
+}
+
+.swal2-icon.swal2-warning {
+  border-color: #3c7fca !important;
+  color: #3c7fca !important;
+}
+
+.swal2-title{
+  color: #FFFFFF !important;
+}
+
+.swal2-content{
+  color: #FFFFFF !important;
+}
+
+.swal2-popup .swal2-styled.swal2-cancel:hover {
+  background: transparent;
+    color: #3c7fca;
+    border: 1px solid #3c7fca;
 }
