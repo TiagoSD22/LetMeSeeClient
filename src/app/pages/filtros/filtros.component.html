@@ -59,6 +59,12 @@
                                 Trocar canais RGB
                             </h5>
                         </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('pixelate')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/pixelate.svg" class="filter-icon">
+                                Pixelizar
+                            </h5>
+                        </mat-list-item>
                     </mat-list>
                 </ng-template>
             </mat-expansion-panel>
@@ -88,6 +94,12 @@
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/colors.svg" class="filter-icon">
                                 Ajuste RGB
+                            </h5>
+                        </mat-list-item>
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('nitidez')" role="listitem">
+                            <h5 class="filter-label">
+                                <img src="../../../assets/icons/nitidez.svg" class="filter-icon">
+                                Nitidez
                             </h5>
                         </mat-list-item>
                         <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('mediana')" role="listitem">
@@ -571,6 +583,36 @@
             </div>
     </mat-sidenav>
 
+    <mat-sidenav *ngIf = "pixelateSidenavAberta" [@slideInOut] #pixelateSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Pixelizar</h5>
+        <div class = 'limiar-sidenav'>
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('pixelate')" matTooltip="Voltar">
+            <div class="div-align">
+                <label for = "limiar-value" class="label-slider">
+                    Tamanho do pixel
+                </label>
+                <mat-slider
+                    [disabled]="false"
+                    [invert]="false"
+                    [max]="33"
+                    [min]="3"
+                    [step]="2"
+                    [thumbLabel]="false"
+                    [(ngModel)]="larguraK"
+                    [vertical]="false"
+                    (input) = "slideMudou('mediana',$event)"
+                    id = "limiar-value">
+                </mat-slider>
+                <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+                    {{larguraK}}
+                </label>
+            </div>
+            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "pixelate()" matTooltip="Aplicar" [disabled] = "carregando">
+                <i class="zmdi zmdi-check"></i>
+            </button>
+        </div>
+    </mat-sidenav>
+
     <mat-sidenav *ngIf = "blurSidenavAberta" [@slideInOut] #blurSidenav mode="side" class="filtro-param-sidenav">
             <h5 class="filter-label-title">Blur</h5>
             <div class = 'dilatacao-sidenav' style="position: relative;" [style.height.px]="gaussiana? 290 : 200">
@@ -764,6 +806,36 @@
         </div>
     </mat-sidenav>
 
+    <mat-sidenav *ngIf = "nitidezSidenavAberta" [@slideInOut] #nitidezSidenav mode="side" class="filtro-param-sidenav">
+        <h5 class="filter-label-title">Nitidez</h5>
+        <div class = 'limiar-sidenav'>
+            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('nitidez')" matTooltip="Voltar">
+            <div class="div-align">
+                <label for = "contraste-value" class="label-slider">
+                    Nitidez
+                </label>
+                <mat-slider class="small-slider"
+                    [disabled]="false"
+                    [invert]="false"
+                    [max]="5"
+                    [min]="0"
+                    [step]="0.1"
+                    [thumbLabel]="false"
+                    [(ngModel)]="fatorNitidez"
+                    [vertical]="false"
+                    (input) = "slideMudou('fatorNitidez',$event)"
+                    id = "contraste-value">
+                </mat-slider>
+                <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+                    {{((fatorNitidez / 5.0) * 100) | number:'1.0-0'}}%
+                </label>
+            </div>
+            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "nitidez()" matTooltip="Aplicar" [disabled] = "carregando">
+                <i class="zmdi zmdi-check"></i>
+            </button>
+        </div>
+    </mat-sidenav>
+
     <mat-sidenav *ngIf = "trocarCanaisSidenavAberta" [@slideInOut] #trocarCanaisSidenav mode="side" class="filtro-param-sidenav">
         <h5 class="filter-label-title">Trocar canais RGB</h5>
         <div class = 'negativo-sidenav' style="height: 230px;">
@@ -934,7 +1006,7 @@
 
             <label [ngClass] = "{'desativado' : pilhaIndice === 0, 'ativado' : pilhaIndice !== 0}"
                    style="right: 0px; margin-left: 20px;margin-right: 10px;"
-                   matTooltip="Desfazer tudo" 
+                   matTooltip="Desfazer tudo (Ctrl + Shift + z)" 
                    (click) = "desfazerTudo()"
                    class="action-bt">
                 <i class="zmdi zmdi-mail-reply-all"></i>
@@ -942,14 +1014,14 @@
         
             <label [ngClass] = "{'desativado' : pilhaIndice === 0, 'ativado' : pilhaIndice !== 0}"
                    style="right: 0px; margin-left: 20px;margin-right: 30px;"
-                   matTooltip="Desfazer" 
+                   matTooltip="Desfazer (Ctrl + z)" 
                    (click) = "desfazer()"
                    class="action-bt">
                 <i class="zmdi zmdi-undo zmdi-hc-lg"></i>
             </label>
             
             <label [ngClass] = "{'desativado' : pilhaIndice === pilha.length - 1, 'ativado' : pilhaIndice !== pilha.length -1}"
-                   matTooltip="Refazer"
+                   matTooltip="Refazer (Ctrl + y)"
                    (click) = "refazer()"
                    class="action-bt">
                 <i class="zmdi zmdi-redo zmdi-hc-lg"></i>

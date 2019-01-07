@@ -107,6 +107,9 @@ export class FiltrosComponent implements OnInit {
   @ViewChild('medianaSidenav') public medianaSidenav : MatSidenav;
   medianaSidenavAberta : boolean = false;
 
+  @ViewChild('pixelateSidenav') public pixelateSidenav : MatSidenav;
+  pixelateSidenavAberta : boolean = false;
+
   @ViewChild('blurSidenav') public blurSidenav : MatSidenav;
   blurSidenavAberta : boolean = false;
   gaussiana : boolean = false;
@@ -152,6 +155,10 @@ export class FiltrosComponent implements OnInit {
 
   @ViewChild('eqHistSidenav') public eqHistSidenav : MatSidenav;
   eqHistSidenavAberta : boolean = false;
+
+  @ViewChild('nitidezSidenav') public nitidezSidenav : MatSidenav;
+  nitidezSidenavAberta : boolean = false;
+  fatorNitidez : number = 0.0;
 
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
@@ -344,6 +351,13 @@ export class FiltrosComponent implements OnInit {
           });
           this.larguraK = 3; 
         break;
+        case 'pixelate':
+          this.pixelateSidenavAberta = false;
+          setTimeout( () => {
+            this.pixelateSidenav.toggle();
+          });
+          this.larguraK = 3; 
+        break;
         case 'blur':
           this.blurSidenavAberta = false;
           setTimeout( () => {
@@ -398,6 +412,13 @@ export class FiltrosComponent implements OnInit {
           setTimeout( () => {
             this.eqHistSidenav.toggle();
           }) 
+        break;
+        case 'nitidez':
+          this.nitidezSidenavAberta = false;
+          setTimeout( () => {
+            this.nitidezSidenav.toggle();
+          }) 
+          this.fatorNitidez = 0.0;
         break;
         case 'eqCanal':
           this.eqCanalSidenavAberta = false;
@@ -522,6 +543,21 @@ export class FiltrosComponent implements OnInit {
         this.menu = false;
         setTimeout( () => {
           this.medianaSidenav.toggle();
+        })
+      break;
+      case 'pixelate':
+      this.larguraK = 5;
+        this.pixelateSidenavAberta = !this.pixelateSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.pixelateSidenav.toggle();
+        })
+      break;
+      case 'nitidez':
+        this.nitidezSidenavAberta = !this.nitidezSidenavAberta;
+        this.menu = false;
+        setTimeout( () => {
+          this.nitidezSidenav.toggle();
         })
       break;
       case 'blur':
@@ -985,6 +1021,27 @@ export class FiltrosComponent implements OnInit {
     });
   }
 
+  pixelate(){
+    this.carregando = true;
+    let parametrosURL = JSON.stringify({
+      "k" : this.larguraK
+    });
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/pixelate/").concat(parametrosURL), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('pixelate');
+      this.openSnackBar("Sucesso!","Pixelate aplicado");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
   eqCanal(){
     this.carregando = true;
     let parametrosURL = JSON.stringify({
@@ -1005,6 +1062,28 @@ export class FiltrosComponent implements OnInit {
       this.carregando = false;
       this.voltarMenu('eqCanal');
       this.openSnackBar("Sucesso!","Equalização de canais aplicada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  nitidez(){
+    console.log("Fator: " + this.fatorNitidez);
+    this.carregando = true;
+    let parametrosURL = JSON.stringify({
+      "fator" : this.fatorNitidez
+    });
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/nitidez/").concat(parametrosURL), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('nitidez');
+      this.openSnackBar("Sucesso!","Nitidez ajustada");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
@@ -1045,6 +1124,9 @@ export class FiltrosComponent implements OnInit {
       break;
       case 'mediana':
         this.larguraK = event.value;
+      break;
+      case 'fatorNitidez':
+        this.fatorNitidez = event.value;
       break;
       case 'brilho':
         this.valorBrilho = event.value;
@@ -1101,6 +1183,22 @@ export class FiltrosComponent implements OnInit {
     }
   }
 
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    if((event.ctrlKey || event.metaKey) && event.keyCode == 90){
+      if(event.shiftKey){
+        this.desfazerTudo();
+      }
+      else{
+        this.desfazer();
+      }
+    }
+    else if((event.ctrlKey || event.metaKey) && event.keyCode == 89){
+      this.refazer();
+    }
+    
+  }
+
   ngOnDestroy(): void {
     if(this.carregando){
       this.carregando = false;
@@ -1110,17 +1208,9 @@ export class FiltrosComponent implements OnInit {
   mock(){
     this.carregando = true;
     let parametrosURL = JSON.stringify({
-      "equalizarR" : true,
-      "equalizarG" : true, 
-      "equalizarB" : true, 
-      "minR" : 0, 
-      "maxR" : 255, 
-      "minG" : 0, 
-      "maxG" : 255, 
-      "minB" : 0, 
-      "maxB" : 255
+      "k" : 5
     });
-    this.http.post<Imagem>(this.urlFiltros.toString().concat("/equalizar_canal/").concat(parametrosURL), this.imagem, {
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/mock/").concat(parametrosURL), this.imagem, {
       reportProgress: true,
       observe: 'response'
     }).subscribe(response => {
