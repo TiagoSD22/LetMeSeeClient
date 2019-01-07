@@ -21,6 +21,7 @@ import {
   animate, state, style, transition, trigger
 } from '@angular/animations';
 import { Options } from 'ng5-slider';
+import { setQuarter } from 'ngx-bootstrap/chronos/units/quarter';
 
 @Component({
   selector: 'app-filtros',
@@ -179,19 +180,32 @@ export class FiltrosComponent implements OnInit {
         this.config.appLayout.isApp_SidebarLeftCollapsed = !this.config.appLayout.isApp_SidebarLeftCollapsed;
       }
     });
+    this.ajustarTela();
   }
 
   ajustarTela(){
-    console.log("Distancia: " + document.getElementById('image').offsetTop);
-    let altura = document.getElementById('img-container').offsetHeight * 1.1;
-    let largura = document.getElementById('img-container').offsetWidth * 1.1;
+    let altura = document.getElementById('img-container').clientHeight;
+    let largura = document.getElementById('img-container').clientWidth;
     document.getElementById('image').style.transform = "translate3d(0px, 0px, 0px)";
-    if(this.alturaOriginal * this.escala > altura || this.larguraOriginal * this.escala > largura){
-      if(this.larguraOriginal < largura && this.alturaOriginal < altura){
-        this.escala = 1;
+    let area = 0.92;
+    if (this.larguraOriginal < largura && this.alturaOriginal < altura) {
+      this.escala = 1;
+    }
+    else {
+      if (this.larguraOriginal * this.escala > largura && this.alturaOriginal * this.escala > altura) {
+        let fator;
+        fator = (this.imagem.largura * this.imagem.altura * area * area) / (altura * largura);
+        fator = Math.sqrt(fator);
+        fator = Math.sqrt(fator);
+        this.escala = (fator * altura * fator * largura) / (this.alturaOriginal * this.larguraOriginal);
       }
-      else{
-        this.escala = (0.9 * altura * largura) / (this.alturaOriginal* this.larguraOriginal);
+      else {
+        if (this.larguraOriginal * this.escala > largura) {
+          this.escala = (area * largura * this.alturaOriginal) / (this.alturaOriginal * this.larguraOriginal);
+        }
+        else {
+          this.escala = (area * altura * this.larguraOriginal) / (this.alturaOriginal * this.larguraOriginal);
+        }
       }
     }
   }
@@ -1196,7 +1210,23 @@ export class FiltrosComponent implements OnInit {
     else if((event.ctrlKey || event.metaKey) && event.keyCode == 89){
       this.refazer();
     }
-    
+    else if(event.key === '+' || event.keyCode == 107){
+      this.aumentarEscala();
+    }
+    else if(event.key === '-' || event.keyCode == 109 || event.keyCode == 189){
+      this.diminuirEscala();
+    }
+    else if(event.keyCode == 32){
+      this.ajustarTela();
+    }
+    else if(((event.ctrlKey || event.metaKey) && event.keyCode == 48) || ((event.ctrlKey || event.metaKey) && event.keyCode == 96)){
+      this.mostrarTamanhoOriginal();
+    }
+    else if((event.ctrlKey || event.metaKey) && event.keyCode == 83){
+      if(event.shiftKey){
+        this.salvarImagem();
+      }
+    }
   }
 
   ngOnDestroy(): void {

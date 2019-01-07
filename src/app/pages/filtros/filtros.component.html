@@ -133,7 +133,7 @@
             <mat-expansion-panel class="panel">
                 <mat-expansion-panel-header class="panel-header">
                     <mat-panel-title>
-                        <img src="../../../assets/icons/editar.svg" class="filter-icon" style="top: 30px;">
+                        <img src="../../../assets/icons/transformar.png" class="filter-icon" style="top: 30px;">
                         <h5 class="filter-category-label">Transformar</h5>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -950,7 +950,7 @@
             <div class="outer">
                 <div class="inner" fxFlex fxLayout="row">
             <label style="margin-right: 100px;margin-left: 10px;cursor: pointer;margin-top: 16px;" 
-                   matTooltip="Salvar" 
+                   matTooltip="Salvar (Ctrl + Shift + S)" 
                    class="action-bt"
                    (click) = "salvarImagem()">
                 <i class="zmdi zmdi-download zmdi-hc-lg"></i>
@@ -958,14 +958,14 @@
             </label>
 
             <label style="margin-right: 20px;cursor: pointer;margin-top: 11px;height: 24px;" 
-                   matTooltip="Tamanho original" 
+                   matTooltip="Tamanho original (Ctrl + 0)" 
                    class="action-bt"
                    (click) = "mostrarTamanhoOriginal()">
                 <i class="material-icons">center_focus_strong</i>
             </label>
         
             <label style="margin-right: 20px;cursor: pointer;margin-top: 11px;height: 24px;" 
-                   matTooltip="Ajustar para tela" 
+                   matTooltip="Ajustar para tela (space)" 
                    class="action-bt"
                    (click) = "ajustarTela()">
                 <i class="material-icons">aspect_ratio</i>
@@ -973,7 +973,7 @@
         
             <label mat-mini-fab
                    style="margin-left: 20px; margin-right: 15px; cursor: pointer;" 
-                   matTooltip="Zoom out"
+                   matTooltip="Zoom out (-)"
                    (click) = "diminuirEscala()"
                    class="action-bt">
                 <i class="zmdi zmdi-minus-circle zmdi-hc-lg"></i>
@@ -994,7 +994,7 @@
         
             <label  
                    style="cursor: pointer; margin-left: 15px;"
-                   matTooltip="Zoom in"
+                   matTooltip="Zoom in (+)"
                    (click) = "aumentarEscala()"
                    class="action-bt">
                 <i class="zmdi zmdi-plus-circle zmdi-hc-lg"></i>
@@ -1006,7 +1006,7 @@
 
             <label [ngClass] = "{'desativado' : pilhaIndice === 0, 'ativado' : pilhaIndice !== 0}"
                    style="right: 0px; margin-left: 20px;margin-right: 10px;"
-                   matTooltip="Desfazer tudo (Ctrl + Shift + z)" 
+                   matTooltip="Desfazer tudo (Ctrl + Shift + Z)" 
                    (click) = "desfazerTudo()"
                    class="action-bt">
                 <i class="zmdi zmdi-mail-reply-all"></i>
@@ -1014,14 +1014,14 @@
         
             <label [ngClass] = "{'desativado' : pilhaIndice === 0, 'ativado' : pilhaIndice !== 0}"
                    style="right: 0px; margin-left: 20px;margin-right: 30px;"
-                   matTooltip="Desfazer (Ctrl + z)" 
+                   matTooltip="Desfazer (Ctrl + Z)" 
                    (click) = "desfazer()"
                    class="action-bt">
                 <i class="zmdi zmdi-undo zmdi-hc-lg"></i>
             </label>
             
             <label [ngClass] = "{'desativado' : pilhaIndice === pilha.length - 1, 'ativado' : pilhaIndice !== pilha.length -1}"
-                   matTooltip="Refazer (Ctrl + y)"
+                   matTooltip="Refazer (Ctrl + Y)"
                    (click) = "refazer()"
                    class="action-bt">
                 <i class="zmdi zmdi-redo zmdi-hc-lg"></i>

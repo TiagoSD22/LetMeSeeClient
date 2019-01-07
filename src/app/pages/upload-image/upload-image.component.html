@@ -5,14 +5,14 @@
   <h6 *ngIf="config.getImgAtual() == undefined" style="font-synthesis: weight; color: lightgray;font-size: 20px;height: 0px;">Carregue
     uma imagem para começar</h6>
   <label *ngIf="config.getImgAtual() == undefined" class="btn btn-primary" style="cursor: pointer;">
-    <input type="file" accept="image/*" (change)="onSelectFile($event)" style="display:none;cursor: pointer;">
+    <input id = "input-bt" type="file" accept="image/*" (change)="onSelectFile($event)" style="display:none;cursor: pointer;">
     <i class="zmdi zmdi-upload"></i>
     Carregar imagem
   </label>
   <h6 *ngIf="config.getImgAtual() != undefined" style="font-synthesis: weight; color: lightgray;font-size: 20px;height: 0px;">Edite
     suas imagens na aba de Filtros</h6>
   <label *ngIf="config.getImgAtual() != undefined" class="btn btn-primary" style="cursor: pointer;">
-    <input type="file" accept="image/*" (change)="onSelectFile($event)" style="display:none;cursor: pointer; ">
+    <input id = "input-bt" type="file" accept="image/*" (change)="onSelectFile($event)" style="display:none;cursor: pointer; ">
     <i class="zmdi zmdi-upload"></i>
     Carregar outra imagem
   </label>
