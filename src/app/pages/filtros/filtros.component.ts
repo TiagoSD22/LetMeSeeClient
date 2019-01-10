@@ -1,3 +1,4 @@
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -22,6 +23,7 @@ import {
 } from '@angular/animations';
 import { Options } from 'ng5-slider';
 import { setQuarter } from 'ngx-bootstrap/chronos/units/quarter';
+import { ImageCroppedEvent } from "../../../../node_modules/ngx-image-cropper/src/interfaces/image-cropped-event.interface";
 
 @Component({
   selector: 'app-filtros',
@@ -161,6 +163,14 @@ export class FiltrosComponent implements OnInit {
   nitidezSidenavAberta : boolean = false;
   fatorNitidez : number = 0.0;
 
+  @ViewChild('imageCropper') imageCropper : any;
+  showCropper : boolean = false;
+  @ViewChild('cropSidenav') public cropSidenav : MatSidenav;
+  cropSidenavAberta : boolean = false;
+  manterAspecto : boolean = true;
+  formatoCorte : String = 'retangular';
+  modoCorte : String = "cortar";
+  
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
     private changeDetectorRefs: ChangeDetectorRef, private DomSanitizer: DomSanitizer,public snackBar: MatSnackBar) { }
@@ -450,6 +460,13 @@ export class FiltrosComponent implements OnInit {
           this.equalizarG = true;
           this.equalizarB = true;
         break;
+        case 'crop':
+          this.cropSidenavAberta = false;
+          this.showCropper = false;
+          setTimeout( () => {
+            this.cropSidenav.toggle();
+          });
+        break;
         default:
       
         break;
@@ -581,6 +598,21 @@ export class FiltrosComponent implements OnInit {
         setTimeout( () => {
           this.blurSidenav.toggle();
         })
+      break;
+      case 'crop':
+        //this.showCropper = true;
+        this.cropSidenavAberta = !this.cropSidenavAberta;
+        this.manterAspecto = true;
+        this.formatoCorte = "retangular";
+        this.modoCorte = "cortar";
+        this.menu = false;
+        setTimeout(() => {
+          this.cropSidenav.toggle().then(
+            (open) =>{
+              this.showCropper = true;
+            }
+          );
+        });
       break;
       case 'extrairCanal':
         this.extrairCanalSidenavAberta = !this.extrairCanalSidenavAberta;
@@ -1086,7 +1118,6 @@ export class FiltrosComponent implements OnInit {
   }
 
   nitidez(){
-    console.log("Fator: " + this.fatorNitidez);
     this.carregando = true;
     let parametrosURL = JSON.stringify({
       "fator" : this.fatorNitidez
@@ -1098,6 +1129,33 @@ export class FiltrosComponent implements OnInit {
       this.carregando = false;
       this.voltarMenu('nitidez');
       this.openSnackBar("Sucesso!","Nitidez ajustada");
+      this.imagem = response.body;
+      this.config.seImgAtual(this.imagem);
+      this.adicionarPilha();
+    }, err => {
+      this.carregando = false;
+      console.log(err);
+    });
+  }
+
+  cortar(){
+    let evento = this.imageCropper.crop();
+    let parametrosURL = JSON.stringify({
+      "tipoCorte" : this.formatoCorte,
+      "modo" : this.modoCorte,
+      "x1" : evento.imagePosition.x1,
+      "y1" : evento.imagePosition.y1,
+      "w" : evento.width,
+      "h" : evento.height
+    });
+    this.carregando = true;
+    this.http.post<Imagem>(this.urlFiltros.toString().concat("/cortar/").concat(parametrosURL), this.imagem, {
+      reportProgress: true,
+      observe: 'response'
+    }).subscribe(response => {
+      this.carregando = false;
+      this.voltarMenu('crop');
+      this.openSnackBar("Sucesso!","Imagem cortada");
       this.imagem = response.body;
       this.config.seImgAtual(this.imagem);
       this.adicionarPilha();
@@ -1235,8 +1293,14 @@ export class FiltrosComponent implements OnInit {
     }
   }
 
+  imageCropped(event: ImageCroppedEvent) {
+    console.log(event.base64);
+    //console.log(event);
+  }
+
   mock(){
     this.carregando = true;
+    
     let parametrosURL = JSON.stringify({
       "k" : 5
     });

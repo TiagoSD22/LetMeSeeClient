@@ -160,9 +160,10 @@
 
 .image{
     display: flex;
-    //object-fit: cover;
+    object-fit: cover;
     position: absolute;
-    cursor: move;
+    z-index: 2;
+    //cursor: move;
 }
   
 .mat-slider-horizontal {
@@ -307,6 +308,23 @@
     font-size: 12px;
 }
 
+.radio-group{
+    left: 0;
+    position: absolute;
+    margin-left: 5px;
+}
+
+.cropper{
+    padding: 0 0 0 0 !important;
+}
+
+.form-field.mat-form-field-appearance-legacy .mat-form-field-label {
+    color: rgba(211,211,211,0.54) !important;
+}
+
+.form-field.mat-form-field.mat-focused .mat-form-field-label {
+    color: #1976d2 !important;
+}
 .option-text .mat-option-text{
     font-size: 12px !important;
 }

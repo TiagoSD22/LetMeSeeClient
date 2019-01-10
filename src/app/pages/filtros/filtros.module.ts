@@ -11,6 +11,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {Ng5SliderModule} from '../../../../node_modules/ng5-slider';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const ROTAS_Filtros = [
   { path: "", component: FiltrosComponent }
@@ -41,6 +42,7 @@ const ROTAS_Filtros = [
     MatSliderModule,
     FlexLayoutModule,
     DragDropModule,
+    ImageCropperModule,
     Ng5SliderModule,
     RouterModule.forChild(ROTAS_Filtros)
   ],

@@ -170,7 +170,8 @@
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   max-height: 100%;
 }
 
