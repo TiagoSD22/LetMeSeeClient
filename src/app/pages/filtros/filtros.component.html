@@ -977,7 +977,7 @@
     <div fxFlex fxLayout="column">
         <div fxFlex = 96% fxLayout="row" fxLayoutAlign="center center" class="image-container" #imgContainer id = "img-container">
             <div class="img-wrapper" [style.width.px] = "imagem?.largura * escala" [style.height.px] = "imagem?.altura * escala" >
-                <image-cropper #imageCropper *ngIf = "showCropper"
+                <image-cropper id = "CropperDiv" #imageCropper *ngIf = "showCropper"
                 class = "cropper"
                 imageBase64 = "data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
                 [maintainAspectRatio]="manterAspecto"
@@ -989,15 +989,25 @@
                 format="imagem.tipo"
                 outputType="base64"
                 (imageCropped)="imageCropped($event)"
+                (cropperReady) = "imageLoaded()"
+                
                 [style.max-height.px] = "imagem?.altura * escala"
                 style="z-index: 10;"
                 >
                 </image-cropper>
                 <img id = "image" cdkDragBoundary=".img-wrapper" class="image" fxFlex
-                    *ngIf = "imagem != undefined && !showCropper" 
+                    *ngIf = "imagem != undefined && !showCropper && !draw" 
                     src="data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
                     [style.width.px] = "imagem.largura * escala"
                     [style.height.px] = "imagem.altura * escala">  
+
+                <canvas-whiteboard #canvasWhiteboard *ngIf="draw"
+                    imageUrl = "data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
+                    (onBatchUpdate)="onCanvasDraw($event)"
+                    (onClear)="onCanvasClear()"
+                    (onUndo)="onCanvasUndo($event)"
+                    (onRedo)="onCanvasRedo($event)">
+                </canvas-whiteboard>
             </div>
             <div *ngIf = "carregando" class="lds-grid">
                 <div></div>
@@ -1053,7 +1063,7 @@
                 [min]="0.10"
                 [step]="0.01"
                 [thumbLabel]="false"
-                [(ngModel)]="escala"
+                [value]="escala"
                 [vertical]="false"
                 (input) = "slideMudou('escala',$event)">
             </mat-slider>

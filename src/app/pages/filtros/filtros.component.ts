@@ -24,6 +24,7 @@ import {
 import { Options } from 'ng5-slider';
 import { setQuarter } from 'ngx-bootstrap/chronos/units/quarter';
 import { ImageCroppedEvent } from "../../../../node_modules/ngx-image-cropper/src/interfaces/image-cropped-event.interface";
+import {CanvasWhiteboardComponent} from "ng2-canvas-whiteboard";
 
 @Component({
   selector: 'app-filtros',
@@ -41,6 +42,7 @@ import { ImageCroppedEvent } from "../../../../node_modules/ngx-image-cropper/sr
       ])
     ])
   ],
+  viewProviders: [CanvasWhiteboardComponent],
   encapsulation: ViewEncapsulation.None
 })
 export class FiltrosComponent implements OnInit {
@@ -54,6 +56,8 @@ export class FiltrosComponent implements OnInit {
   carregando : boolean = false;
   larguraOriginal : number;
   alturaOriginal: number;
+
+  draw : boolean = false;
 
   @ViewChild('imgContainer') imgContainer : ElementRef;
   lar : number;
@@ -170,6 +174,8 @@ export class FiltrosComponent implements OnInit {
   manterAspecto : boolean = true;
   formatoCorte : String = 'retangular';
   modoCorte : String = "cortar";
+  escalaInicialCropperImg : number;
+  escalaInicialCropper : number;
   
   constructor(private http: HttpClient, private toastr: ToastrService,private config: ConfigService, 
     private _fb: FormBuilder,private _router: Router, 
@@ -609,7 +615,10 @@ export class FiltrosComponent implements OnInit {
         setTimeout(() => {
           this.cropSidenav.toggle().then(
             (open) =>{
+              this.ajustarTela();
               this.showCropper = true;
+              this.escalaInicialCropper = this.escala;
+              this.escalaInicialCropperImg = this.escala;
             }
           );
         });
@@ -1164,6 +1173,25 @@ export class FiltrosComponent implements OnInit {
       console.log(err);
     });
   }
+  
+  imageLoaded(){
+    //this.ajustarTela();
+    //this.ajustarCropper(this.escala,this.escala);
+  }
+
+  ajustarCropper(fatorCropper : number, fatorCropperImage : number){
+    let alturaAtualCropperImage = document.getElementById("CropperDiv").children["0"].children["0"].attributes[3].ownerElement.height;
+          let larguraAtualCropperImage = document.getElementById("CropperDiv").children["0"].children["0"].attributes[3].ownerElement.width;
+
+          let alturaAtualCropper = document.getElementById("CropperDiv").children["0"].children["1"].style.height;
+          let larguraAtualCropper = document.getElementById("CropperDiv").children["0"].children["1"].style.width;
+
+          document.getElementById("CropperDiv").children["0"].children["0"].attributes[3].ownerElement.height = this.imagem.altura * fatorCropperImage;
+          document.getElementById("CropperDiv").children["0"].children["0"].attributes[3].ownerElement.width = this.imagem.largura * fatorCropperImage;
+          
+          document.getElementById("CropperDiv").children["0"].children["1"].style.height = this.imagem.altura * fatorCropper;
+          document.getElementById("CropperDiv").children["0"].children["1"].style.width = this.imagem.largura * fatorCropper;
+  }
 
   slideMudou(slide : String, event : any){
     switch(slide){
@@ -1172,6 +1200,9 @@ export class FiltrosComponent implements OnInit {
       break;
       case 'escala':
         this.escala = event.value;
+        if(this.showCropper){
+          //this.ajustarCropper((1 - ( this.escalaInicialCropper - this.escala)),(1 - ( this.escalaInicialCropperImg - this.escala)));
+        }
       break;
       case 'canalR':
         this.valorR = event.value;
@@ -1299,7 +1330,8 @@ export class FiltrosComponent implements OnInit {
   }
 
   mock(){
-    this.carregando = true;
+    this.draw = true;
+    /*this.carregando = true;
     
     let parametrosURL = JSON.stringify({
       "k" : 5
@@ -1317,6 +1349,6 @@ export class FiltrosComponent implements OnInit {
     }, err => {
       this.carregando = false;
       console.log(err);
-    });
+    });*/
   }
 }

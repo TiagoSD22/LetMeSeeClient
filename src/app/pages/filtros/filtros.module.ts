@@ -12,6 +12,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {Ng5SliderModule} from '../../../../node_modules/ng5-slider';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CanvasWhiteboardModule} from "ng2-canvas-whiteboard";
 
 const ROTAS_Filtros = [
   { path: "", component: FiltrosComponent }
@@ -44,6 +45,7 @@ const ROTAS_Filtros = [
     DragDropModule,
     ImageCropperModule,
     Ng5SliderModule,
+    CanvasWhiteboardModule,
     RouterModule.forChild(ROTAS_Filtros)
   ],
   declarations: [FiltrosComponent]
