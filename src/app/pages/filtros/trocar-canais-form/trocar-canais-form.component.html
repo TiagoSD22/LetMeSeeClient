@@ -1,0 +1,21 @@
+<div [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Trocar canais RGB</h5>
+  <div class = 'negativo-sidenav' style="height: 230px;">
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+      
+      <div style="padding-top: 55px;left: 5px;">
+          <mat-form-field>
+              <mat-select [(ngModel)]="canaisSwap" class="referencia-select">
+                  <mat-option class="option-text" value="RG">Trocar vermelho com verde</mat-option>
+                  <mat-option class="option-text" value="RB">Trocar vermelho com azul</mat-option>
+                  <mat-option class="option-text" value="GB">Trocar verde com azul</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div style="width: 20%;left: 40%;position: absolute;bottom: 20px;" matTooltip ="Aplicar">
+          <button class="btn" mat-mini-fab color="primary" (click) = "aplicar()" [disabled] = "carregando">
+              <i class="zmdi zmdi-check"></i>
+          </button>
+      </div>
+  </div>
+</div>

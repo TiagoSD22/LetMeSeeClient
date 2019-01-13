@@ -17,49 +17,49 @@
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
                     <mat-list role = "list" *ngIf = "menu" style="width: 100%;max-width: 100%;">
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('escalaCinza')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('escalaCinza')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/gray_scale.png" class="filter-icon">
                                 Escala de cinza
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('negativo')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('negativo')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/negativo.svg" class="filter-icon">
                                 Negativo
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('limiar')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('limiar')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/limiar.png" class="filter-icon">
                                 Limiar
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('dilatar')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('dilatar')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/maximo.png" class="filter-icon">
                                 Dilatação
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('erodir')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('erodir')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/minimo.png" class="filter-icon">
                                 Erosão
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('extrairCanal')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('extrairCanal')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/extrair_canal.png" class="filter-icon">
                                 Extrair canal
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('trocarCanais')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('trocarCanais')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/swap.png" class="filter-icon">
                                 Trocar canais RGB
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('pixelate')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('pixelate')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/pixelate.svg" class="filter-icon">
                                 Pixelizar
@@ -78,49 +78,49 @@
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
                     <mat-list role = "list" *ngIf = "menu" style="width: 100%;max-width: 100%;">
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('contraste')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('contraste')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/contraste.svg" class="filter-icon">
                                 Contraste
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('brilho')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('brilho')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/brilho.svg" class="filter-icon">
                                 Nível de brilho
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('ajusteRGB')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('ajusteRGB')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/colors.svg" class="filter-icon">
                                 Ajuste RGB
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('nitidez')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('nitidez')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/nitidez.svg" class="filter-icon">
                                 Nitidez
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('mediana')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('mediana')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/mediana.png" class="filter-icon">
                                 Redução de ruído(Mediana)
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('blur')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('blur')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/blur.svg" class="filter-icon">
                                 Blur
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('eqHist')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('eqHist')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/eqHist2.png" class="filter-icon">
                                 Equalizar histograma
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('eqCanal')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('eqCanal')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/eqCanal.svg" class="filter-icon">
                                 Equalização de canais
@@ -139,42 +139,42 @@
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
                     <mat-list role="list" *ngIf="menu" style="width: 100%;max-width: 100%;">
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('resize')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('resize')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/resize.png" class="filter-icon">
                                 Redimensionar
                             </h5>
                         </mat-list-item>
 
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('espelhoH')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('espelhoH')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/espelho_horizontal.svg" class="filter-icon">
                                 Espelho horizontal
                             </h5>
                         </mat-list-item>
                 
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('espelhoV')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('espelhoV')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/espelho_vertical.svg" class="filter-icon">
                                 Espelho vertical
                             </h5>
                         </mat-list-item>
 
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('girarH')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('girarH')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/rotacionar_horario.svg" class="filter-icon">
                                 Girar horário
                             </h5>
                         </mat-list-item>
 
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('girarAH')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('girarAH')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/rotacionar_antihorario.svg" class="filter-icon">
                                 Girar anti-horário
                             </h5>
                         </mat-list-item>
 
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('crop')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('crop')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/crop.svg" class="filter-icon">
                                 Cortar
@@ -193,19 +193,19 @@
                 </mat-expansion-panel-header>
                 <ng-template matExpansionPanelContent>
                     <mat-list role="list" *ngIf="menu" style="width: 100%;max-width: 100%;">
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('prewitt')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('prewitt')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/P.png" class="filter-icon edge">
                                 Prewitt
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('roberts')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('roberts')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/R.png" class="filter-icon edge">
                                 Roberts Cross
                             </h5>
                         </mat-list-item>
-                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toogle('sobel')" role="listitem">
+                        <mat-list-item style="margin-top: 0px;width: 100%;max-width: 100%;" (click)="toggleSidenav('sobel')" role="listitem">
                             <h5 class="filter-label">
                                 <img src="../../../assets/icons/S.png" class="filter-icon edge">
                                 Sobel
@@ -223,778 +223,207 @@
             </div>
         </mat-accordion>
 
-        <mat-sidenav *ngIf = "negativoSidenavAberta" [@slideInOut] #negativoSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Negativo</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('negativo')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "negativo()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <negativo-form *ngIf = "sidenavs.get('negativo')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </negativo-form>
 
-        <mat-sidenav *ngIf = "escalaCinzaSidenavAberta" [@slideInOut] #escalaCinzaSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Escala de cinza</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('escalaCinza')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "escalaCinza()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <escala-cinza-form *ngIf = "sidenavs.get('escalaCinza')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </escala-cinza-form>
 
-        <mat-sidenav *ngIf = "eqHistSidenavAberta" [@slideInOut] #eqHistSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Equalizar histograma</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('eqHist')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "eqHist()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <limiar-form *ngIf = "sidenavs.get('limiar')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">   
+        </limiar-form>
 
-        <mat-sidenav *ngIf = "limiarSidenavAberta" [@slideInOut] #limiarSidenav mode="side" class="filtro-param-sidenav">
-                <h5 class="filter-label-title">Limiar</h5>
-                <div class = 'limiar-sidenav' style="height: 180px;">
-                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('limiar')" matTooltip="Voltar">
-                    <div style="right: 5px;top:5px;position: absolute;">
-                        <mat-checkbox [labelPosition]="after" [(ngModel)]="usarMedia"><h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">Usar intensidade média</h5></mat-checkbox>
-                    </div>
-                    <div *ngIf = "!usarMedia" class="div-align" style="padding-top: 70px;">
-                        <label for = "limiar-value" class="label-slider">
-                            Valor
-                        </label>
-                        <mat-slider
-                            class="limiar-input"
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="255"
-                            [min]="0"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="valorLimiar"
-                            [vertical]="false"
-                            (input) = "slideMudou('limiar',$event)"
-                            id = "limiar-value">
-                        </mat-slider>
-                        <label *ngIf="valorLimiar <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{valorLimiar}}
-                        </label>
-                        <label *ngIf="valorLimiar > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            +{{valorLimiar}}
-                        </label>
-                    </div>
-                    <div *ngIf = "usarMedia" style="padding-top: 60px;">
-                        <mat-form-field>
-                            <mat-select [(ngModel)]="referencia" class="referencia-select">
-                                <mat-option class="option-text" value="RGB">Média dos 3 canais</mat-option>
-                                <mat-option class="option-text" value="RG">Média dos canais vermelho e verde apenas</mat-option>
-                                <mat-option class="option-text" value="RB">Média dos canais vermelho e azul apenas</mat-option>
-                                <mat-option class="option-text" value="GB">Média dos canais verde e azul apenas</mat-option>
-                                <mat-option class="option-text" value="R">Média do canal vermelho apenas</mat-option>
-                                <mat-option class="option-text" value="G">Média do canal verde apenas</mat-option>
-                                <mat-option class="option-text" value="B">Média do canal azul apenas</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div style="display: flex;position: absolute;width: 100%;bottom: 0px;">
-                        <button class="btn" mat-mini-fab color="primary" style="bottom: 10px;position: relative;margin: auto;" (click) = "limiar()" matTooltip="Aplicar" [disabled] = "carregando">
-                            <i class="zmdi zmdi-check"></i>
-                        </button>
-                    </div>
-                </div>
-        </mat-sidenav>
+        <dilatar-form *ngIf = "sidenavs.get('dilatar')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </dilatar-form>
 
-        <mat-sidenav *ngIf = "ajusteRGBSidenavAberta" [@slideInOut] #ajusteRGBSidenav mode="side" class="filtro-param-sidenav">
-                <h5 class="filter-label-title">Ajuste RGB</h5>
-                <div class = 'ajusteRGB-sidenav'>
-                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('ajusteRGB')" matTooltip="Voltar">
-                    <div class="div-align">
-                        <label for = "canalR" class="label-slider">R</label>
-                        <mat-slider
-                            class="slider-vermelho"
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="255"
-                            [min]="-255"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="valorR"
-                            [vertical]="false"
-                            id = "canalR"
-                            (input) = "slideMudou('canalR',$event)">
-                        </mat-slider>
-                        <label *ngIf = "valorR <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{valorR}}
-                        </label>
-                        <label *ngIf = "valorR > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            +{{valorR}}
-                        </label>
-                    </div>
+        <erodir-form *ngIf = "sidenavs.get('erodir')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </erodir-form>
 
-                    <div class="div-align">
-                        <label for = "canalG" class="label-slider">G</label>
-                        <mat-slider
-                            class="slider-verde"
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="255"
-                            [min]="-255"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="valorG"
-                            [vertical]="false"
-                            id = "canalG"
-                            (input) = "slideMudou('canalG',$event)">
-                        </mat-slider>
-                        <label *ngIf="valorG <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{valorG}}
-                        </label>
-                        <label *ngIf="valorG > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            +{{valorG}}
-                        </label>
-                    </div>
+        <extrair-canal-form *ngIf = "sidenavs.get('extrairCanal')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </extrair-canal-form>
 
-                    <div class="div-align">
-                        <label for = "canalB" class="label-slider">B</label>
-                        <mat-slider
-                            class="slider-azul"
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="255"
-                            [min]="-255"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="valorB"
-                            [vertical]="false"
-                            id = "canalB"
-                            (input) = "slideMudou('canalB',$event)">
-                        </mat-slider>
-                        <label *ngIf="valorB <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{valorB}}
-                        </label>
-                        <label *ngIf="valorB > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            +{{valorB}}
-                        </label>
-                    </div>
-                    
-                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "ajusteRGB()" matTooltip="Aplicar" [disabled] = "carregando">
-                        <i class="zmdi zmdi-check"></i>
-                    </button>
-                </div>
-        </mat-sidenav>
+        <trocar-canais-form *ngIf = "sidenavs.get('trocarCanais')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </trocar-canais-form>
 
-        <mat-sidenav *ngIf = "robertsSidenavAberta" [@slideInOut] #robertsSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Roberts Cross</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('roberts')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "roberts()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <pixelizar-form *ngIf = "sidenavs.get('pixelate')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </pixelizar-form>
 
-        <mat-sidenav *ngIf = "sobelSidenavAberta" [@slideInOut] #sobelSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Sobel</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('sobel')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "sobel()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <contraste-form *ngIf = "sidenavs.get('contraste')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </contraste-form>
 
-        <mat-sidenav *ngIf = "prewittSidenavAberta" [@slideInOut] #prewittSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Prewitt</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('prewitt')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "prewitt()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <brilho-form *ngIf = "sidenavs.get('brilho')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </brilho-form>
 
-        <mat-sidenav *ngIf = "espelhoHSidenavAberta" [@slideInOut] #espelhoHSidenav mode="side" class="filtro-param-sidenav">
-                <h5 class="filter-label-title">Espelho horizontal</h5>
-                <div class = 'negativo-sidenav'>
-                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('espelhoH')" matTooltip="Voltar">
-                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "espelhoH()" matTooltip="Aplicar" [disabled] = "carregando">
-                        <i class="zmdi zmdi-check"></i>
-                    </button>
-                </div>
-        </mat-sidenav>
+        <ajuste-rgb-form *ngIf = "sidenavs.get('ajusteRGB')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </ajuste-rgb-form>
 
-        <mat-sidenav *ngIf = "espelhoVSidenavAberta" [@slideInOut] #espelhoVSidenav mode="side" class="filtro-param-sidenav">
-                <h5 class="filter-label-title">Espelho vertical</h5>
-                <div class = 'negativo-sidenav'>
-                    <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('espelhoV')" matTooltip="Voltar">
-                    <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "espelhoV()" matTooltip="Aplicar" [disabled] = "carregando">
-                        <i class="zmdi zmdi-check"></i>
-                    </button>
-                </div>
-        </mat-sidenav>
+        <nitidez-form *ngIf = "sidenavs.get('nitidez')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </nitidez-form>
 
-        <mat-sidenav *ngIf = "girarHSidenavAberta" [@slideInOut] #girarHSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Girar horário</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('girarH')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "girarH()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <mediana-form *ngIf = "sidenavs.get('mediana')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </mediana-form>
 
-        <mat-sidenav *ngIf = "girarAHSidenavAberta" [@slideInOut] #girarAHSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Girar anti-horário</h5>
-            <div class = 'negativo-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('girarAH')" matTooltip="Voltar">
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "girarAH()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </mat-sidenav>
+        <blur-form *ngIf = "sidenavs.get('blur')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </blur-form>
 
-        <mat-sidenav *ngIf = "dilatarSidenavAberta" [@slideInOut] #dilatarSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Dilatação</h5>
-            <div class = 'dilatacao-sidenav' style="position: relative;">
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('dilatar')" matTooltip="Voltar">
-                    <div style="right: 5px;top:5px;position: absolute;">
-                        <mat-checkbox [labelPosition]="after" [(ngModel)]="selecaoLivre"><h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">Seleção livre</h5></mat-checkbox>
-                    </div>
-                    <div class="div-align">
-                        <label for = "largura" class="label-slider">
-                            Largura
-                        </label>
-                        <mat-slider
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="20"
-                            [min]="2"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="larguraK"
-                            [vertical]="false"
-                            (input) = "slideMudou('larguraK',$event)"
-                            id = "largura">
-                        </mat-slider>
-                        <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{larguraK}}
-                        </label>
-                    </div>
-                    <div class="div-align" style="padding-top: 5px"> 
-                        <label for = "altura" class="label-slider">
-                            Altura
-                        </label>
-                        <mat-slider
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="20"
-                            [min]="2"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="alturaK"
-                            [vertical]="false"
-                            (input) = "slideMudou('alturaK',$event)"
-                            id = "altura">
-                        </mat-slider>
-                        <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{alturaK}}
-                        </label>
-                    </div>
-                <button class="btn" mat-mini-fab color="primary" (click) = "dilatar()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-    </mat-sidenav>
+        <equalizar-histograma-form *ngIf = "sidenavs.get('eqHist')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </equalizar-histograma-form>
 
-    <mat-sidenav *ngIf = "erodirSidenavAberta" [@slideInOut] #erodirSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Erosão</h5>
-            <div class = 'dilatacao-sidenav' style="position: relative;">
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('erodir')" matTooltip="Voltar">
-                    <div style="right: 5px;top:5px;position: absolute;">
-                        <mat-checkbox [labelPosition]="after" [(ngModel)]="selecaoLivre"><h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">Seleção livre</h5></mat-checkbox>
-                    </div>
-                    <div class="div-align">
-                        <label for = "largura" class="label-slider">
-                            Largura
-                        </label>
-                        <mat-slider
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="20"
-                            [min]="2"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="larguraK"
-                            [vertical]="false"
-                            (input) = "slideMudou('larguraK',$event)"
-                            id = "largura">
-                        </mat-slider>
-                        <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{larguraK}}
-                        </label>
-                    </div>
-                    <div class="div-align" style="padding-top: 5px"> 
-                        <label for = "altura" class="label-slider">
-                            Altura
-                        </label>
-                        <mat-slider
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="20"
-                            [min]="2"
-                            [step]="1"
-                            [thumbLabel]="false"
-                            [(ngModel)]="alturaK"
-                            [vertical]="false"
-                            (input) = "slideMudou('alturaK',$event)"
-                            id = "altura">
-                        </mat-slider>
-                        <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{alturaK}}
-                        </label>
-                    </div>
-                <button class="btn" mat-mini-fab color="primary" (click) = "erodir()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-    </mat-sidenav>
+        <equalizar-canal-form *ngIf = "sidenavs.get('eqCanal')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </equalizar-canal-form>
 
-    <mat-sidenav *ngIf = "medianaSidenavAberta" [@slideInOut] #medianaSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Mediana</h5>
-            <div class = 'limiar-sidenav'>
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('mediana')" matTooltip="Voltar">
-                <div class="div-align">
-                    <label for = "limiar-value" class="label-slider">
-                        Máscara
-                    </label>
-                    <mat-slider
-                        [disabled]="false"
-                        [invert]="false"
-                        [max]="33"
-                        [min]="3"
-                        [step]="2"
-                        [thumbLabel]="false"
-                        [(ngModel)]="larguraK"
-                        [vertical]="false"
-                        (input) = "slideMudou('mediana',$event)"
-                        id = "limiar-value">
-                    </mat-slider>
-                    <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                        {{larguraK}}
-                    </label>
-                </div>
-                <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "mediana()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-    </mat-sidenav>
+        <redimensionar-form *ngIf = "sidenavs.get('resize')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (update) = "atualizarDimensoesImagem($event)"
+            (restaurar) = "restaurarDimensoes($event)"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </redimensionar-form>
 
-    <mat-sidenav *ngIf = "pixelateSidenavAberta" [@slideInOut] #pixelateSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Pixelizar</h5>
-        <div class = 'limiar-sidenav'>
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('pixelate')" matTooltip="Voltar">
-            <div class="div-align">
-                <label for = "limiar-value" class="label-slider">
-                    Tamanho do pixel
-                </label>
-                <mat-slider
-                    [disabled]="false"
-                    [invert]="false"
-                    [max]="33"
-                    [min]="3"
-                    [step]="2"
-                    [thumbLabel]="false"
-                    [(ngModel)]="larguraK"
-                    [vertical]="false"
-                    (input) = "slideMudou('mediana',$event)"
-                    id = "limiar-value">
-                </mat-slider>
-                <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                    {{larguraK}}
-                </label>
-            </div>
-            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "pixelate()" matTooltip="Aplicar" [disabled] = "carregando">
-                <i class="zmdi zmdi-check"></i>
-            </button>
-        </div>
-    </mat-sidenav>
+        <espelho-horizontal-form *ngIf = "sidenavs.get('espelhoH')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </espelho-horizontal-form>
 
-    <mat-sidenav *ngIf = "blurSidenavAberta" [@slideInOut] #blurSidenav mode="side" class="filtro-param-sidenav">
-            <h5 class="filter-label-title">Blur</h5>
-            <div class = 'dilatacao-sidenav' style="position: relative;" [style.height.px]="gaussiana? 290 : 200">
-                <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('blur')" matTooltip="Voltar">
-                    <div class="flex flex-horizontal-center" style="right: 5px;top:5px;display: flex;align-items: center;right: 0;position: absolute;">
-                        <mat-checkbox [labelPosition]="after" [(ngModel)]="gaussiana" style="margin-top: 0px;">
-                            <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
-                                Gaussiana
-                            </h5>
-                        </mat-checkbox>
-                        <img src="../../../assets/icons/gaussian.svg" [style.width.px] = "50" [style.height.px] = "50">
-                    </div>
-                    <div class="div-align" style="padding-top: 60px;">
-                        <label for = "largura" class="label-slider">
-                            Máscara
-                        </label>
-                        <mat-slider
-                            [disabled]="false"
-                            [invert]="false"
-                            [max]="33"
-                            [min]="3"
-                            [step]="2"
-                            [thumbLabel]="false"
-                            [(ngModel)]="larguraK"
-                            [vertical]="false"
-                            (input) = "slideMudou('larguraK',$event)"
-                            id = "largura">
-                        </mat-slider>
-                        <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                            {{larguraK}}
-                        </label>
-                    </div>
-                    <div *ngIf="gaussiana" style="padding-top: 5px;object-fit: contain;" class="div-align">
-                        <label for="largura" class="label-slider">
-                            SigmaX
-                        </label>
-                        <mat-slider [disabled]="false" [invert]="false" [max]="100" [min]="-100" [step]="1" [thumbLabel]="true" [(ngModel)]="sigmaX"
-                            [vertical]="false" (input)="slideMudou('sigmaX',$event)" id="largura">
-                        </mat-slider>
-                    </div>
-                    <div *ngIf="gaussiana" style="padding-top: 5px;" class="div-align">
-                        <label for="largura" class="label-slider">
-                            SigmaY
-                        </label>
-                        <mat-slider [disabled]="false" [invert]="false" [max]="0.4" [min]="0" [step]="0.001" [thumbLabel]="true"
-                            [(ngModel)]="sigmaY" [vertical]="false" (input)="slideMudou('sigmaY',$event)" id="largura">
-                        </mat-slider>
-                    </div>
-                <button class="btn" [style.margin-top.px] = "gaussiana? 10 : 20"  mat-mini-fab color="primary" (click) = "blur()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-    </mat-sidenav>
+        <espelho-vertical-form *ngIf = "sidenavs.get('espelhoV')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </espelho-vertical-form>
 
-    <mat-sidenav *ngIf = "resizeSidenavAberta" [@slideInOut] #resizeSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Redimensionar</h5>
-        <div class = 'dilatacao-sidenav'>
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('resize')" matTooltip="Voltar">
-            <div class="flex flex-horizontal-center" style="right: 5px;top:5px;display: flex;align-items: center;right: 0;position: absolute;">
-                <mat-checkbox [labelPosition]="after" [(ngModel)]="manterProporcao" style="margin-top: 0px;">
-                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
-                        Manter proporção
-                    </h5>
-                </mat-checkbox>
-                <img src="../../../assets/icons/aspect_ratio.png" [style.width.px] = "16" [style.height.px] = "16" style="margin-left: 5px;margin-right: 5px;">
-            </div>
-            <div class="two-col" style="margin-top: 70px;">
-                <div class="col1" style="width: 40%">
-                    <mat-form-field class="example-full-width">
-                        <input (change) = "inputMudou('novaLargura')" [(ngModel)]="novaLargura" type="text" matInput placeholder="Largura">
-                        <span matSuffix style="color: #3c7fca;">px &nbsp;</span>
-                    </mat-form-field>
-                </div>
-                <div class="col2" style="width: 40%">
-                    <mat-form-field class="example-full-width">
-                        <input (change) = "inputMudou('novaAltura')" [(ngModel)]="novaAltura" type="text" matInput placeholder="Altura">
-                        <span matSuffix style="color: #3c7fca;">px &nbsp;</span>
-                    </mat-form-field>
-                </div>
-            </div>
-            <button class="btn" mat-mini-fab color="primary" style="margin-top: 140px;" (click) = "resize()" matTooltip="Aplicar" [disabled] = "carregando">
-                <i class="zmdi zmdi-check"></i>
-            </button>
-        </div>
-    </mat-sidenav>
+        <rotacao-horaria-form *ngIf = "sidenavs.get('girarH')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </rotacao-horaria-form>
 
-    <mat-sidenav *ngIf = "extrairCanalSidenavAberta" [@slideInOut] #extrairCanalSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Extrair canal</h5>
-        <div class = 'negativo-sidenav' style="height: 200px;">
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('extrairCanal')" matTooltip="Voltar">
-            <div style="padding-top: 40px;">
-            <div style="display: inline-block;">
-                <mat-checkbox class="red-check" 
-                              [labelPosition]="before" 
-                              [(ngModel)]="extrairR" 
-                              matTooltip="Extrair canal vermelho">
-                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
-                        R
-                    </h5>
-                </mat-checkbox>
-            </div>
-            <div style="display: inline-block;padding-left: 10px;">
-                <mat-checkbox class="green-check" 
-                              [labelPosition]="before" 
-                              [(ngModel)]="extrairG" 
-                              matTooltip="Extrair canal verde">
-                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
-                        G
-                    </h5>
-                </mat-checkbox>
-            </div>
-            <div style="display: inline-block;padding-left: 10px;">
-                <mat-checkbox class="blue-check" 
-                              [labelPosition]="before" 
-                              [(ngModel)]="extrairB" 
-                              matTooltip="Extrair canal azul">
-                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
-                        B
-                    </h5>
-                </mat-checkbox>
-            </div>
-            </div>
-            <div style="width: 20%;left: 40%;position: absolute;" [matTooltip]="!extrairR && !extrairG && !extrairB ? 'Selecione um canal!' : 'Aplicar'">
-                <button [disabled] = "!extrairR && !extrairG && !extrairB" class="btn" mat-mini-fab color="primary" style="margin-top: 20px;" (click) = "extrairCanal()" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </div>
-    </mat-sidenav>
+        <rotacao-anti-horaria-form *ngIf = "sidenavs.get('girarAH')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </rotacao-anti-horaria-form>
 
-    <mat-sidenav *ngIf = "brilhoSidenavAberta" [@slideInOut] #brilhoSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Nível de brilho</h5>
-        <div class = 'limiar-sidenav'>
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('brilho')" matTooltip="Voltar">
-            <div class="div-align">
-                <label for = "brilho-value" class="label-slider">
-                    Brilho
-                </label>
-                <mat-slider
-                    [disabled]="false"
-                    [invert]="false"
-                    [max]="255"
-                    [min]="-255"
-                    [step]="1"
-                    [thumbLabel]="false"
-                    [(ngModel)]="valorBrilho"
-                    [vertical]="false"
-                    (input) = "slideMudou('brilho',$event)"
-                    id = "brilho-value">
-                </mat-slider>
-                <label *ngIf="valorBrilho <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                    {{((valorBrilho / 255) * 100) | number:'1.0-0'}}%
-                </label>
-                <label *ngIf="valorBrilho > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                    +{{((valorBrilho / 255) * 100) | number:'1.0-0'}}%
-                </label>
-            </div>
-            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "brilho()" matTooltip="Aplicar" [disabled] = "carregando">
-                <i class="zmdi zmdi-check"></i>
-            </button>
-        </div>
-    </mat-sidenav>
+        <cortar-form *ngIf = "sidenavs.get('crop')"
+            [imagem] = "imagem"
+            (show) = "showCropper = $event"
+            (update) = "updateCropper($event)"
+            [cropper] = "imageCropper"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </cortar-form>
 
-    <mat-sidenav *ngIf = "contrasteSidenavAberta" [@slideInOut] #contrasteSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Contraste</h5>
-        <div class = 'limiar-sidenav'>
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('contraste')" matTooltip="Voltar">
-            <div class="div-align">
-                <label for = "contraste-value" class="label-slider">
-                    Contraste
-                </label>
-                <mat-slider class="small-slider"
-                    [disabled]="false"
-                    [invert]="false"
-                    [max]="10"
-                    [min]="0"
-                    [step]="0.1"
-                    [thumbLabel]="false"
-                    [(ngModel)]="valorContraste"
-                    [vertical]="false"
-                    (input) = "slideMudou('contraste',$event)"
-                    id = "contraste-value">
-                </mat-slider>
-                <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                    {{((valorContraste / 10.0) * 100) | number:'1.0-0'}}%
-                </label>
-            </div>
-            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "contraste()" matTooltip="Aplicar" [disabled] = "carregando">
-                <i class="zmdi zmdi-check"></i>
-            </button>
-        </div>
-    </mat-sidenav>
+        <prewitt-form *ngIf = "sidenavs.get('prewitt')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </prewitt-form>
 
-    <mat-sidenav *ngIf = "nitidezSidenavAberta" [@slideInOut] #nitidezSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Nitidez</h5>
-        <div class = 'limiar-sidenav'>
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('nitidez')" matTooltip="Voltar">
-            <div class="div-align">
-                <label for = "contraste-value" class="label-slider">
-                    Nitidez
-                </label>
-                <mat-slider class="small-slider"
-                    [disabled]="false"
-                    [invert]="false"
-                    [max]="5"
-                    [min]="0"
-                    [step]="0.1"
-                    [thumbLabel]="false"
-                    [(ngModel)]="fatorNitidez"
-                    [vertical]="false"
-                    (input) = "slideMudou('fatorNitidez',$event)"
-                    id = "contraste-value">
-                </mat-slider>
-                <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
-                    {{((fatorNitidez / 5.0) * 100) | number:'1.0-0'}}%
-                </label>
-            </div>
-            <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "nitidez()" matTooltip="Aplicar" [disabled] = "carregando">
-                <i class="zmdi zmdi-check"></i>
-            </button>
-        </div>
-    </mat-sidenav>
+        <roberts-cross-form *ngIf = "sidenavs.get('roberts')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </roberts-cross-form>
 
-    <mat-sidenav *ngIf = "trocarCanaisSidenavAberta" [@slideInOut] #trocarCanaisSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Trocar canais RGB</h5>
-        <div class = 'negativo-sidenav' style="height: 230px;">
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('trocarCanais')" matTooltip="Voltar">
-            
-            <div style="padding-top: 55px;left: 5px;">
-                <mat-form-field>
-                    <mat-select [(ngModel)]="canaisSwap" class="referencia-select">
-                        <mat-option class="option-text" value="RG">Trocar vermelho com verde</mat-option>
-                        <mat-option class="option-text" value="RB">Trocar vermelho com azul</mat-option>
-                        <mat-option class="option-text" value="GB">Trocar verde com azul</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div style="width: 20%;left: 40%;position: absolute;bottom: 20px;" matTooltip ="Aplica">
-                <button class="btn" mat-mini-fab color="primary" (click) = "trocarCanais()" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </div>
-    </mat-sidenav>
-
-    <mat-sidenav *ngIf = "eqCanalSidenavAberta" [@slideInOut] #eqCanalSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Equalização de canais</h5>
-        <div class = 'negativo-sidenav' [ngClass]="{'normal': !eqPorFaixa || (!equalizarR && !equalizarG && !equalizarB), 
-                                        'classe1' : eqPorFaixa && ((equalizarR && !equalizarG && !equalizarB) ||
-                                                                   (equalizarG && !equalizarR && !equalizarB) ||
-                                                                   (equalizarB && !equalizarG && !equalizarR)),
-                                        'classe2' : eqPorFaixa && ((equalizarR && equalizarG && !equalizarB) ||
-                                                                   (equalizarR && equalizarB && !equalizarG) ||
-                                                                   (equalizarG && equalizarB && !equalizarR)),
-                                        'classe3' : eqPorFaixa && equalizarR && equalizarG && equalizarB}">
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('eqCanal')" matTooltip="Voltar">
-            <div class="flex flex-horizontal-center" style="padding-bottom: 20px;right: 5px;top:5px;display: flex;align-items: center;right: 5px;position: absolute;">
-                <mat-checkbox [labelPosition]="after" [(ngModel)]="eqPorFaixa" style="margin-top: 0px;" (change) = "checkBoxMudou('eqPorFaixa')">
-                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
-                        Equalizar por faixa
-                    </h5>
-                </mat-checkbox>
-            </div>
-            <div style="padding-top: 60px;display: flex; flex-direction: column;left: 0px;align-items: flex-start;">
-                <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
-                    <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="red-check" 
-                                [labelPosition]="before" 
-                                [(ngModel)]="equalizarR" 
-                                (change) = "checkBoxMudou('equalizarR')"
-                                matTooltip="Equalizar canal vermelho">
-                        <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
-                            Equalizar canal vermelho
-                        </h5>
-                    </mat-checkbox>
-                    <ng5-slider class="ng-slider red" *ngIf = "eqPorFaixa && equalizarR" [(value)]="minR" [(highValue)]="maxR" floor = 0 ceil = 255 step = 1></ng5-slider>
-                </div>
-                <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
-                    <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="green-check" 
-                                [labelPosition]="before" 
-                                [(ngModel)]="equalizarG" 
-                                (change) = "checkBoxMudou('equalizarG')"
-                                matTooltip="Equalizar canal verde">
-                        <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
-                            Equalizar canal verde
-                        </h5>
-                    </mat-checkbox>
-                    <ng5-slider class="ng-slider green" *ngIf = "eqPorFaixa && equalizarG" [(value)]="minG" [(highValue)]="maxG" floor = 0 ceil = 255 step = 1></ng5-slider>
-                </div>
-                <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
-                    <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="blue-check" 
-                                [labelPosition]="before" 
-                                [(ngModel)]="equalizarB" 
-                                (change) = "checkBoxMudou('equalizarB')"
-                                matTooltip="Equalizar canal azul">
-                        <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
-                            Equalizar canal azul
-                        </h5>
-                    </mat-checkbox>
-                    <ng5-slider class="ng-slider blue" *ngIf = "eqPorFaixa && equalizarB" [(value)]="minB" [(highValue)]="maxB" floor = 0 ceil = 255 step = 1></ng5-slider>
-                </div>
-            </div>
-            <div style="width: 20%;left: 40%;position: absolute;bottom: 10px;" [matTooltip] = "!equalizarR && !equalizarG && !equalizarB ? 'Selecione um canal para equalizar' : 'Aplicar'">
-                <button [disabled] = "!equalizarR && !equalizarG && !equalizarB" class="btn" mat-mini-fab color="primary" (click) = "eqCanal()" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </div>
-    </mat-sidenav>
-
-    <mat-sidenav *ngIf = "cropSidenavAberta" [@slideInOut] #cropSidenav mode="side" class="filtro-param-sidenav">
-        <h5 class="filter-label-title">Cortar</h5>
-        <div class = 'dilatacao-sidenav' style = "height: 250px;">
-            <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu('crop')" matTooltip="Voltar">
-            <div class="flex flex-horizontal-center" style="right: 5px;top:5px;display: flex;align-items: center;right: 0;position: absolute;">
-                <mat-checkbox [labelPosition]="after" [(ngModel)]="manterAspecto" style="margin-top: 0px;">
-                    <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
-                        Manter proporção
-                    </h5>
-                </mat-checkbox>
-                <img src="../../../assets/icons/aspect_ratio.png" [style.width.px] = "16" [style.height.px] = "16" style="margin-left: 5px;margin-right: 5px;">
-            </div>
-                <div style="padding-top: 65px;left: 0px;width: 70%;margin-left: 5px;">
-                    <mat-form-field class="form-field">
-                        <mat-select [(ngModel)]="formatoCorte" class="referencia-select" placeholder="Formato do corte">
-                            <mat-option class="option-text" value="retangular">Retangular</mat-option>
-                            <mat-option class="option-text" value="circular">Circular</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-radio-group class="radio-group" [(ngModel)]="modoCorte">
-                        <mat-radio-button class="radio-bt" value = "cortar" matTooltip="Manter apenas a região selecionada">
-                            <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0;margin-bottom: 0;">
-                                Cortar
-                            </h5>
-                        </mat-radio-button>
-                        <mat-radio-button class="radio-bt" value = "extrair" style="margin-left: 15px;" matTooltip="Remover da foto a região selecionada e manter o resto">
-                            <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0;margin-bottom: 0;">
-                                Extrair
-                            </h5>
-                        </mat-radio-button>
-                      </mat-radio-group>
-                </div>
-            
-            <div style="width: 20%;left: 40%;position: absolute;bottom: 10px;">
-                <button class="btn" mat-mini-fab color="primary" style="bottom: 5px;" (click) = "cortar()" matTooltip="Aplicar" [disabled] = "carregando">
-                    <i class="zmdi zmdi-check"></i>
-                </button>
-            </div>
-        </div>
-    </mat-sidenav>
+        <sobel-form *ngIf = "sidenavs.get('sobel')"
+            [imagem] = "imagem"
+            (voltar) = "toggleSidenav($event)"
+            (onLoading) = "carregando = $event"
+            (filtroAplicado) = "filtroAplicado($event)">
+        </sobel-form>
 
     </div>
 
     <div fxFlex fxLayout="column">
         <div fxFlex = 96% fxLayout="row" fxLayoutAlign="center center" class="image-container" #imgContainer id = "img-container">
             <div class="img-wrapper" [style.width.px] = "imagem?.largura * escala" [style.height.px] = "imagem?.altura * escala" >
-                <image-cropper id = "CropperDiv" #imageCropper *ngIf = "showCropper"
-                class = "cropper"
-                imageBase64 = "data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
-                [maintainAspectRatio]="manterAspecto"
-                [aspectRatio]="imagem?.largura / imagem?.altura"
-                [cropperMinWidth]="1"
-                [onlyScaleDown]="true"
-                [roundCropper]="formatoCorte === 'circular' ? true : false"
-                [autoCrop] = false
-                format="imagem.tipo"
-                outputType="base64"
-                (imageCropped)="imageCropped($event)"
-                (cropperReady) = "imageLoaded()"
                 
-                [style.max-height.px] = "imagem?.altura * escala"
-                style="z-index: 10;"
-                >
+                <image-cropper id = "CropperDiv" #imageCropper *ngIf = "showCropper"
+                    class = "cropper"
+                    imageBase64 = "data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
+                    [aspectRatio]="imagem?.largura / imagem?.altura"
+                    [cropperMinWidth]="1"
+                    [onlyScaleDown]="true"
+                    [autoCrop] = false
+                    format="imagem.tipo"
+                    outputType="base64"
+                    (imageCropped)="imageCropped($event)"
+                    (cropperReady) = "imageLoaded()"
+                    [style.max-height.px] = "imagem?.altura * escala"
+                    style="z-index: 10;">
                 </image-cropper>
+            
                 <img id = "image" cdkDragBoundary=".img-wrapper" class="image" fxFlex
                     *ngIf = "imagem != undefined && !showCropper && !draw" 
                     src="data:image/{{imagem.tipo}};base64,{{imagem.conteudoBase64}}"
@@ -1065,7 +494,7 @@
                 [thumbLabel]="false"
                 [value]="escala"
                 [vertical]="false"
-                (input) = "slideMudou('escala',$event)">
+                (input) = "escalaMudou($event)">
             </mat-slider>
         
             <label  

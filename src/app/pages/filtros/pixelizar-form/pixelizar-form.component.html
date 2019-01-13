@@ -1,0 +1,29 @@
+<div [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Pixelizar</h5>
+  <div class = 'limiar-sidenav'>
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+      <div class="div-align">
+          <label for = "tamanho" class="label-slider">
+              Tamanho do pixel
+          </label>
+          <mat-slider
+              [disabled]="false"
+              [invert]="false"
+              [max]="33"
+              [min]="3"
+              [step]="2"
+              [thumbLabel]="false"
+              [(ngModel)]="larguraK"
+              [vertical]="false"
+              (input) = "onChange($event)"
+              id = "tamanho">
+          </mat-slider>
+          <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              {{larguraK}}
+          </label>
+      </div>
+      <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "aplicar()" matTooltip="Aplicar" [disabled] = "carregando">
+          <i class="zmdi zmdi-check"></i>
+      </button>
+  </div>
+</div>

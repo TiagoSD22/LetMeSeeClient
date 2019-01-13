@@ -1,0 +1,52 @@
+<div [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Dilatação</h5>
+  <div class = 'dilatacao-sidenav' style="position: relative;">
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+          <div style="right: 5px;top:5px;position: absolute;">
+              <mat-checkbox [labelPosition]="after" [(ngModel)]="selecaoLivre"><h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">Seleção livre</h5></mat-checkbox>
+          </div>
+          <div class="div-align">
+              <label for = "largura" class="label-slider">
+                  Largura
+              </label>
+              <mat-slider
+                  [disabled]="false"
+                  [invert]="false"
+                  [max]="20"
+                  [min]="2"
+                  [step]="1"
+                  [thumbLabel]="false"
+                  [(ngModel)]="larguraK"
+                  [vertical]="false"
+                  (input) = "onChange('larguraK',$event)"
+                  id = "largura">
+              </mat-slider>
+              <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+                  {{larguraK}}
+              </label>
+          </div>
+          <div class="div-align" style="padding-top: 5px"> 
+              <label for = "altura" class="label-slider">
+                  Altura
+              </label>
+              <mat-slider
+                  [disabled]="false"
+                  [invert]="false"
+                  [max]="20"
+                  [min]="2"
+                  [step]="1"
+                  [thumbLabel]="false"
+                  [(ngModel)]="alturaK"
+                  [vertical]="false"
+                  (input) = "onChange('alturaK',$event)"
+                  id = "altura">
+              </mat-slider>
+              <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+                  {{alturaK}}
+              </label>
+          </div>
+      <button class="btn" mat-mini-fab color="primary" (click) = "aplicar()" matTooltip="Aplicar" [disabled] = "carregando">
+          <i class="zmdi zmdi-check"></i>
+      </button>
+  </div>
+</div>

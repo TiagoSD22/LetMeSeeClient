@@ -1,0 +1,51 @@
+<div  [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Limiar</h5>
+  <div class = 'limiar-sidenav' style="height: 180px;">
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+      <div style="right: 5px;top:5px;position: absolute;">
+          <mat-checkbox [labelPosition]="after" [(ngModel)]="usarMedia"><h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">Usar intensidade média</h5></mat-checkbox>
+      </div>
+      <div *ngIf = "!usarMedia" class="div-align" style="padding-top: 70px;">
+          <label for = "limiar-value" class="label-slider">
+              Valor
+          </label>
+          <mat-slider
+              class="limiar-input"
+              [disabled]="false"
+              [invert]="false"
+              [max]="255"
+              [min]="0"
+              [step]="1"
+              [thumbLabel]="false"
+              [(ngModel)]="valorLimiar"
+              [vertical]="false"
+              (input) = "onChange($event)"
+              id = "limiar-value">
+          </mat-slider>
+          <label *ngIf="valorLimiar <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              {{valorLimiar}}
+          </label>
+          <label *ngIf="valorLimiar > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              +{{valorLimiar}}
+          </label>
+      </div>
+      <div *ngIf = "usarMedia" style="padding-top: 60px;">
+          <mat-form-field>
+              <mat-select [(ngModel)]="referencia" class="referencia-select">
+                  <mat-option class="option-text" value="RGB">Média dos 3 canais</mat-option>
+                  <mat-option class="option-text" value="RG">Média dos canais vermelho e verde apenas</mat-option>
+                  <mat-option class="option-text" value="RB">Média dos canais vermelho e azul apenas</mat-option>
+                  <mat-option class="option-text" value="GB">Média dos canais verde e azul apenas</mat-option>
+                  <mat-option class="option-text" value="R">Média do canal vermelho apenas</mat-option>
+                  <mat-option class="option-text" value="G">Média do canal verde apenas</mat-option>
+                  <mat-option class="option-text" value="B">Média do canal azul apenas</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div style="display: flex;position: absolute;width: 100%;bottom: 0px;">
+          <button class="btn" mat-mini-fab color="primary" style="bottom: 10px;position: relative;margin: auto;" (click) = "aplicar()" matTooltip="Aplicar" [disabled] = "carregando">
+              <i class="zmdi zmdi-check"></i>
+          </button>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Ajuste RGB</h5>
+  <div class = 'ajusteRGB-sidenav'>
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+      <div class="div-align">
+          <label for = "canalR" class="label-slider">R</label>
+          <mat-slider
+              class="slider-vermelho"
+              [disabled]="false"
+              [invert]="false"
+              [max]="255"
+              [min]="-255"
+              [step]="1"
+              [thumbLabel]="false"
+              [(ngModel)]="valorR"
+              [vertical]="false"
+              id = "canalR"
+              (input) = "onChangeR($event)">
+          </mat-slider>
+          <label *ngIf = "valorR <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              {{valorR}}
+          </label>
+          <label *ngIf = "valorR > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              +{{valorR}}
+          </label>
+      </div>
+
+      <div class="div-align">
+          <label for = "canalG" class="label-slider">G</label>
+          <mat-slider
+              class="slider-verde"
+              [disabled]="false"
+              [invert]="false"
+              [max]="255"
+              [min]="-255"
+              [step]="1"
+              [thumbLabel]="false"
+              [(ngModel)]="valorG"
+              [vertical]="false"
+              id = "canalG"
+              (input) = "onChangeG($event)">
+          </mat-slider>
+          <label *ngIf="valorG <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              {{valorG}}
+          </label>
+          <label *ngIf="valorG > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              +{{valorG}}
+          </label>
+      </div>
+
+      <div class="div-align">
+          <label for = "canalB" class="label-slider">B</label>
+          <mat-slider
+              class="slider-azul"
+              [disabled]="false"
+              [invert]="false"
+              [max]="255"
+              [min]="-255"
+              [step]="1"
+              [thumbLabel]="false"
+              [(ngModel)]="valorB"
+              [vertical]="false"
+              id = "canalB"
+              (input) = "onChangeB($event)">
+          </mat-slider>
+          <label *ngIf="valorB <= 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              {{valorB}}
+          </label>
+          <label *ngIf="valorB > 0" style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              +{{valorB}}
+          </label>
+      </div>
+      
+      <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "aplicar()" matTooltip="Aplicar" [disabled] = "carregando">
+          <i class="zmdi zmdi-check"></i>
+      </button>
+  </div>
+</div>

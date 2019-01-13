@@ -1,0 +1,63 @@
+<div [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Equalização de canais</h5>
+  <div class = 'negativo-sidenav' [ngClass]="{'normal': !eqPorFaixa || (!equalizarR && !equalizarG && !equalizarB), 
+                                  'classe1' : eqPorFaixa && ((equalizarR && !equalizarG && !equalizarB) ||
+                                                             (equalizarG && !equalizarR && !equalizarB) ||
+                                                             (equalizarB && !equalizarG && !equalizarR)),
+                                  'classe2' : eqPorFaixa && ((equalizarR && equalizarG && !equalizarB) ||
+                                                             (equalizarR && equalizarB && !equalizarG) ||
+                                                             (equalizarG && equalizarB && !equalizarR)),
+                                  'classe3' : eqPorFaixa && equalizarR && equalizarG && equalizarB}">
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+      <div class="flex flex-horizontal-center" style="padding-bottom: 20px;right: 5px;top:5px;display: flex;align-items: center;right: 5px;position: absolute;">
+          <mat-checkbox [labelPosition]="after" [(ngModel)]="eqPorFaixa" style="margin-top: 0px;" (change) = "onChange('eqPorFaixa')">
+              <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;">
+                  Equalizar por faixa
+              </h5>
+          </mat-checkbox>
+      </div>
+      <div style="padding-top: 60px;display: flex; flex-direction: column;left: 0px;align-items: flex-start;">
+          <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
+              <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="red-check" 
+                          [labelPosition]="before" 
+                          [(ngModel)]="equalizarR" 
+                          (change) = "onChange('equalizarR')"
+                          matTooltip="Equalizar canal vermelho">
+                  <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
+                      Equalizar canal vermelho
+                  </h5>
+              </mat-checkbox>
+              <ng5-slider class="ng-slider red" *ngIf = "eqPorFaixa && equalizarR" [(value)]="minR" [(highValue)]="maxR" floor = 0 ceil = 255 step = 1></ng5-slider>
+          </div>
+          <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
+              <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="green-check" 
+                          [labelPosition]="before" 
+                          [(ngModel)]="equalizarG" 
+                          (change) = "onChange('equalizarG')"
+                          matTooltip="Equalizar canal verde">
+                  <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
+                      Equalizar canal verde
+                  </h5>
+              </mat-checkbox>
+              <ng5-slider class="ng-slider green" *ngIf = "eqPorFaixa && equalizarG" [(value)]="minG" [(highValue)]="maxG" floor = 0 ceil = 255 step = 1></ng5-slider>
+          </div>
+          <div style="margin-top: 0px;margin-bottom: 0px;width: 100%;">
+              <mat-checkbox style="margin-top: 0px;margin-bottom: 0px;display: flex;margin-left: 5px;" class="blue-check" 
+                          [labelPosition]="before" 
+                          [(ngModel)]="equalizarB" 
+                          (change) = "onChange('equalizarB')"
+                          matTooltip="Equalizar canal azul">
+                  <h5 style="font-size: 14px;opacity: 0.7;color: lightgray;margin-top: 0px;margin-bottom: 0px;">
+                      Equalizar canal azul
+                  </h5>
+              </mat-checkbox>
+              <ng5-slider class="ng-slider blue" *ngIf = "eqPorFaixa && equalizarB" [(value)]="minB" [(highValue)]="maxB" floor = 0 ceil = 255 step = 1></ng5-slider>
+          </div>
+      </div>
+      <div style="width: 20%;left: 40%;position: absolute;bottom: 10px;" [matTooltip] = "!equalizarR && !equalizarG && !equalizarB ? 'Selecione um canal para equalizar' : 'Aplicar'">
+          <button [disabled] = "!equalizarR && !equalizarG && !equalizarB" class="btn" mat-mini-fab color="primary" (click) = "aplicar()" [disabled] = "carregando">
+              <i class="zmdi zmdi-check"></i>
+          </button>
+      </div>
+  </div>
+</div>

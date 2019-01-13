@@ -1,0 +1,9 @@
+<div [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Girar anti-horário</h5>
+  <div class = 'negativo-sidenav'>
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+      <button class="btn" mat-mini-fab color="primary" style="margin-top: 30px;" (click) = "aplicar()" matTooltip="Aplicar" [disabled] = "carregando">
+          <i class="zmdi zmdi-check"></i>
+      </button>
+  </div>
+</div>

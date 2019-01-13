@@ -1,0 +1,29 @@
+<div [@slideInOut] class="filtro-param-sidenav">
+  <h5 class="filter-label-title">Contraste</h5>
+  <div class = 'limiar-sidenav'>
+      <img src="../../../assets/icons/voltar.svg" class="voltar-icon" (click) = "voltarMenu()" matTooltip="Voltar">
+      <div class="div-align">
+          <label for = "contraste-value" class="label-slider">
+              Contraste
+          </label>
+          <mat-slider class="small-slider"
+              [disabled]="false"
+              [invert]="false"
+              [max]="10"
+              [min]="0"
+              [step]="0.1"
+              [thumbLabel]="false"
+              [(ngModel)]="valorContraste"
+              [vertical]="false"
+              (input) = "onChange($event)"
+              id = "contraste-value">
+          </mat-slider>
+          <label style="font-size: 14px;opacity: 0.7;color: lightgray;margin-left: 5px;margin-right: 5px;">
+              {{((valorContraste / 10.0) * 100) | number:'1.0-0'}}%
+          </label>
+      </div>
+      <button class="btn" mat-mini-fab color="primary" style="margin-top: 2px;" (click) = "aplicar()" matTooltip="Aplicar" [disabled] = "carregando">
+          <i class="zmdi zmdi-check"></i>
+      </button>
+  </div>
+</div>
